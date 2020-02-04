@@ -1,0 +1,58 @@
+.show-side-bar {
+    margin-top: 15px;
+    width: 170px;
+    height: 90vh;
+    animation: open 1.3s;
+    overflow: hidden;
+    color: black;
+}
+
+.show-side-bar p{
+    margin: 0;
+    padding: 10px 0;
+    box-sizing: border-box;
+    color: black;
+    font-weight: 700;
+    border-right: #262626 solid 0.3px;
+}
+.show-side-bar p:hover{
+    display: flex;
+    background-color: #262626;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+}
+
+@keyframes open {
+    from {
+        width: 0px;
+    }
+    to {
+        width: 170px;
+    }
+  }
+
+  .hide-side-bar {
+    width: 0px;
+    height: 100vh;
+    animation: close 0.3s;
+    overflow: auto;
+  }
+
+  @keyframes close {
+    from {
+        width: 170px;
+    }
+    to {
+        width: 0%;
+    }
+  }
+
+  #close-btn{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      margin-right: 15px;
+      margin-bottom: 20px;
+      color: black;
+  }
