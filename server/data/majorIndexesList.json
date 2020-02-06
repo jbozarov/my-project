@@ -1,0 +1,86 @@
+[ {
+      "ticker" : ".DJI",
+      "changes" : 242.119,
+      "price" : 29290.8,
+      "indexName" : "Dow Jones"
+    }, {
+      "ticker" : ".IXIC",
+      "changes" : 40.709,
+      "price" : 9508.68,
+      "indexName" : "Nasdaq"
+    }, {
+      "ticker" : ".INX",
+      "changes" : 9.78,
+      "price" : 3334.69,
+      "indexName" : "S&P 500"
+    }, {
+      "ticker" : "%5EFCHI",
+      "changes" : 66.3398,
+      "price" : 5985.4,
+      "indexName" : "CAC 40"
+    }, {
+      "ticker" : "%5ERUI",
+      "changes" : 7.7449,
+      "price" : 1844.17,
+      "indexName" : "Russell 1000 Index"
+    }, {
+      "ticker" : "%5ERUT",
+      "changes" : 37.5034,
+      "price" : 1681.92,
+      "indexName" : "Russell 2000 Index"
+    }, {
+      "ticker" : "%5EPSE",
+      "changes" : -5.1577,
+      "price" : 3895.99,
+      "indexName" : "NYSE Arca Technology 100 Index"
+    }, {
+      "ticker" : "%5EDJT",
+      "changes" : 55.7598,
+      "price" : 10943.1,
+      "indexName" : "Dow Jones Transportation Average"
+    }, {
+      "ticker" : "%5EIXCO",
+      "changes" : -68.1177,
+      "price" : 6370.66,
+      "indexName" : "NASDAQ Computer Index"
+    }, {
+      "ticker" : "%5EMID",
+      "changes" : 5.73,
+      "price" : 2078.83,
+      "indexName" : "S&P 400 Mid Cap Index"
+    }, {
+      "ticker" : "%5ENDX",
+      "changes" : -63.5351,
+      "price" : 9377.81,
+      "indexName" : "NASDAQ 100 Index"
+    }, {
+      "ticker" : "%5ENYA",
+      "changes" : -180.883,
+      "price" : 13602.9,
+      "indexName" : "NYSE Composite Index"
+    }, {
+      "ticker" : "%5EOEX",
+      "changes" : 1446.53,
+      "price" : 1446.53,
+      "indexName" : "S&P 100 Index"
+    }, {
+      "ticker" : "%5ESOX",
+      "changes" : -34.758,
+      "price" : 1805.54,
+      "indexName" : "PHLX Semiconductor Index"
+    }, {
+      "ticker" : "%5EXAU",
+      "changes" : 0.8511,
+      "price" : 104.362,
+      "indexName" : "PHLX Gold/Silver Index"
+    }, {
+      "ticker" : "%5EXAX",
+      "changes" : -24.8665,
+      "price" : 2436.7,
+      "indexName" : "NYSE American Composite Index"
+    }, {
+      "ticker" : "%5EXMI",
+      "changes" : -34.5491,
+      "price" : 2741.67,
+      "indexName" : "NYSE Arca Major Market Index"
+    } ]

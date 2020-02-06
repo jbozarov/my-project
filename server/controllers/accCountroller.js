@@ -14,5 +14,12 @@ module.exports =  {
 
         await db.get_accounts(customer_id)
         .then(response => res.status(200).send(response))
+    }, 
+    getTransactions: async(req, res) => {
+        const db = req.app.get('db') 
+        const { account_number } = req.params
+
+        await db.get_transactions(account_number)
+        .then(transactions => res.status(200).send(transactions))
     }
 }

@@ -36,7 +36,7 @@ export class Sidebar extends Component {
                 <Link to='/dashboard' style={{textDecoration:'none', color:'grey'}} ><p> <MdDashboard style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdDashboard>Dashboard</p> </Link>
                 <Link to={`/accounts/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><p><GiBank style={{paddingRight: '10px', paddingLeft: '15px'}} ></GiBank> Accounts</p> </Link>
                 <Link to={`/transactions/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><p><AiOutlineTransaction style={{paddingRight: '10px', paddingLeft: '15px'}} ></AiOutlineTransaction> Transactions</p> </Link>
-                <Link to='/cards' style={{textDecoration:'none', color:'grey'}} ><p> <FaAddressCard style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaAddressCard> Cards</p> </Link>
+                <Link to={`/invest/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><p> <FaAddressCard style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaAddressCard> Investment</p> </Link>
                 <Link to='/calculator' style={{textDecoration:'none', color:'grey'}} ><p><FaCalculator style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaCalculator> Calculator</p> </Link>
                 <Link to='/settings' style={{textDecoration:'none', color:'grey'}} ><p> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdSettings> Setting</p> </Link>
                 <Link to={`/open/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><p> <GiBanknote style={{paddingRight: '10px', paddingLeft: '15px'}} ></GiBanknote> Open new account </p> </Link>

@@ -39,8 +39,8 @@ class Calculator extends Component {
     const {results} = this.state
     return (
       <div className="calculator">
-      <h1 className='calc-header' >Welcome to calculator </h1>
-      <div className='screen' ></div>{results} 
+      <h5 className='calc-header'> Calculator </h5>
+      <input className='screen' value={results}/>
       <Buttons buttonPressed={this.buttonPressed} /> 
       </div>
       );

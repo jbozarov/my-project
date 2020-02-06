@@ -3,6 +3,8 @@ import Header from './components/header/Header'
 import routes from './routes'
 import Sidebar from "./components/sidebar/Sidebar";
 import './App.css'
+import Schedule from './components/schedule/Schedule'
+
  
 class App extends React.Component {
 
@@ -11,10 +13,11 @@ class App extends React.Component {
     return (
         <div>
         <Header/> 
-            <div className='body'>
-                <Sidebar/>
-                {routes}
-            </div>
+        <div className='body'>
+         {/*<Schedule />*/}
+            <Sidebar/>
+            {routes} 
+        </div>
         </div>
     );
   }

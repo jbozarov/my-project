@@ -1,0 +1,29 @@
+.accounts{
+    width: 70%;
+    margin: auto;
+    box-sizing: border-box;
+}
+.box-1{
+    margin: 20px;
+    height: 30vh;
+}
+.type {
+    background-color: darkgray;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.box-2{
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card {
+    width: 200px;
+    border-radius: 5px;
+}

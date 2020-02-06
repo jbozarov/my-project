@@ -7,7 +7,6 @@ export class Buttons extends Component {
   }
   render() {
     return (
-      <div>
       <div className='container' >
       <div className='row'>
             <button name='√' onClick={this.buttonPressed} >√</button>
@@ -40,7 +39,6 @@ export class Buttons extends Component {
             <button name='=' onClick={this.buttonPressed} >=</button>
       </div>
   </div>
-      </div>
     )
   }
 }

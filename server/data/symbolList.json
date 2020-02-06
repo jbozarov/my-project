@@ -1,0 +1,55 @@
+[{
+    "symbol" : "AAON",
+    "name" : "AAON, Inc.",
+    "currency" : "USD",
+    "stockExchange" : "NasdaqGS",
+    "exchangeShortName" : "NASDAQ"
+  }, {
+    "symbol" : "AAPL",
+    "name" : "Apple Inc.",
+    "currency" : "USD",
+    "stockExchange" : "NasdaqGS",
+    "exchangeShortName" : "NASDAQ"
+  }, {
+    "symbol" : "AAXN",
+    "name" : "Axon Enterprise, Inc.",
+    "currency" : "USD",
+    "stockExchange" : "NasdaqGS",
+    "exchangeShortName" : "NASDAQ"
+  }, {
+    "symbol" : "AAWW",
+    "name" : "Atlas Air Worldwide Holdings, Inc.",
+    "currency" : "USD",
+    "stockExchange" : "NasdaqGS",
+    "exchangeShortName" : "NASDAQ"
+  }, {
+    "symbol" : "CPAAW",
+    "name" : "Conyers Park II Acquisition Corp.",
+    "currency" : null,
+    "stockExchange" : "NasdaqCM",
+    "exchangeShortName" : "NASDAQ"
+  }, {
+    "symbol" : "AAL",
+    "name" : "American Airlines Group Inc.",
+    "currency" : "USD",
+    "stockExchange" : "NasdaqGS",
+    "exchangeShortName" : "NASDAQ"
+  }, {
+    "symbol" : "AAOI",
+    "name" : "Applied Optoelectronics, Inc.",
+    "currency" : "USD",
+    "stockExchange" : "NasdaqGM",
+    "exchangeShortName" : "NASDAQ"
+  }, {
+    "symbol" : "STAA",
+    "name" : "STAAR Surgical Company",
+    "currency" : "USD",
+    "stockExchange" : "NasdaqGM",
+    "exchangeShortName" : "NASDAQ"
+  }, {
+    "symbol" : "PAACR",
+    "name" : "Proficient Alpha Acquisition Corp.",
+    "currency" : "USD",
+    "stockExchange" : "NasdaqGS",
+    "exchangeShortName" : "NASDAQ"
+  }]

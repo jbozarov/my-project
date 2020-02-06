@@ -6,18 +6,41 @@ export class Transactions extends Component {
         super(); 
 
         this.state = {
-            cards: []
+            transactions: []
         }
     }
 
     componentDidMount(){
-        //axios.get(`/aip/cards/${this.props.match.params.customer_id}`)
+        this.getTransactions(); 
     }
+    
+    async getTransactions () {
+        await axios.get(`/api/transactions/${this.props.match.params.account_number}`)
+        .then(res=>this.setState({transactions: res.data}))
+    }
+
     render() {
-        //console.log(this.props.match.params.customer_id)
         return (
             <div>
-                Transactions
+                <table>
+                    <tr>
+                        <th> Transaction ID </th>
+                        <th> Account Number </th>
+                        <th> Transaction type </th>
+                        <th> Description </th>
+                        <th> Transaction date </th>
+                    </tr>
+          
+                {this.state.transactions.map(transaction => (
+                    <tr key={transaction.transaction_id} >
+                        <td> {transaction.transaction_id} </td>
+                        <td> {transaction.account_number} </td>
+                        <td> {transaction.transaction_type} </td>
+                        <td> {transaction.description} </td>
+                        <td> {transaction.transaction_date} </td>
+                    </tr>
+                ))}      
+                </table>
             </div>
         )
     }

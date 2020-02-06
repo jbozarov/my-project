@@ -6,6 +6,7 @@ const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
 const ctrl = require('./controllers/controller')
 const validCtrl = require('./controllers/validation')
 const accCtrl = require('./controllers/accCountroller')
+const stockCtrl = require('./controllers/stockController')
 const cors = require('cors')
 const app = express()
 
@@ -36,6 +37,11 @@ app.post('/api/valid', validCtrl.validate)
 app.post('/api/submit', ctrl.submit); 
 app.post('/api/signin', validCtrl.signIn)
 app.post('/api/account', accCtrl.createAcc)
-app.get('/api/accounts/:customer_id', accCtrl.getAccounts);
+app.get('/api/accounts/:customer_id', accCtrl.getAccounts)
+app.get('/api/transactions/:account_number', accCtrl.getTransactions)
+
+
+//Stocks andpoints
+app.get('/api/stocks', stockCtrl.getStocks)
 
 
