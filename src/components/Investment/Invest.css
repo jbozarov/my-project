@@ -9,34 +9,33 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 80vw;
+    max-width: 80vw;
 }
 
 .major-indexes-box-1{
-    width: 100%;
+    margin: auto;
+    padding: 10px;
+    width: 90%;
+    height: 15vh;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    overflow: auto;
 }
 .major-indexes-box-2{
-    width: 190px;
-    height: 90px;
-    border: 0.5px solid grey;
     box-sizing: border-box;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0px 10px;
-    margin: 20px;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 0px 5px;
+    margin: 0 10px;
 }
 .major-indexes-box-2 p{
-    margin: 0;
-    padding: 0;
+    width: 15vw;
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
 }
 
 .green{

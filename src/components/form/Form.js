@@ -1,72 +1,55 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { userLogged } from '../../redux/reducers/userReducer'
 import axios from 'axios'
+import styled from 'styled-components'
 import './Form.css'
 
-export class Form extends Component {
-    constructor(){
-        super(); 
-        this.state = {
-            first_name: '',
-            last_name: '', 
-            birth_date: '', 
-            street: '', 
-            city: '',
-            state: '',
-            country: '',
-            zip_code: '',
-            login: '',
-            password: '',
-            validationResposce: '',
-            loggedInUser: {},
-        }
-        this.validate = this.validate.bind(this); 
+const Form = props => {
+   const [first_name, setFirstName] = useState(''),
+         [last_name, setLastName] = useState(''), 
+         [login, setLogin] = useState(''),
+         [password, setPassword] = useState(''),
+         [validationResposce, setValidationResponse] = useState('')
+
+
+    const validate = () => axios.post('/auth/valid', {login}).then(res=>setValidationResponse(res.data))
+
+    const submit = () => {
+        axios.post('/auth/register', { first_name, last_name, login, password })
+        .then(res=>props.userLogged(res.data))
+        .catch(err=>console.log(err))
+        props.history.push('/') 
     }
 
-    handleForm = e => this.setState({[e.target.name]: e.target.value })
-
-
-    async validate () {
-        const { login } = this.state; 
-        await axios.post('/api/valid', {login})
-        .then(res=>this.setState({validationResposce: res.data}))
-    }
-
-    submit = () => {
-        const { first_name, last_name, birth_date, street, city, state, country, zip_code, login, password } = this.state; 
-        axios.post('/api/submit', { first_name, last_name, birth_date, street, city, state, country, zip_code, login, password })
-        .then(res=>this.setState({loggedInUser: res.data}))
-    }
-
-    render() {
-        const {first_name, last_name, birth_date, street, city, state, country, zip_code, login, password, validationResposce } = this.state; 
-        return (
-            <div className='form' >
-                <h1>Registration form</h1>
-                <div id='email_password' >
-                    <p><input placeholder=' Enter your email' type='text' name='login' value={login} onChange={e=>this.handleForm(e)} /></p>
-                    <p><input placeholder=' 8-20 character long' type='text' name='password' value={password} onChange={e=>this.handleForm(e)} /> </p>
-                    <button onClick={this.validate} >Validate your email </button>
-                </div>
-                <p> {validationResposce} </p>
-                <div className='name-dob' >
-                <p><input placeholder=' Enter first name' type='text' name='first_name' value={first_name} onChange={e=>this.handleForm(e)} /></p>
-                <p><input placeholder=' Enter last name' type='text' name='last_name' value={last_name} onChange={e=>this.handleForm(e)} /> </p>
-                <p><input type='text' placeholder=' Date of birth: mm/dd/yyyy' name='birth_date' value={birth_date} onChange={e=>this.handleForm(e)} /> </p>
-                </div>
-                <div className='street-city'>
-                <p><input className='street' placeholder=' Enter street' type='text' name='street' value={street} onChange={e=>this.handleForm(e)} /> </p>
-                <p><input className='city' placeholder=' Enter city' type='text' name='city' value={city} onChange={e=>this.handleForm(e)} /> </p>
-                </div>
-                <div className='state-country-zip' >
-                <p><input placeholder=' Enter state' type='text' name='state' value={state} onChange={e=>this.handleForm(e)} /> </p>
-                <p><input placeholder=' Enter country' type='text' name='country' value={country} onChange={e=>this.handleForm(e)} /> </p>
-                <p><input placeholder=' zip code' type='number' name='zip_code' value={zip_code} onChange={e=>this.handleForm(e)} /> </p>
-                </div>
-                <button className='click-btn' onClick={this.submit} > Click to submit</button>
-            </div>
-        )
-    }
+   return (
+      <div className='form' >
+            <h1>Registration form</h1>
+            <input placeholder=' Enter your email'  value={login} onChange={e=>setLogin(e.target.value)} />
+            <input placeholder=' 8-20 character long'  value={password} onChange={e=>setPassword(e.target.value)}/> 
+            <BTN onClick={validate} >Validate your email </BTN>
+            <p> {validationResposce} </p>
+            <input placeholder=' Enter first name' value={first_name} onChange={e=>setFirstName(e.target.value)}/>
+            <input placeholder=' Enter last name' value={last_name} onChange={e=>setLastName(e.target.value)} />
+            <BTN className='click-btn' onClick={submit} > Click to submit</BTN>
+      </div>
+   )
 }
 
-export default Form
+export default connect(null, { userLogged })(Form);
 
+
+const BTN = styled.button`
+   height: 25px;
+   width: 29vw;
+   min-width: 120px;
+   max-width: 240px;
+   border: none;
+   border-radius: 2px;
+   background-color: #3399ff;
+   font-size: large;
+   &:hover {
+      background-color: #3399ff;
+      transform: scale(1.02);
+   }
+`;

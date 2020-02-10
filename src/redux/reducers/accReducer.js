@@ -6,7 +6,7 @@ const initialState = {
 
 const CREATE_ACC = 'CREATE_ACC'; 
 export const createNewAcc = newAccount => {
-    console.log(newAccount); 
+    console.log('account reducer 9 line: ', newAccount); 
     return {
         type: CREATE_ACC, 
         payload: newAccount

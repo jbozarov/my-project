@@ -1,8 +1,8 @@
 
-
 .sign-in {
-    height: 350px;
-    width: 300px;
+    height: 70vh;
+    width: 60%;
+    max-width: 390px;
     margin: auto;
     border: black 0.3px solid;
     box-sizing: border-box;
@@ -19,7 +19,9 @@
 
 .sign-in input{
     height: 25px;
-    width: 200px;
+    width: 29vw;
+    min-width: 120px;
+    max-width: 240px;
     border: #333333 0.5px solid;
     border-radius: 2px;
     color: black;
@@ -27,41 +29,10 @@
     font-size: 13px;
 }
 
-.sign-in a{
-    font-size: small;
-    color: black;
-    text-decoration: none;
-}
-
 .sign-in ::-webkit-input-placeholder{
     color: black;
-    font-weight: 200;
-    font-size: 12px;
+    font-weight: 300;
+    font-size: 14px;
 }
 
-.login-btn {
-    width: 205px;
-    height: 30px;
-    border: none;
-    border-radius: 2px;
-    background-color: #3399ff;
-    font-size: large;
-}
 
-.login-btn:hover{
-    background-color: #3399ff;
-    transform: scale(1.02);
-}
-.register-btn{
-    width: 205px;
-    height: 30px;
-    border: none;
-    border-radius: 2px;
-    background-color: #d9d9d9;
-    font-size: large;
-}
-
-.register-btn:hover{
-    background-color: #3399ff;
-    transform: scale(1.02);
-}

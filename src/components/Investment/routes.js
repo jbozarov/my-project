@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Stocks from './Stocks'
-import MutualFunds from './MutualFunds'
+import Stocks from './stocks/Stocks'
+import Cart from './cart/Cart'
 
 
 
@@ -9,6 +9,6 @@ import MutualFunds from './MutualFunds'
 export default (
     <Switch>
         <Route exact path='/invest/stocks' component={Stocks} />
-        <Route path='/invest/mutualfunds' component={MutualFunds} /> 
+        <Route path='/invest/cart' component={Cart} />
     </Switch>
 )
