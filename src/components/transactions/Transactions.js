@@ -11,6 +11,7 @@ export class Transactions extends Component {
     }
 
     componentDidMount(){
+       console.log(this.props.match.params.account_number)
         this.getTransactions(); 
     }
     

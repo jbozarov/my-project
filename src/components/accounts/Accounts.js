@@ -1,31 +1,24 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'; 
 import visalogo from './visalogo.svg'
 import axios from 'axios'
 import './Accounts.css'
 
-export class Accounts extends Component {
-    constructor(){
-        super(); 
+const Accounts = props => {
+   const [accounts, setAccounts ] = useState([])
 
-        this.state = {
-            accounts: []
-        }
-        this.getAccounts = this.getAccounts.bind(this); 
-    }
+    useEffect(() => {
+       getAccounts()
+    }, [])
 
-    componentDidMount(){
-        this.getAccounts(); 
+    const getAccounts = async() => {
+        await axios.get(`/api/accounts/${props.match.params.customer_id}`)
+              .then(res => setAccounts(res.data))
+              .catch(err => console.log(err))
     }
-
-    async getAccounts () {
-        await axios.get(`/api/accounts/${this.props.match.params.customer_id}`)
-              .then(res=>this.setState({accounts: res.data}))
-    }
-    render() {
         return (
             <div className='accounts' >
-                {this.state.accounts.map(account=>(
+                {accounts.map(account=>(
                     <div className='box-1' key={account.account_number}>
                         <p className='type' > {account.account_type} </p>
                         <div className='box-2' >      
@@ -48,6 +41,6 @@ export class Accounts extends Component {
             </div>
         )
     }
-}
+
 
 export default withRouter(Accounts)

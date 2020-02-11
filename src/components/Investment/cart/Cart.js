@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
+import { ToastContainer, toase, toast } from 'react-toastify'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -7,23 +8,22 @@ import styled from 'styled-components'
 
 const Cart = props => {
 const [ cartItems, setCartItems ] = useState([])
-const [ amount, setAmount ] = useState(0)
 
 useEffect( () => {
+   getCart()
+}, [])
+
+function getCart() {
    axios.get(`/api/cart/${props.user.customer_order_id}`)
    .then(items => setCartItems(items.data))
    .catch(err => console.log(err))
-}, [])
+}
 
-console.log('Cart line 14: ', cartItems, props.user.customer_order_id)
-const items = cartItems.map(item => (
-   <CartItem key={item.cart_id} > 
-      <p> {item.ticker} </p>
-      <p> {item.qty} </p>
-      <p> {item.price} </p>
-      <p> {item.total} </p>
-   </CartItem>
-))
+const remove = ticker => {
+   axios.delete(`/api/removefromcart/${ticker}`)
+   .then(() => getCart())
+   .catch(err => console.log(err))
+}
 
 
 // const onOpened=()=>{
@@ -35,42 +35,51 @@ const items = cartItems.map(item => (
 //  }
 
 const onToken = (token) => {
-   console.log(token)
-   let { amount } = this.state
-   amount /= 100
-   console.log(amount)
-   token.card = void 0
-   axios.post('/api/payment', { token, amount: this.state.amount }).then(res => {
-     console.log(res)
-     alert(`Congratulations you paid Kevin ${amount}!`)
+   console.log('line 38 is: ', token)
+   axios.post('/api/payment', { token, amount: (yourTotal*100).toFixed(), customer_order_id: props.user.customer_order_id, customer_id: props.user.customer_id })
+   .then(res => {
+      toast.success(`Congratulations you paid ${props.user.first_name} ${yourTotal}!`)
+   })
+   .then(err => {
+      toast.error('Error occured')
    })
  }
 
- const yourTotal = cartItems.reduce((a, b) => parseInt(a) + parseInt(b.total), 0); 
- console.log(yourTotal)
+ const yourTotal = cartItems.reduce((a, b) => parseFloat(a) + parseFloat(b.total), 0); 
 
    return (
       <div>
-         {items}
+         <ToastContainer position="top-right" autoClose={1200} hideProgressBar={false} newestOnTop={false}
+         closeOnClick rtl={false} pauseOnVisibilityChange draggable pauseOnHover />
+         {console.log('this is: ', props.user.customer_id)}
+         {cartItems.length < 1 ? 
+            <h3> Your cart is empty </h3>
+         :
+         cartItems.map(item => (
+            <CartItem key={item.cart_id} > 
+               <p> {item.ticker} </p>
+               <p> {item.qty} </p>
+               <p> {item.price} </p>
+               <p> {item.total} </p>
+               <button onClick={() => remove(item.ticker)} >Remove from card </button>
+            </CartItem>
+         ))}
          <h3> Your total is: {yourTotal} </h3>
-         <button>Checkout</button>
-         <button>Checkout</button>
-
          <StripeCheckout
-          name='CLass' //header
+          name='bankname' //header
          //  image={imageUrl}
-          description='This is stuff going beneath the header' //subtitle - beneath header
+          description='making a payment' //subtitle - beneath header
           stripeKey={process.env.REACT_APP_STRIPE_KEY} //public key not secret key
           token={onToken} //fires the call back
-          amount={amount} //this will be in cents
-          currency="USD" 
-          // image={imageUrl} // the pop-in header image (default none)
+          amount={yourTotal*100} //this will be in cents
+         //  currency="USD" 
+          image={imageUrl} // the pop-in header image (default none)
           // ComponentClass="div" //initial default button styling on block scope (defaults to span)
           panelLabel="Submit Payment" //text on the submit button
-          locale="en" //locale or language (e.g. en=english, fr=french, zh=chinese)
+         //  locale="en" //locale or language (e.g. en=english, fr=french, zh=chinese)
          //  opened={onOpened} //fires cb when stripe is opened
          //  closed={onClosed} //fires cb when stripe is closed
-          allowRememberMe // "Remember Me" option (default true)
+          allowRememberMe={true} // "Remember Me" option (default true)
           billingAddress={false}
           // shippingAddress //you can collect their address
           zipCode={false}
@@ -98,3 +107,5 @@ const CartItem = styled.div`
    max-width: 80vw; 
    margin: auto; 
 `;
+
+const imageUrl = 'https://img.favpng.com/7/23/21/logo-atom-bank-brand-portfolio-company-png-favpng-6u9CEmCiGejDKMjtGsYpHUUFw.jpg'

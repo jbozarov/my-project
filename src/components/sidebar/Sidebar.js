@@ -8,7 +8,7 @@ import { userLogOut } from '../../redux/reducers/userReducer'
 import { FaHome, FaAddressCard, FaCalculator } from 'react-icons/fa'
 import { AiOutlineLogout, AiOutlineClose, AiOutlineTransaction } from 'react-icons/ai'
 import { GiBank, GiBanknote } from 'react-icons/gi'
-import { MdDashboard, MdSettings } from 'react-icons/md'
+import { MdDashboard, MdSettings, MdHelpOutline } from 'react-icons/md'
 import axios from 'axios';
 
 
@@ -26,7 +26,7 @@ export class Sidebar extends Component {
          axios.post('/auth/logout').then(() => this.props.userLogOut({}))
       }
       render() {
-        console.log(this.props.user.customer_id)
+        console.log(this.props.user.first_name)
         return (
             <div>
             {!this.props.user.first_name ? 
@@ -45,8 +45,9 @@ export class Sidebar extends Component {
                 <Link to={`/transactions/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><AiOutlineTransaction style={{paddingRight: '10px', paddingLeft: '15px'}} ></AiOutlineTransaction> Transactions</P> </Link>
                 <Link to={`/invest/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <FaAddressCard style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaAddressCard> Investment</P> </Link>
                 <Link to='/calculator' style={{textDecoration:'none', color:'grey'}} ><P><FaCalculator style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></FaCalculator> Calculator</P> </Link>
-                <Link to='/settings' style={{textDecoration:'none', color:'grey'}} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></MdSettings> Setting</P> </Link>
                 <Link to={`/open/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><P> <GiBanknote style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></GiBanknote> Open new account </P> </Link>
+                <Link to='/settings' style={{textDecoration:'none', color:'grey'}} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></MdSettings> Setting</P> </Link>
+                <Link to='/help' style={{textDecoration:'none', color:'grey'}} ><P> <MdHelpOutline style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></MdHelpOutline> Help</P> </Link>
                 <Link style={{textDecoration:'none', color:'grey'}}><P onClick={this.logout} ><AiOutlineLogout style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></AiOutlineLogout> LOGOUT</P></Link>
                 </div>}
            </div>

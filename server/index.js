@@ -2,10 +2,11 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
-const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, STRIPE_SECRET } = process.env
 const validCtrl = require('./controllers/validation')
 const accCtrl = require('./controllers/accCountroller')
 const stockCtrl = require('./controllers/stockController')
+const stripeCtrl = require('./controllers/stripeControllers')
 const cors = require('cors')
 const app = express()
 
@@ -45,5 +46,9 @@ app.get('/api/transactions/:account_number', accCtrl.getTransactions)
 app.get('/api/stocks', stockCtrl.getStocks)
 app.post('/api/add', stockCtrl.addToCart)
 app.get('/api/cart/:customer_order_id', stockCtrl.getCart)
+app.delete('/api/removefromcart/:ticker', stockCtrl.remove)
+
+
+app.post('/api/payment', stripeCtrl.pay)
 
 

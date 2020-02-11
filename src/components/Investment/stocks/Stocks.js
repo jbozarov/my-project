@@ -38,23 +38,9 @@ export class Stocks extends Component {
           price, 
           total: eval(price*qty)
        }).then(res => {
-         toast.success(`${qty} of ${ticker} is added `, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-            });
+         toast.success(`${qty} of ${ticker} is added `);
        }).catch(err=>{
-          toast.error('Something went wrong', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-          })
+          toast.error('Something went wrong')
           console.log(err)
        })
        this.setState({buyClicked: false, ticker: '', price: '', qty: ''})

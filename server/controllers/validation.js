@@ -28,7 +28,6 @@ module.exports = {
     signIn: async (req, res) => {
         const db = req.app.get('db');
         const {login, password} = req.body; 
-        console.log('line 31: ', {login, password})
         const { session } = req
         let user = await db.customers.check_login(login)
 
@@ -38,14 +37,12 @@ module.exports = {
         let validated = bcrypt.compareSync(password, user[0].hash)
         if(!validated) return res.status(401).send('Incorrect password')
         delete user[0].hash
-        console.log('sign in: ', user)
         session.user = user[0]
         return res.status(200).send(session.user); 
     },
     logout: (req, res) => {
        const { session } = req
        session.destroy(); 
-       console.log('line 48: ', session)
        res.sendStatus(200)
     }
 }
