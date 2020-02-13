@@ -18,8 +18,8 @@ export class OpenAccount extends Component {
     }
 
     componentDidMount(){
-      //   let newAccNumber = [...Array(10)].map(i=>(~~(Math.random()*10)).toString()).join('')
-        let newAccNumber = '4242424242424242'
+        let newAccNumber = [...Array(10)].map(i=>(~~(Math.random()*10)).toString()).join('')
+      //   let newAccNumber = '4242424242424242'
         this.setState({account_number: newAccNumber, customer_id: this.props.match.params.customer_id})
 
     }
@@ -33,6 +33,7 @@ export class OpenAccount extends Component {
         console.log(this.state)
         let newAccount = await axios.post('/api/account', {account_number, customer_id, account_type, balance}).then(res=>res.data); 
         this.props.createNewAcc(newAccount)
+        this.props.history.push('/dashboard')
         
     }
     dropdown = e => this.setState({account_type: e.target.value});

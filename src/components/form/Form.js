@@ -8,15 +8,21 @@ import './Form.css'
 const Form = props => {
    const [first_name, setFirstName] = useState(''),
          [last_name, setLastName] = useState(''), 
-         [login, setLogin] = useState(''),
+         [email, setEmail] = useState(''),
          [password, setPassword] = useState(''),
-         [validationResposce, setValidationResponse] = useState('')
+         [validationResposce, setValidationResponse] = useState(''),
+         [rejectResponse, setRejectResponse] = useState('')
 
 
-    const validate = () => axios.post('/auth/valid', {login}).then(res=>setValidationResponse(res.data))
+    const validate = () => axios.post('/auth/valid', {email})
+    .then(res=>setValidationResponse(res.data))
+    .catch(() => {
+       setValidationResponse(''); 
+       setRejectResponse('Username already taken')
+      })
 
     const submit = () => {
-        axios.post('/auth/register', { first_name, last_name, login, password })
+        axios.post('/auth/register', { first_name, last_name, email, password })
         .then(res=>props.userLogged(res.data))
         .catch(err=>console.log(err))
         props.history.push('/') 
@@ -25,10 +31,11 @@ const Form = props => {
    return (
       <div className='form' >
             <h1>Registration form</h1>
-            <input placeholder=' Enter your email'  value={login} onChange={e=>setLogin(e.target.value)} />
+            <input placeholder=' Enter your email'  value={email} onChange={e=>setEmail(e.target.value)} />
             <input placeholder=' 8-20 character long'  value={password} onChange={e=>setPassword(e.target.value)}/> 
             <BTN onClick={validate} >Validate your email </BTN>
-            <p> {validationResposce} </p>
+            { validationResposce.length>1 ? <p style={{color: 'green', fontWeight: '700'}} > {validationResposce} </p>
+            : <p style={{color: 'red', fontWeight: '700'}} > {rejectResponse} </p> }
             <input placeholder=' Enter first name' value={first_name} onChange={e=>setFirstName(e.target.value)}/>
             <input placeholder=' Enter last name' value={last_name} onChange={e=>setLastName(e.target.value)} />
             <BTN className='click-btn' onClick={submit} > Click to submit</BTN>

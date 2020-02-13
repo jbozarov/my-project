@@ -1,6 +1,6 @@
 
 .invest{
-    width: 100vw;
+    width: 100%;
     background-color: #e6e6e6;
 }
 
@@ -13,9 +13,10 @@
 }
 
 .major-indexes-box-1{
-    margin: auto;
+    margin: 0 auto;
     padding: 10px;
     width: 90%;
+    max-width: 90%;
     height: 15vh;
     display: flex;
     overflow: auto;

@@ -24,6 +24,8 @@ export class Sidebar extends Component {
 
       logout = () => {
          axios.post('/auth/logout').then(() => this.props.userLogOut({}))
+         this.props.closeSideBar(false)
+         this.props.history.push('/')
       }
       render() {
         console.log(this.props.user.first_name)
@@ -40,7 +42,7 @@ export class Sidebar extends Component {
                 <div className={this.props.sidebarReducer.sidebarOpen ? 'show-side-bar' : 'hide-side-bar'} > 
                 <Link id='close-btn' ><Span onClick={() => this.props.closeSideBar(false)}> <AiOutlineClose size={15} ></AiOutlineClose></Span></Link>
                 <Link to='/' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><FaHome style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaHome> Home</P> </Link>
-                <Link to='/dashboard' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdDashboard style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdDashboard>Dashboard</P> </Link>
+                <Link to={`/dashboard/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdDashboard style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdDashboard>Dashboard</P> </Link>
                 <Link to={`/accounts/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><GiBank style={{paddingRight: '10px', paddingLeft: '15px'}} ></GiBank> Accounts</P> </Link>
                 <Link to={`/transactions/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><AiOutlineTransaction style={{paddingRight: '10px', paddingLeft: '15px'}} ></AiOutlineTransaction> Transactions</P> </Link>
                 <Link to={`/invest/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <FaAddressCard style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaAddressCard> Investment</P> </Link>

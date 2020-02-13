@@ -27,7 +27,7 @@ export class Transactions extends Component {
                     <tr>
                         <th> Transaction ID </th>
                         <th> Account Number </th>
-                        <th> Transaction type </th>
+                        <th> Amount</th>
                         <th> Description </th>
                         <th> Transaction date </th>
                     </tr>
@@ -36,7 +36,7 @@ export class Transactions extends Component {
                     <tr key={transaction.transaction_id} >
                         <td> {transaction.transaction_id} </td>
                         <td> {transaction.account_number} </td>
-                        <td> {transaction.transaction_type} </td>
+                        <td> {transaction.amount} </td>
                         <td> {transaction.description} </td>
                         <td> {transaction.transaction_date} </td>
                     </tr>

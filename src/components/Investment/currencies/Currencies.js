@@ -1,33 +1,30 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components' 
 import { connect } from 'react-redux'
 import axios from 'axios'
-import './Stocks.css'
-import logo from './apple.png'
-import { ToastContainer, toast } from 'react-toastify'
+import './Currencies.css'
 import 'react-toastify/dist/ReactToastify.css'
 toast.configure(); 
 
 
-export class Stocks extends Component {
+class Currencies extends Component {
     constructor(pro){
         super(); 
 
         this.state = {
-            stocks: [],
+            currencies: [],
             buyClicked: true,
             ticker: '',
             price: '',
-            qty: 0, 
-            searchInput: ''
+            qty: 0
         }
     }
 
     
    componentDidMount(){
-      axios.get('/api/stocks').then(res=>this.setState({stocks: res.data}))
-      // this.setState({searchInput: this.props.searchInput})
+      axios.get('https://financialmodelingprep.com/api/v3/forex').then(res=>this.setState({currencies: res.data.forexList}))
    }
       
    handleChange = quantity => this.setState({qty: quantity })
@@ -42,7 +39,7 @@ export class Stocks extends Component {
           price, 
           total: eval(price*qty)
        }).then(res => {
-         toast.success(` ${qty} of ${ticker} is added `);
+         toast.success(`${qty} of ${ticker} is added `);
        }).catch(err=>{
           toast.error('Something went wrong')
           console.log(err)
@@ -50,18 +47,13 @@ export class Stocks extends Component {
        this.setState({buyClicked: false, ticker: '', price: '', qty: ''})
     }
 
-   //  if (this.props.searchInput) {
-
-   //  }
-
     render() {
-       console.log('stocks line 34: ', this.props.searchInput)
-        const { stocks, buyClicked, ticker } = this.state
+        const { currencies, buyClicked, ticker } = this.state
         return (
-            <div className='stocks' >
+            <div className='currencies' >
             <ToastContainer
                position="top-right"
-               autoClose={800}
+               autoClose={3000}
                hideProgressBar={false}
                newestOnTop={false}
                closeOnClick
@@ -72,25 +64,27 @@ export class Stocks extends Component {
 
                 <table className='stocks-table' >
                     <tr>
-                        <th>Ticker</th>
-                        <th>Company Name</th>
+                        <th>Pair</th>
                         <th>Price</th>
-                        <th>Exchange Market</th>
+                        <th>Change</th>
+                        <th >Last updated</th>
+                        <th >Buy</th>
                     </tr>
-                    {stocks.length>1 && stocks.map(stock =>
-                        <tr key={stock.ticker} >
-                            <td> {stock.ticker} </td>
-                            <td> <Link to={`/invest/history/${stock.ticker}`} style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
-                            <td> {stock.price} </td>
+                    {currencies.length>1 && currencies.map(money =>
+                        <tr key={money.ticker} >
+                            <td className='first'> {money.ticker}</td>
+                            <td> {money.bid} </td>
+                            <td style={{fontWeight: '900', color: money.changes>0 ? 'green' : 'red'}} >{parseFloat(money.changes).toFixed(3)}</td>
+                            <td className='date-column'> {money.date.slice(0, 10)} </td>
                             {buyClicked ? 
-                              <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker, stock.price)} >Buy</button></td>
+                              <td className='last-cur-column' > {money.exchange} <button onClick={()=>this.buy(money.ticker, money.price)} >Buy</button></td>
                               :
-                              ticker===stock.ticker ? 
-                              <td className='last-column'> {stock.exchange} 
+                              ticker===money.ticker ? 
+                              <td className='last-cur-column' > {money.exchange} 
                                     <input type='number' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleChange(e.target.value)} /> 
                                     <button onClick={()=>this.add()} >Add</button></td>
                               : 
-                              <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker)} >Buy </button></td>
+                              <td className='last-cur-column' > {money.exchange} <button onClick={()=>this.buy(money.ticker)} >Buy</button></td>
                            }     
                         </tr>)}
                 </table>
@@ -101,10 +95,8 @@ export class Stocks extends Component {
 
 function mapStateToProps (state) {
    return {
-      user: state.userReducer.user, 
-      searchInput: state.searchInput.input
+      user: state.userReducer.user
    }
 }
 
-export default connect(mapStateToProps)(Stocks)
-
+export default connect(mapStateToProps)(Currencies)

@@ -1,7 +1,7 @@
 INSERT INTO customers (
     first_name,
     last_name,
-    login, 
+    email, 
     hash
 )
 VALUES($1, $2, $3, $4)

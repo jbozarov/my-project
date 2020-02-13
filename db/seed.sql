@@ -4,7 +4,7 @@ CREATE TABLE customers (
     customer_id serial primary key,
     first_name varchar(32),
     last_name varchar(32),
-    login varchar(20), 
+    email varchar(100), 
     hash varchar(300)
 ); 
 
@@ -25,8 +25,8 @@ CREATE TABLE transactions (
     transaction_id serial primary key, 
     account_number varchar(20) references accounts(account_number),
     amount varchar(20), 
-    description varchar(20),
-    transaction_date date 
+    description varchar(200),
+    transaction_date varchar(20) 
 );
 
 create table customer_order (
@@ -37,8 +37,8 @@ create table customer_order (
 
 create table cart (
     cart_id serial primary key, 
-    customer_order_id int REFERENCES customer_order(customer_order_id), 
-    ticker varchar(10) REFERENCES stocks(ticker), 
+    customer_order_id int, 
+    ticker varchar(10), 
     qty int, 
     price decimal(9,2), 
     total decimal(9,2)
@@ -54,32 +54,52 @@ CREATE TABLE stocks (
 
 CREATE TABLE appointments (
    appointment_id serial primary key, 
-   customer_id int references customers(customer_id), 
+   customer_id int, 
    date varchar(20),
    time varchar(20), 
    available boolean
 )
 
-insert into appointments (appointment_id, customer_id, date, time, available) values (1, 1, '10/29/2019', '1:39 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (2, 2, '4/18/2019', '2:52 PM', false);
-insert into appointments (appointment_id, customer_id, date, time, available) values (3, 3, '10/25/2019', '12:00 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (4, 4, '9/18/2019', '12:51 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (5, 5, '5/14/2019', '12:09 PM', false);
-insert into appointments (appointment_id, customer_id, date, time, available) values (6, 6, '3/29/2019', '3:17 PM', false);
-insert into appointments (appointment_id, customer_id, date, time, available) values (7, 7, '9/20/2019', '1:20 PM', false);
-insert into appointments (appointment_id, customer_id, date, time, available) values (8, 8, '10/9/2019', '2:42 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (9, 9, '1/13/2020', '2:18 PM', false);
-insert into appointments (appointment_id, customer_id, date, time, available) values (10, 10, '7/27/2019', '11:44 AM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (11, 11, '10/13/2019', '11:07 AM', false);
-insert into appointments (appointment_id, customer_id, date, time, available) values (12, 12, '6/2/2019', '10:09 AM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (13, 13, '9/13/2019', '2:09 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (14, 14, '12/7/2019', '1:12 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (15, 15, '7/30/2019', '3:39 PM', false);
-insert into appointments (appointment_id, customer_id, date, time, available) values (16, 16, '6/29/2019', '3:44 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (17, 17, '3/12/2019', '1:01 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (18, 18, '4/18/2019', '11:56 AM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (19, 19, '9/22/2019', '2:23 PM', true);
-insert into appointments (appointment_id, customer_id, date, time, available) values (20, 20, '12/4/2019', '10:02 AM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (1, 1, '3/2/2020', '10:00 AM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (2, 2, '3/2/2020', '11:00 AM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (3, 3, '3/2/2020', '12:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (4, 4, '3/2/2020', '1:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (5, 5, '3/2/2020', '2:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (6, 6, '3/2/2020', '3:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (7, 7, '3/2/2020', '4:00 PM', false);
+
+insert into appointments (appointment_id, customer_id, date, time, available) values (8, 8, '3/3/2020', '10:00 AM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (9, 9, '3/3/2020', '11:00 AM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (10, 10, '3/3/2020', '12:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (11, 11, '3/3/2020', '1:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (12,12, '3/3/2020', '2:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (13, 13, '3/3/2020', '3:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (14, 14, '3/3/2020', '4:00 PM', true);
+
+insert into appointments (appointment_id, customer_id, date, time, available) values (15, 15, '3/4/2020', '10:00 AM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (16, 16, '3/4/2020', '11:00 AM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (17, 17, '3/4/2020', '12:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (18, 18, '3/4/2020', '1:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (19, 19, '3/4/2020', '2:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (20, 20, '3/4/2020', '3:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (21, 21, '3/4/2020', '4:00 PM', false);
+
+insert into appointments (appointment_id, customer_id, date, time, available) values (22, 22, '3/5/2020', '10:00 AM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (23, 23, '3/5/2020', '11:00 AM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (24, 24, '3/5/2020', '12:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (25, 25, '3/5/2020', '1:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (26, 26, '3/5/2020', '2:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (27, 27, '3/5/2020', '3:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (28, 28, '3/5/2020', '4:00 PM', true);
+
+insert into appointments (appointment_id, customer_id, date, time, available) values (29, 29, '3/6/2020', '10:00 AM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (30, 30, '3/6/2020', '11:00 AM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (31, 31, '3/6/2020', '12:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (32, 32, '3/6/2020', '1:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (33, 33, '3/6/2020', '2:00 PM', false);
+insert into appointments (appointment_id, customer_id, date, time, available) values (34, 34, '3/6/2020', '3:00 PM', true);
+insert into appointments (appointment_id, customer_id, date, time, available) values (35, 35, '3/6/2020', '4:00 PM', false);
+
 
 
 

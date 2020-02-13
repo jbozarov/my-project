@@ -17,7 +17,7 @@ import Schedule from './components/schedule/Schedule'
 export default (
     <Switch>
         <Route exact path='/' component={Landing} />
-        <Route path='/dashboard' component={Dashboard} /> 
+        <Route path='/dashboard/:customer_id' component={Dashboard} /> 
         <Route path='/accounts/:customer_id' component={Accounts} /> 
         <Route path='/transactions/:account_number' component={Transactions} /> 
         <Route path='/settings' component={Settings} /> 

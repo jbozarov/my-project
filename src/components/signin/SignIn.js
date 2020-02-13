@@ -8,22 +8,24 @@ import './Signin.css'
 
 
 const SignIn = props => {
-   const [login, setEmailInput] = useState('')
+   const [email, setEmailInput] = useState('')
    const [password, setPassInput] = useState('')
 
 
     const signIn = () => {
-        axios.post('/auth/signin', {login, password})
-        .then(res => props.userLogged(res.data))
-        .catch(err=>console.log(err))
-        props.history.push('/') 
+        axios.post('/auth/signin', {email, password})
+        .then(res => {
+           props.userLogged(res.data)
+           props.history.push(`/`) 
+         })
+        .catch(err=>console.log(err))   
     }
 
       const goRegitsterPage = () => props.history.push('/form')
       return (
          <div className='sign-in'  >
                <h2>Please sign in </h2>
-               <input placeholder=' Enter your email' value={login} onChange={e=>setEmailInput(e.target.value)} />
+               <input placeholder=' Enter your email' value={email} onChange={e=>setEmailInput(e.target.value)} />
                <PasswordMask className='password' useVendorStyles={false} placeholder=' Enter your password' value={password} onChange={e=>setPassInput(e.target.value)}/>
                <LoginBTN onClick={signIn} >Sign in </LoginBTN>
                <p style={{color: '#3399ff', fontWeight: '600', fontStyle: 'italic'}} >Forgot password ?</p>
@@ -35,7 +37,9 @@ const SignIn = props => {
 
 
 function mapStateToProps(state) {
-    return state
+    return {
+      user: state.userReducer.user
+    }
 }
 
 export default connect(mapStateToProps, {userLogged})(SignIn); 

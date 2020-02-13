@@ -30,10 +30,9 @@ export class Invest extends Component {
                 <nav className='invest-nav' >
                     <Link to='/invest/stocks' style={{textDecoration:'none', color:'black'}} > <p> Stocks </p> </Link> 
                     <Link to='/invest/mutualfunds' style={{textDecoration:'none', color:'black'}} > <p> Mutual Funds </p> </Link> 
-                    <Link style={{textDecoration:'none', color:'black'}} > <p> Currencies </p> </Link> 
+                    <Link to='/invest/currencies' style={{textDecoration:'none', color:'black'}} > <p> Currencies </p> </Link> 
                     <Link style={{textDecoration:'none', color:'black'}} > <p> Cryptocurrencies </p> </Link> 
-                    <Link style={{textDecoration:'none', color:'black'}} > <p> Commodities </p> </Link> 
-                    <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <p> my investment </p> </Link> 
+                    <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <p> cart </p> </Link> 
                 </nav>
                 <div className='major-indexes-box-1'>
                    {    this.state.indexes.map(ind=>

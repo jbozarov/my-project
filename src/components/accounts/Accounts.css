@@ -1,5 +1,5 @@
 .accounts{
-    width: 70%;
+    width: 80%;
     margin: auto;
     box-sizing: border-box;
 }
@@ -26,4 +26,18 @@
 .card {
     width: 200px;
     border-radius: 5px;
+}
+
+.dash-nav{
+   height: 7vh;
+   width: 100%;
+   padding: 3px 10px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   font-size: x-large;
+   color: blue;
+   font-weight: 500;
 }

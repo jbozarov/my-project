@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
-import { ToastContainer, toase, toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -36,11 +36,12 @@ const remove = ticker => {
 
 const onToken = (token) => {
    console.log('line 38 is: ', token)
-   axios.post('/api/payment', { token, amount: (yourTotal*100).toFixed(), customer_order_id: props.user.customer_order_id, customer_id: props.user.customer_id })
+   axios.post('/api/payment', { token, amount: (yourTotal*100).toFixed(), customer_order_id: props.user.customer_order_id, customer_id: props.user.customer_id, email: props.user.email })
    .then(res => {
+      getCart()
       toast.success(`Congratulations you paid ${props.user.first_name} ${yourTotal}!`)
    })
-   .then(err => {
+   .catch(err => {
       toast.error('Error occured')
    })
  }

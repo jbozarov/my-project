@@ -10,7 +10,7 @@ module.exports = {
     addToCart: (req, res) => {
        const db = req.app.get('db')
        const { customer_order_id, ticker, qty, price, total } = req.body 
-       console.log({ customer_order_id, ticker, qty, price, total })
+       console.log('stockctrl line 13: ',{ customer_order_id, ticker, qty, price, total })
 
        db.cart.add_to_cart([customer_order_id, ticker, qty, price, total])
        .then(data => res.sendStatus(200))
@@ -19,7 +19,6 @@ module.exports = {
     getCart: (req, res) => {
        const db = req.app.get('db')
        const { customer_order_id } = req.params 
-       console.log('line 22: ', customer_order_id)
 
        db.cart.get_cart( customer_order_id ) 
        .then(items => res.status(200).send(items))

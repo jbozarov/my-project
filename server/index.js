@@ -2,13 +2,23 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
-const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, STRIPE_SECRET } = process.env
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, EMAIL, PASSWORD } = process.env
 const validCtrl = require('./controllers/validation')
 const accCtrl = require('./controllers/accCountroller')
 const stockCtrl = require('./controllers/stockController')
 const stripeCtrl = require('./controllers/stripeControllers')
+const appointCtrl = require('./controllers/appointmentControllers')
+const nodemailer = require('nodemailer')
 const cors = require('cors')
 const app = express()
+
+const transporter = nodemailer.createTransport({
+   service: 'gmail', 
+   auth: {
+      user: EMAIL, 
+      pass: PASSWORD
+   }
+})
 
 
 app.use(cors()); 
@@ -26,6 +36,7 @@ app.use(
 
 massive(CONNECTION_STRING).then(db => {
   app.set('db', db);
+  app.set('transporter', transporter)
   console.log('Database is connected');
   app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`));
 });
@@ -48,6 +59,10 @@ app.post('/api/add', stockCtrl.addToCart)
 app.get('/api/cart/:customer_order_id', stockCtrl.getCart)
 app.delete('/api/removefromcart/:ticker', stockCtrl.remove)
 
+
+//APPOINTMENTS
+app.post('/api/schedules', appointCtrl.getSchedules)
+app.put('/api/make', appointCtrl.makeApp)
 
 app.post('/api/payment', stripeCtrl.pay)
 

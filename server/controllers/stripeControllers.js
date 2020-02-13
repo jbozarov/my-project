@@ -1,10 +1,21 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
+const EMAIL = process.env
+
+
+const mailOptions = {
+   from: EMAIL, 
+   to: '', 
+   subject: 'Thanks you for  investing', 
+   text: 'THANKS '
+}
+
 
 module.exports = {
     pay: (req,res)=>{
         const db = req.app.get('db')
-        const {token:{id}, amount, customer_order_id, customer_id } = req.body;
-        console.log('stripe line 7: ', amount, customer_order_id, customer_id)
+        const transporter = req.app.get('transporter')
+        const {token:{id}, amount, customer_order_id, customer_id, email } = req.body;
+        console.log('stripe line 7: ', amount, customer_order_id, customer_id, email)
         stripe.charges.create(
             {
                 amount: amount,
@@ -24,6 +35,19 @@ module.exports = {
                        description: charge.description, 
                        transaction_date: today
                     }
+
+                    const cart = await db.cart.get_cart( customer_order_id ) 
+                  //   const orderDetails: 
+                    const {ticker, qty, price, total } = cart[0]
+                    const customMailOptions = {...mailOptions, to: email, text: `Your purchase details: Stockes: ${ticker}, Quantity: ${qty}, price: ${price}, total:  ${total}`}
+                    transporter.sendMail(customMailOptions, (err, data) => {
+                       if(err) {
+                          console.log(err)
+                       } else {
+                          console.log('email confirmation sent')
+                          console.log(data)
+                       }
+                    })
                     db.transactions.create_transaction([newTransaction.account_number, newTransaction.amount, newTransaction.description, newTransaction.transaction_date])
                     const balance = await db.accounts.get_balance(newTransaction.account_number)
                     console.log('account bal: ', balance, parseFloat(balance[0].balance), parseFloat(newTransaction.amount))

@@ -1,0 +1,49 @@
+.currencies{
+   display: flex;
+   justify-content: center;
+   width: 90%;
+   min-width: 60%;
+   margin-top: 40px;
+   margin: auto;
+
+}
+
+
+.stocks-table{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+}
+
+.stocks-table td, .stocks-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.stocks-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.stocks-table tr:hover {background-color: #ddd;}
+
+.stocks-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.last-cur-column{
+    min-width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.first{
+    width: 30px;
+}
+
+.date-column{
+   max-width: 50px;
+   box-sizing: border-box;
+}
