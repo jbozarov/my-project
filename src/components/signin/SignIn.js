@@ -16,7 +16,7 @@ const SignIn = props => {
         axios.post('/auth/signin', {email, password})
         .then(res => {
            props.userLogged(res.data)
-           props.history.push(`/`) 
+           props.history.push(`/dashboard`) 
          })
         .catch(err=>console.log(err))   
     }
@@ -26,7 +26,7 @@ const SignIn = props => {
          <div className='sign-in'  >
                <h2>Please sign in </h2>
                <input placeholder=' Enter your email' value={email} onChange={e=>setEmailInput(e.target.value)} />
-               <PasswordMask className='password' useVendorStyles={false} placeholder=' Enter your password' value={password} onChange={e=>setPassInput(e.target.value)}/>
+               <PasswordMask  className='password' useVendorStyles={false} placeholder=' Enter your password' value={password} onChange={e=>setPassInput(e.target.value)}/>
                <LoginBTN onClick={signIn} >Sign in </LoginBTN>
                <p style={{color: '#3399ff', fontWeight: '600', fontStyle: 'italic'}} >Forgot password ?</p>
                <RegBTN onClick={goRegitsterPage} className='register-btn' >Register </RegBTN>

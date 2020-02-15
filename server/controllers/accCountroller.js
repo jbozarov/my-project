@@ -22,5 +22,13 @@ module.exports =  {
 
         await db.transactions.get_transactions(account_number)
         .then(transactions => res.status(200).send(transactions))
+    },
+    getTransByCusId: async(req, res) => {
+        const db = req.app.get('db') 
+        const { customer_id } = req.params
+        console.log('accCTRL 21 ', customer_id)
+
+        await db.transactions.get_trans_by_cusid(customer_id)
+        .then(transactions => res.status(200).send(transactions))
     }
 }

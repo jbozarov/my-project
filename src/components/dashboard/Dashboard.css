@@ -1,0 +1,71 @@
+
+.invest-table{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.invest-table td, .invest-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+
+.invest-table th, .invest-table td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: white;
+  color: black;
+}
+
+.invest-table tr:nth-child(even){background-color: #f2f2f2;}
+.invest-table tr:hover {background-color: #ddd;}
+.transactions tr:nth-child(even){background-color: #f2f2f2;}
+.transactions tr:hover {background-color: #ddd;}
+
+
+
+.transactions{
+   width: 40%;
+   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+   border-collapse: collapse;
+   margin: auto;
+   background-color: white;
+}
+
+.transactions td, .transactions th {
+   border: 1px solid #ddd;
+   padding: 8px;
+}
+
+
+.transactions th, .transactions td {
+ padding-top: 20px;
+ padding-bottom: 20px;
+ text-align: left;
+ background-color: white;
+ color: black;
+}
+
+/* .box{
+   display: flex;
+   flex-direction: column;
+   background-color: white;
+} */
+
+.transactions p{
+   margin: 9px;
+   width: 80%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   padding: 0px 8% 0 5%;
+}
+
+.desc{
+   color: black;
+   font-size: 16px;
+}

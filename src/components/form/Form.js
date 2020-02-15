@@ -30,7 +30,7 @@ const Form = props => {
 
    return (
       <div className='form' >
-            <h1>Registration form</h1>
+            <h3> Register account </h3>
             <input placeholder=' Enter your email'  value={email} onChange={e=>setEmail(e.target.value)} />
             <input placeholder=' 8-20 character long'  value={password} onChange={e=>setPassword(e.target.value)}/> 
             <BTN onClick={validate} >Validate your email </BTN>

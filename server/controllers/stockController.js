@@ -25,7 +25,10 @@ module.exports = {
        .catch(error => res.status(500).send(error))
     }, 
     remove: (req, res) => {
-       const { ticker } = req.params
+       console.log('hit')
+       let {ticker}  = req.params
+       ticker = ticker.split('-').join('/')
+       console.log('delete line 29: ', ticker)
        req.app.get('db').cart.remove_from_cart(ticker)
        .then(() => res.sendStatus(200))
        .catch(err => res.status(500).send(err))

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Landing from './components/home/Home'
 import Dashboard from './components/dashboard/Dashboard'
 import Accounts from './components/accounts/Accounts'
 import Transactions from './components/transactions/Transactions'
@@ -16,8 +15,7 @@ import Schedule from './components/schedule/Schedule'
 
 export default (
     <Switch>
-        <Route exact path='/' component={Landing} />
-        <Route path='/dashboard/:customer_id' component={Dashboard} /> 
+        <Route path='/dashboard' component={Dashboard} /> 
         <Route path='/accounts/:customer_id' component={Accounts} /> 
         <Route path='/transactions/:account_number' component={Transactions} /> 
         <Route path='/settings' component={Settings} /> 

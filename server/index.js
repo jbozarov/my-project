@@ -8,6 +8,7 @@ const accCtrl = require('./controllers/accCountroller')
 const stockCtrl = require('./controllers/stockController')
 const stripeCtrl = require('./controllers/stripeControllers')
 const appointCtrl = require('./controllers/appointmentControllers')
+const invstCtrl = require('./controllers/investmentCtrl')
 const nodemailer = require('nodemailer')
 const cors = require('cors')
 const app = express()
@@ -50,7 +51,9 @@ app.post('/auth/signin', validCtrl.signIn)
 app.post('/auth/logout', validCtrl.logout)
 app.post('/api/account', accCtrl.createAcc)
 app.get('/api/accounts/:customer_id', accCtrl.getAccounts)
+
 app.get('/api/transactions/:account_number', accCtrl.getTransactions)
+app.get('/api/transactionscustomerid/:customer_id', accCtrl.getTransByCusId)
 
 
 //STOCKS
@@ -66,4 +69,5 @@ app.put('/api/make', appointCtrl.makeApp)
 
 app.post('/api/payment', stripeCtrl.pay)
 
-
+//INVESTMENTS 
+app.get('/api/investments/:customer_id', invstCtrl.getInvestments)

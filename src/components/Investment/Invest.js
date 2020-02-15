@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { FiShoppingCart } from 'react-icons/fi'
 import './Invest.css'
 import routes from './routes'
 import axios from 'axios';
@@ -31,8 +32,8 @@ export class Invest extends Component {
                     <Link to='/invest/stocks' style={{textDecoration:'none', color:'black'}} > <p> Stocks </p> </Link> 
                     <Link to='/invest/mutualfunds' style={{textDecoration:'none', color:'black'}} > <p> Mutual Funds </p> </Link> 
                     <Link to='/invest/currencies' style={{textDecoration:'none', color:'black'}} > <p> Currencies </p> </Link> 
-                    <Link style={{textDecoration:'none', color:'black'}} > <p> Cryptocurrencies </p> </Link> 
-                    <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <p> cart </p> </Link> 
+                    <Link to='/invest/crypto' style={{textDecoration:'none', color:'black'}} > <p> Cryptocurrencies </p> </Link> 
+                    <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <p> <FiShoppingCart size={15} ></FiShoppingCart> </p> </Link> 
                 </nav>
                 <div className='major-indexes-box-1'>
                    {    this.state.indexes.map(ind=>

@@ -48,6 +48,7 @@ module.exports = {
                           console.log(data)
                        }
                     })
+                    db.investments.add_to_investments([customer_id, ticker, qty, price])
                     db.transactions.create_transaction([newTransaction.account_number, newTransaction.amount, newTransaction.description, newTransaction.transaction_date])
                     const balance = await db.accounts.get_balance(newTransaction.account_number)
                     console.log('account bal: ', balance, parseFloat(balance[0].balance), parseFloat(newTransaction.amount))

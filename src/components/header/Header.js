@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'; 
 import { connect } from 'react-redux'
 import  { openSideBar} from '../../redux/reducers/sidebarReducer'
-import { filterState } from '../../redux/reducers/filterReducer'
+import { filterState } from '../../redux/reducers/searchReducer'
 import styled from 'styled-components'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { FaUserAlt } from 'react-icons/fa'
@@ -18,7 +18,7 @@ const Header = props => {
                 {!props.user.first_name ? 
                <DeskHeader>
                   <Link><p onClick={() => props.openSideBar(true)}> <GiHamburgerMenu size={17} style={{color: 'white'}} ></GiHamburgerMenu></p></Link>
-                  <input placeholder="  Search" style={{width: '60vw', height: '20px', borderRadius: '10px', border: 'none'}} onChange={e => handleSearch(e.target.value)} />
+                  <input placeholder="  Search" style={{width: '60vw', height: '25px', borderRadius: '10px', border: 'none'}} onChange={e => handleSearch(e.target.value)} />
                   <LoginRegister>
                         <Link to='/signin' style={{textDecoration:'none', color:'white'}}><p> <FaUserAlt> </FaUserAlt> Login</p></Link>
                         <Link to='/form' style={{textDecoration:'none', color:'white'}} ><p> <FiUserCheck></FiUserCheck> Register</p></Link>
@@ -27,7 +27,7 @@ const Header = props => {
                 : 
                 <DeskHeader>
                     <Link><p onClick={() => props.openSideBar(true)}> <GiHamburgerMenu size={17} style={{color: 'white'}} ></GiHamburgerMenu></p></Link>
-                    <input placeholder="  Search" style={{width: '60vw', height: '15px', borderRadius: '10px', border: 'none'}} onChange={e => handleSearch(e.target.value)} />
+                    <input placeholder="  Search" style={{width: '60vw', height: '25px', borderRadius: '10px', border: 'none'}} onChange={e => handleSearch(e.target.value)} />
                     <p style={{fontWeight: '700'}} >Welcome, {props.user.first_name} </p>
                 </DeskHeader>}
                {!props.user.first_name ? 

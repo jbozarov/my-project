@@ -20,7 +20,9 @@ function getCart() {
 }
 
 const remove = ticker => {
-   axios.delete(`/api/removefromcart/${ticker}`)
+   ticker = ticker.split('/').join('-')
+   console.log('cart ctrl', (ticker))
+   axios.delete(`/api/removefromcart/${ticker}`, )
    .then(() => getCart())
    .catch(err => console.log(err))
 }
@@ -49,23 +51,39 @@ const onToken = (token) => {
  const yourTotal = cartItems.reduce((a, b) => parseFloat(a) + parseFloat(b.total), 0); 
 
    return (
-      <div>
+      <CartDiv>
          <ToastContainer position="top-right" autoClose={1200} hideProgressBar={false} newestOnTop={false}
          closeOnClick rtl={false} pauseOnVisibilityChange draggable pauseOnHover />
          {console.log('this is: ', props.user.customer_id)}
          {cartItems.length < 1 ? 
             <h3> Your cart is empty </h3>
          :
-         cartItems.map(item => (
-            <CartItem key={item.cart_id} > 
-               <p> {item.ticker} </p>
-               <p> {item.qty} </p>
-               <p> {item.price} </p>
-               <p> {item.total} </p>
-               <button onClick={() => remove(item.ticker)} >Remove from card </button>
-            </CartItem>
+         <table className="invest-table">
+            <tr>
+               <th>Type</th>
+               <th>Qty</th>
+               <th>purchased price</th>
+               <th>Total</th>
+               <th>Remove</th>
+            </tr>
+         {cartItems.map(item => (
+           <tr key={item.cart_id}>
+             <td> {item.ticker} </td>
+             <td> {item.qty} </td>
+             <td> {item.price} </td>
+             <td> {item.total} </td>
+             <td><button onClick={() => remove(item.ticker)} >Remove</button>{" "}</td>
+           </tr>
          ))}
-         <h3> Your total is: {yourTotal} </h3>
+         <tfoot>
+           <tr>
+             <th>Total</th>
+             <td colSpan="4"> {yourTotal.toFixed(2)}</td>
+           </tr>
+         </tfoot>
+       </table>
+      }
+
          <StripeCheckout
           name='bankname' //header
          //  image={imageUrl}
@@ -88,7 +106,7 @@ const onToken = (token) => {
           {/* <button>Checkout</button> */}
         </StripeCheckout>
 
-      </div>
+      </CartDiv>
    )
 }
 
@@ -99,6 +117,12 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps)(Cart); 
+
+const CartDiv = styled.div`
+   width: 100%
+   margin: auto; 
+`;
+
 
 const CartItem = styled.div`
    display: flex;

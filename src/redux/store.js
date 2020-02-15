@@ -5,7 +5,7 @@ import promiseMiddleware from 'redux-promise-middleware'
 import userReducer from './reducers/userReducer'
 import sidebarReducer from './reducers/sidebarReducer'
 import accReducer from './reducers/accReducer'
-import searchReducer from './reducers/filterReducer'
+import searchReducer from './reducers/searchReducer'
 
 const rootReducer = combineReducers({
     userReducer,

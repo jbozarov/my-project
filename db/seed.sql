@@ -52,6 +52,14 @@ CREATE TABLE stocks (
     exchange varchar(20)
 )
 
+CREATE TABLE investments (
+   investment_id serial primary key, 
+   customer_id int, 
+   ticker varchar(10),
+   qty int, 
+   purchased_price decimal(9,2)
+)
+
 CREATE TABLE appointments (
    appointment_id serial primary key, 
    customer_id int, 

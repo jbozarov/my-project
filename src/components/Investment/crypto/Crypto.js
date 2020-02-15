@@ -1,35 +1,33 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components' 
 import { connect } from 'react-redux'
 import axios from 'axios'
-import './Stocks.css'
-import logo from './apple.png'
-import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 toast.configure(); 
 
 
-export class Stocks extends Component {
+class crpto extends Component {
     constructor(props){
         super(props); 
 
         this.state = {
-            stocks: [],
+            crpto: [],
             buyClicked: true,
             ticker: '',
             price: '',
-            qty: 0, 
-            searchInput: props.searchInput
+            qty: 0
         }
     }
 
     
    componentDidMount(){
-      console.log(this.props)
-      axios.get('/api/stocks').then(res=>this.setState({stocks: res.data}))
+      this.getCryptocurrencies(); 
    }
-
+   
+   getCryptocurrencies = () => {
+      axios.get('https://financialmodelingprep.com/api/v3/cryptocurrencies').then(res=>this.setState({crpto: res.data.cryptocurrenciesList}))
+   }
       
    handleChange = quantity => this.setState({qty: quantity })
 
@@ -43,7 +41,7 @@ export class Stocks extends Component {
           price, 
           total: eval(price*qty)
        }).then(res => {
-         toast.success(` ${qty} of ${ticker} is added `);
+         toast.success(`${qty} of ${ticker} is added `);
        }).catch(err=>{
           toast.error('Something went wrong')
           console.log(err)
@@ -52,21 +50,13 @@ export class Stocks extends Component {
     }
 
     render() {
-       const { stocks, buyClicked, ticker } = this.state
-       let filteredStocks;
-       if (this.props.searchInput.searchInput) {
-          filteredStocks = stocks.filter(stock => stock.ticker.includes(this.props.searchInput.searchInput.toUpperCase()))
-       } else {
-          filteredStocks=stocks
-       }
-       console.log(this.props.searchInput)
-       console.log(filteredStocks)
-       
+        const { crpto, buyClicked, ticker } = this.state
+        console.log(this.state)
         return (
-            <div className='stocks' >
+            <div className='currencies' >
             <ToastContainer
                position="top-right"
-               autoClose={800}
+               autoClose={1000}
                hideProgressBar={false}
                newestOnTop={false}
                closeOnClick
@@ -78,24 +68,26 @@ export class Stocks extends Component {
                 <table className='stocks-table' >
                     <tr>
                         <th>Ticker</th>
-                        <th>Company Name</th>
+                        <th>Name</th>
                         <th>Price</th>
-                        <th>Exchange Market</th>
+                        <th>Change</th>
+                        <th >MarketCapitalization</th>
                     </tr>
-                    {filteredStocks.length>=1 && filteredStocks.map(stock =>
-                        <tr key={stock.ticker} >
-                            <td> {stock.ticker} </td>
-                            <td> <Link to={`/invest/history/${stock.ticker}`} style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
-                            <td> {stock.price} </td>
+                    {crpto.length>1 && crpto.map(crpt =>
+                        <tr key={crpt.ticker} >
+                            <td className='first'> {crpt.ticker}</td>
+                            <td> {crpt.name} </td>
+                            <td> {crpt.price} </td>
+                            <td className='date-column' style={{fontWeight: '900', color: crpt.changes>0 ? 'green' : 'red'}} > {crpt.changes} </td>
                             {buyClicked ? 
-                              <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker, stock.price)} >Buy</button></td>
+                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.bid)} >Buy</button></td>
                               :
-                              ticker===stock.ticker ? 
-                              <td className='last-column'> {stock.exchange} 
+                              ticker===crpt.ticker ? 
+                              <td className='last-cur-column' > {crpt.marketCapitalization} 
                                     <input type='number' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleChange(e.target.value)} /> 
                                     <button onClick={()=>this.add()} >Add</button></td>
                               : 
-                              <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker)} >Buy </button></td>
+                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.bid)} >Buy</button></td>
                            }     
                         </tr>)}
                 </table>
@@ -106,10 +98,8 @@ export class Stocks extends Component {
 
 function mapStateToProps (state) {
    return {
-      user: state.userReducer.user, 
-      searchInput: state.searchInput
+      user: state.userReducer.user
    }
 }
 
-export default connect(mapStateToProps)(Stocks)
-
+export default connect(mapStateToProps)(crpto)

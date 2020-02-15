@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components' 
 import { connect } from 'react-redux'
@@ -10,8 +9,8 @@ toast.configure();
 
 
 class Currencies extends Component {
-    constructor(pro){
-        super(); 
+    constructor(props){
+        super(props); 
 
         this.state = {
             currencies: [],
@@ -32,6 +31,7 @@ class Currencies extends Component {
     buy = (tick, price) => this.setState({buyClicked: !this.state.buyClicked, ticker: tick, price: price })
     add = () => {
        const { ticker, price, qty } = this.state 
+       console.log(ticker, price, qty)
        axios.post('/api/add', {
           customer_order_id: this.props.user.customer_order_id,
           ticker, 
@@ -49,11 +49,12 @@ class Currencies extends Component {
 
     render() {
         const { currencies, buyClicked, ticker } = this.state
+        console.log(this.state)
         return (
             <div className='currencies' >
             <ToastContainer
                position="top-right"
-               autoClose={3000}
+               autoClose={1000}
                hideProgressBar={false}
                newestOnTop={false}
                closeOnClick
@@ -77,14 +78,14 @@ class Currencies extends Component {
                             <td style={{fontWeight: '900', color: money.changes>0 ? 'green' : 'red'}} >{parseFloat(money.changes).toFixed(3)}</td>
                             <td className='date-column'> {money.date.slice(0, 10)} </td>
                             {buyClicked ? 
-                              <td className='last-cur-column' > {money.exchange} <button onClick={()=>this.buy(money.ticker, money.price)} >Buy</button></td>
+                              <td className='last-cur-column' > {money.exchange} <button onClick={()=>this.buy(money.ticker, money.bid)} >Buy</button></td>
                               :
                               ticker===money.ticker ? 
                               <td className='last-cur-column' > {money.exchange} 
                                     <input type='number' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleChange(e.target.value)} /> 
                                     <button onClick={()=>this.add()} >Add</button></td>
                               : 
-                              <td className='last-cur-column' > {money.exchange} <button onClick={()=>this.buy(money.ticker)} >Buy</button></td>
+                              <td className='last-cur-column' > {money.exchange} <button onClick={()=>this.buy(money.ticker, money.bid)} >Buy</button></td>
                            }     
                         </tr>)}
                 </table>

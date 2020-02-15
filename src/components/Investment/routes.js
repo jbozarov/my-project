@@ -4,6 +4,8 @@ import Stocks from './stocks/Stocks'
 import Cart from './cart/Cart'
 import History from './history/History'
 import Currencies from './currencies/Currencies'
+import Crypto from './crypto/Crypto'
+import MutualFuncs from './muturalFunds/MutualFuncs'
 
 
 
@@ -14,5 +16,7 @@ export default (
         <Route path='/invest/cart' component={Cart} />
         <Route path='/invest/history/:ticker' component={History} /> 
         <Route path='/invest/currencies' component={Currencies} />
+        <Route path='/invest/crypto' component={Crypto} />
+        <Route path='/invest/mutualfunds' component={MutualFuncs} />
     </Switch>
 )
