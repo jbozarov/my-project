@@ -1,11 +1,11 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Stocks from './stocks/Stocks'
-import Cart from './cart/Cart'
-import History from './history/History'
-import Currencies from './currencies/Currencies'
-import Crypto from './crypto/Crypto'
-import MutualFuncs from './muturalFunds/MutualFuncs'
+import Stocks from '../stocks/Stocks'
+import Cart from '../cart/Cart'
+import History from '../history/History'
+import Currencies from '../currencies/Currencies'
+import Crypto from '../crypto/Crypto'
+import MutualFuncs from '../muturalFunds/MutualFuncs'
 
 
 

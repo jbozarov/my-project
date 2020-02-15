@@ -8,7 +8,7 @@ import Calculator from './components/calculator/Calculator'
 import Form from './components/form/Form'
 import SignIn from './components/signin/SignIn'
 import OpenAccount from './components/openaccount/OpenAccount'
-import Invest from './components/Investment/Invest'
+import Invest from './components/Investment/invest/Invest'
 import Help from './components/help/Help'
 import Schedule from './components/schedule/Schedule'
 

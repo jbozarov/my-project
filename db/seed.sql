@@ -60,6 +60,24 @@ CREATE TABLE investments (
    purchased_price decimal(9,2)
 )
 
+CREATE TABLE buyorders (
+   buy_order_id serial primary key, 
+   customer_id int, 
+   order_type varchar(20), 
+   ticker varchar(10),
+   qty int, 
+   wanted_price decimal(9,2)
+)
+
+CREATE TABLE sellorders (
+   sell_order_id serial primary key, 
+   customer_id int, 
+   order_type varchar(20), 
+   ticker varchar(10),
+   qty int, 
+   wanted_price decimal(9,2)
+)
+
 CREATE TABLE appointments (
    appointment_id serial primary key, 
    customer_id int, 

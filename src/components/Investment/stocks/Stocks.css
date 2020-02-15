@@ -1,19 +1,8 @@
 
-
-.stocks{
-   display: flex;
-   justify-content: center;
-   width: 90%;
-   min-width: 60%;
-   margin-top: 40px;
-   margin: auto;
-}
-
-
 .stocks-table{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
 }
 
 .stocks-table td, .stocks-table th {
@@ -33,13 +22,11 @@
   color: white;
 }
 
-.last-column{
-    min-width: 60%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.first{
-    width: 30px;
-}
+.stocks-table thead {
+   padding-top: 12px;
+   padding-bottom: 12px;
+   text-align: left;
+   background-color: #4CAF50;
+   color: black;
+   font-size: large;
+ }

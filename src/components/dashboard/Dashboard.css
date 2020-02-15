@@ -30,7 +30,7 @@
 
 .transactions{
    width: 40%;
-   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+   font-family: 'Times New Roman', Times, serif;
    border-collapse: collapse;
    margin: auto;
    background-color: white;
@@ -57,11 +57,13 @@
 } */
 
 .transactions p{
-   margin: 9px;
+   margin: 0px;
    width: 80%;
+   height: 6vh;
    display: flex;
    flex-direction: row;
    justify-content: space-between;
+   align-items: center;
    padding: 0px 8% 0 5%;
 }
 

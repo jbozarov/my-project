@@ -133,4 +133,4 @@ const CartItem = styled.div`
    margin: auto; 
 `;
 
-const imageUrl = 'https://img.favpng.com/7/23/21/logo-atom-bank-brand-portfolio-company-png-favpng-6u9CEmCiGejDKMjtGsYpHUUFw.jpg'
+const imageUrl = 'https://sapience.com.au/images/icons/super-and-investing.png'

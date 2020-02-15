@@ -49,7 +49,7 @@ export class History extends Component {
       console.log(this.props.match.params.ticker)
       return (
          <div>
-         <Line classname='chart' data={this.state} width={400} height={150}
+         <Line data={this.state} width={600} height={250}
          options={{ title:{display:true, text:`History of ${this.props.match.params.ticker} for last 30 days`, fontSize:20},
            legend: { display:true, position:'right' }
          }}

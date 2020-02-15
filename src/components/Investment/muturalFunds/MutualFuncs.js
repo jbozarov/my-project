@@ -72,7 +72,7 @@ class MutualFunds extends Component {
                     </tr>
                     {mutualfunds.length>1 && mutualfunds.map(fund =>
                         <tr key={fund.symbol} >
-                            <td className='first'> {fund.symbol}</td>
+                            <td> {fund.symbol}</td>
                             <td> {fund.name} </td>
                             <td> {fund.stockExchange} </td>    
                         </tr>)}

@@ -17,7 +17,9 @@ class Currencies extends Component {
             buyClicked: true,
             ticker: '',
             price: '',
-            qty: 0
+            qty: 0, 
+            searchInput: props.searchInput, 
+            isOrdersUpdated: ''
         }
     }
 
@@ -49,7 +51,13 @@ class Currencies extends Component {
 
     render() {
         const { currencies, buyClicked, ticker } = this.state
-        console.log(this.state)
+        let filteredCurr; 
+        if (this.props.searchInput.searchInput) {
+         filteredCurr = currencies.filter(money => money.ticker.includes(this.props.searchInput.searchInput.toUpperCase()))
+      } else {
+         filteredCurr=currencies
+      }
+      console.log(filteredCurr)
         return (
             <div className='currencies' >
             <ToastContainer
@@ -62,8 +70,7 @@ class Currencies extends Component {
                pauseOnVisibilityChange
                draggable
                pauseOnHover />
-
-                <table className='stocks-table' >
+                <table className='currencies-table' >
                     <tr>
                         <th>Pair</th>
                         <th>Price</th>
@@ -71,7 +78,7 @@ class Currencies extends Component {
                         <th >Last updated</th>
                         <th >Buy</th>
                     </tr>
-                    {currencies.length>1 && currencies.map(money =>
+                    {filteredCurr.length>=1 && filteredCurr.map(money =>
                         <tr key={money.ticker} >
                             <td className='first'> {money.ticker}</td>
                             <td> {money.bid} </td>
@@ -96,7 +103,8 @@ class Currencies extends Component {
 
 function mapStateToProps (state) {
    return {
-      user: state.userReducer.user
+      user: state.userReducer.user, 
+      searchInput: state.searchInput
    }
 }
 

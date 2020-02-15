@@ -1,12 +1,3 @@
-.mutual{
-   display: flex;
-   justify-content: center;
-   width: 90%;
-   min-width: 60%;
-   margin-top: 40px;
-   margin: auto;
-}
-
 
 .mutual-table{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;

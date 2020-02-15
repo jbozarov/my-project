@@ -9,6 +9,7 @@ const stockCtrl = require('./controllers/stockController')
 const stripeCtrl = require('./controllers/stripeControllers')
 const appointCtrl = require('./controllers/appointmentControllers')
 const invstCtrl = require('./controllers/investmentCtrl')
+const orderCtrl = require('./controllers/orderControllers')
 const nodemailer = require('nodemailer')
 const cors = require('cors')
 const app = express()
@@ -71,3 +72,7 @@ app.post('/api/payment', stripeCtrl.pay)
 
 //INVESTMENTS 
 app.get('/api/investments/:customer_id', invstCtrl.getInvestments)
+
+//ORDERS 
+app.get('/api/getbuyorders', orderCtrl.getBuyOrders)
+app.post('/api/addbuyorders', orderCtrl.addBuyOrder)

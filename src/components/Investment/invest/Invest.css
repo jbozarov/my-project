@@ -2,6 +2,15 @@
 .invest{
     width: 100%;
     background-color: #e6e6e6;
+    display: flex;
+    flex-direction: column;
+}
+
+.some {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   align-items: flex-start;
 }
 
 .invest-nav{

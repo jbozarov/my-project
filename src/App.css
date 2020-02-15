@@ -6,7 +6,7 @@
    display: flex;
    flex-direction: row;
    width: 100%;
-   max-width: 100vw;
+   max-width: 100%;
    /* background: linear-gradient(232deg, #16A085, #F4D03F); */
    /* background: linear-gradient(232deg, #3CA55C, #B5AC49); */
    /* background: linear-gradient(90deg, rgba(156,156,156,1) 0%, rgba(255,255,255,1) 72%); */
