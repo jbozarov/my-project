@@ -18,6 +18,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "fsevents": "^2.1.2",
     "massive": "^6.1.4",
     "nodemailer": "^6.4.2",
     "react": "^16.12.0",

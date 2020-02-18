@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import styled from "styled-components";
 import axios from "axios";
 import "./Dashboard.css";
+import Incomechart from './IncomeChart'
 
 class Dashboard extends Component {
    constructor() {
@@ -14,7 +15,8 @@ class Dashboard extends Component {
       this.state = {
          accounts: [], 
          investments: [], 
-         transactions: [], 
+         transactions: [],
+         alltransactions: [], 
          realStock: {},
          total: 0
       }
@@ -51,7 +53,7 @@ class Dashboard extends Component {
 
    getTransactions = () => {
     axios.get(`/api/transactionscustomerid/${this.props.user.customer_id}`)
-   .then(res=>this.setState({transactions: res.data.reverse().slice(0, 5)}))
+   .then(res=>this.setState({transactions: res.data.reverse().slice(0, 5), alltransactions: res.data}))
 }
 
     getMarketPrice = ticker => {
@@ -62,8 +64,8 @@ class Dashboard extends Component {
    }
 
    render(){
-      const { accounts, investments, transactions, realStock } = this.state
-      console.log(realStock)
+      const { accounts, investments, transactions, alltransactions, realStock } = this.state
+      console.log(alltransactions)
       let total = investments.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.purchased_price), 0)
   return (
     <DashboardDiv>
@@ -80,8 +82,8 @@ class Dashboard extends Component {
           ></MdEmail>
         </NavIcons>
       </DashNav>
+      <UpperTables>
       <MappedCards>
-        {" "}
         {accounts.map(account => (
           <Card key={account.account_number}>
             <Bankname> ABC Bank </Bankname>
@@ -99,67 +101,67 @@ class Dashboard extends Component {
               </Link>
               <p>
                 Balance: {"$"}
-                {account.balance}{" "}
+                {Number(account.balance).toFixed(2)}{" "}
               </p>
             </LinkBalance>
           </Card>
         ))}
       </MappedCards>
-      <h2>Your investments </h2>
-  
-      <LowerTables> 
-      <table className="invest-table">
-         <thead  ><tr><td colSpan='6'>Your investments</td> </tr></thead>
-        <tr>
-          <th>Name</th>
-          <th>Qty</th>
-          <th>purchased price</th>
-          <th>Real Price</th>
-          <th>Orders</th>
-          <th>Sell</th>
-        </tr>
-        {investments.map(item => (
-          <tr key={item.investment_id}>
-            <td> {item.ticker} </td>
-            <td> {item.qty} </td>
-            <td> {item.purchased_price} </td>
-            {realStock.symbol === item.ticker ? 
-               <td style={{cursor: 'pointer', color: item.purchased_price > realStock.price ? 'red' : 'green', fontWeight: '800'}} onClick={() => this.getMarketPrice(item.ticker)} > {realStock.price} </td>
-               : 
-               <td style={{cursor: 'pointer'}} onClick={() => this.getMarketPrice(item.ticker)} > View market price </td>
-            }
-            <td><button>Enter stop order </button>{" "}</td>
-            <td><button>Sell</button>{" "}</td>
-          </tr>
-        ))}
-        <tfoot>
-          <tr>
-            <th>Total</th>
-            <td colSpan="5"> {total.toFixed(2)}</td>
-          </tr>
-        </tfoot>
-      </table>
-
-
-
+      <Incomechart alltransactions={alltransactions} />
       <table className="transactions" >
-         <thead><tr><td colSpan='1' style={{fontSize: '20px'}} >Recent transactions</td> </tr></thead>
+         <thead><tr><td colSpan='1' style={{fontSize: '12px'}} >Recent transactions</td> </tr></thead>
          {transactions.map(transaction => (
-         <tr key={transaction.transaction_id}>
+         <tbody key={transaction.transaction_id}>
+            <tr>
             <p> 
                <span className='desc' > {transaction.description} </span> 
                <span> {transaction.transaction_date} </span></p>
             <p> 
                <span>  {transaction.account_number} </span> 
-               <span style={{color: 'red', fontWeight: '600'}} > {transaction.amount} </span>
+               <span style={{fontWeight: '600', color: transaction.type === 'expense' ? 'red' : 'green'}} > {transaction.amount} </span>
             </p>
-         </tr>
-      ))}
-      <tfoot> <tr>  <p>View more </p> </tr> </tfoot>
-     
+            </tr>
+         </tbody> ))}
       </table>
+      </UpperTables>
 
-
+      <h2>Your investments </h2>
+  
+      <LowerTables> 
+         <table className='stocks-table' >
+            <thead ><td colSpan='8'>Stocks</td></thead>
+               <tr>
+                  <th>Ticker</th>
+                  <th>Quantity</th>
+                  <th>Purchased price</th>
+                  <th>Real Price</th>
+                  <th>Orders</th>
+                  <th>Wanted price</th>
+                  <th>Submit</th>
+               </tr>
+               {investments.length>=1 && investments.map(item =>
+                  <tr key={item.ticker} >
+                        <td> {item.ticker} </td>
+                        <td> {item.qty} </td>
+                        <td> {item.purchased_price}</td>
+                        {realStock.symbol === item.ticker ? 
+                           <td style={{cursor: 'pointer', color: item.purchased_price > realStock.price ? 'red' : 'green', fontWeight: '800'}} onClick={() => this.getMarketPrice(item.ticker)} > {realStock.price} </td>
+                           : 
+                           <td style={{cursor: 'pointer'}} onClick={() => this.getMarketPrice(item.ticker)} > View market price </td>
+                        }
+                     <td> 
+                        <select value={this.state[`${item.ticker}orderType`]} onChange={e => this.changeOrderType(e, item.ticker, item.price )} >
+                           <option defaultValue >select</option>
+                           <option value='market' >Market </option>
+                           <option value='limit' >Limit </option>
+                           <option value='stop limit'>Stop limit</option>
+                        </select> 
+                     </td> 
+                     <td> <input value={this.state[`${item.ticker}wantedPrice`]} type='number' min='0' placeholder='Price' style={{width: '60px'}} onChange={e=>this.handlePrice(item.ticker, e.target.value)} /></td> 
+                     <td> <button disabled={ item.ticker !== this.state.ticker } onClick={()=>this.submit()} > Submit </button> </td>  
+                  </tr>)} 
+                  <tfoot><tr><td colSpan="7"> You invested ${total.toFixed(2)} </td></tr></tfoot>
+            </table>
       </LowerTables>
     </DashboardDiv>
   );
@@ -181,12 +183,13 @@ const DashboardDiv = styled.div`
   margin: 10px auto;
   box-sizing: border-box;
   background-color: rgba(245, 245, 245, 1);
-  // background: linear-gradient(90deg, rgba(156,156,156,1) 0%, rgba(255,255,255,1) 72%);
+//   background: linear-gradient(90deg, rgba(156,156,156,1) 0%, rgba(255,255,255,1) 72%);
 `;
 
 const DashNav = styled.nav`
   height: 7vh;
-  width: 100%;
+  width: 90%;
+  margin: auto; 
   padding: 3px 10px;
   box-sizing: border-box;
   display: flex;
@@ -205,8 +208,18 @@ const NavIcons = styled.div`
   justify-content: space-between;
 `;
 
+const UpperTables = styled.div`
+   width: 100%; 
+   margin: auto; 
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   align-items: flex-start;
+`; 
+
+
 const MappedCards = styled.div`
-  width: 100%;
+  width: 20%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -226,7 +239,7 @@ const Card = styled.div`
   margin: 20px;
   padding: 10px;
   height: 20vh;
-  width: 25%;
+  width: 40%;
   min-width: 200px;
   max-width: 200px;
   display: flex;
@@ -274,17 +287,70 @@ const LinkBalance = styled.div`
 
 const LowerTables = styled.div`
    width: 90%; 
-   margin: auto; 
+   // margin: auto; 
    display: flex; 
    flex-direction: row; 
-   justify-content: space-between; 
+   justify-content: flex-start; 
    align-items: flex-start; 
    flex-wrap: wrap; 
 `; 
 
+// --------------------
+// <table className="invest-table">
+//          <thead><tr><td colSpan='6'>Your investments</td></tr></thead>
+//          <thead>
+//         <tr>
+//           <th>Name</th>
+//           <th>Qty</th>
+//           <th>purchased price</th>
+//           <th>Real Price</th>
+//           <th>Orders</th>
+//           <th>Sell</th>
+//         </tr>
+//         </thead>
+//         {investments.map(item => (
+//            <tbody key={item.investment_id}>
+//           <tr>
+//             <td> {item.ticker} </td>
+//             <td> {item.qty} </td>
+//             <td> {item.purchased_price} </td>
+//             {realStock.symbol === item.ticker ? 
+//                <td style={{cursor: 'pointer', color: item.purchased_price > realStock.price ? 'red' : 'green', fontWeight: '800'}} onClick={() => this.getMarketPrice(item.ticker)} > {realStock.price} </td>
+//                : 
+//                <td style={{cursor: 'pointer'}} onClick={() => this.getMarketPrice(item.ticker)} > View market price </td>
+//             }
+//             <td><button>Enter stop order </button>{" "}</td>
+//             <td><button>Sell</button>{" "}</td>
+//             </tr>
+//             </tbody>
+//         ))}
+//         <tfoot>
+//           <tr>
+//             <th>Total</th>
+//             <td colSpan="5"> {total.toFixed(2)}</td>
+//           </tr>
+//         </tfoot>
+//       </table>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ---------------------
 // import React, { useState, useEffect } from "react";
 // import { connect } from "react-redux";
 // import { Link, withRouter } from "react-router-dom";

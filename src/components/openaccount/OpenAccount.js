@@ -18,8 +18,8 @@ export class OpenAccount extends Component {
     }
 
     componentDidMount(){
-        let newAccNumber = [...Array(10)].map(i=>(~~(Math.random()*10)).toString()).join('')
-      //   let newAccNumber = '4242424242424242'
+      //   let newAccNumber = [...Array(10)].map(i=>(~~(Math.random()*10)).toString()).join('')
+        let newAccNumber = '4242424242424242'
         this.setState({account_number: newAccNumber, customer_id: this.props.match.params.customer_id})
 
     }

@@ -26,7 +26,8 @@ CREATE TABLE transactions (
     account_number varchar(20) references accounts(account_number),
     amount varchar(20), 
     description varchar(200),
-    transaction_date varchar(20) 
+    transaction_date varchar(20), 
+    type varchar(20)
 );
 
 create table customer_order (

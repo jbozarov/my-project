@@ -80,14 +80,14 @@ class crpto extends Component {
                             <td> {crpt.price} </td>
                             <td className='date-column' style={{fontWeight: '900', color: crpt.changes>0 ? 'green' : 'red'}} > {crpt.changes} </td>
                             {buyClicked ? 
-                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.bid)} >Buy</button></td>
+                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.price)} >Buy</button></td>
                               :
                               ticker===crpt.ticker ? 
                               <td className='last-cur-column' > {crpt.marketCapitalization} 
                                     <input type='number' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleChange(e.target.value)} /> 
                                     <button onClick={()=>this.add()} >Add</button></td>
                               : 
-                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.bid)} >Buy</button></td>
+                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.price)} >Buy</button></td>
                            }     
                         </tr>)}
                 </table>

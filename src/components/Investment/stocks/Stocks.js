@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom';
-import styled from 'styled-components' 
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { buyUpdate } from '../../../redux/reducers/ordersReducers'
 import axios from 'axios'
@@ -15,13 +14,17 @@ export class Stocks extends Component {
         super(props); 
 
         this.state = {
+            currTicker: '',
             stocks: [],
+            buyClicked: false,
             searchInput: props.searchInput, 
-            orderType: '', 
+            orderType: 'select', 
             ticker: '',
             price: '',
             qty: 0, 
-            wantedPrice: 0
+            wantedPrice: 0,
+            v: false,
+
         }
     }
 
@@ -30,13 +33,51 @@ export class Stocks extends Component {
       axios.get('/api/stocks').then(res=>this.setState({stocks: res.data}))
    }
 
+   check = (t) => {
+      if (t!==this.state.currTicker) {
+         this.setState({[`${this.state.currTicker}qty`]: '', 
+         [`${this.state.currTicker}wantedPrice`]: '',
+         [`${this.state.currTicker}orderType`]: '',
+         currTicker: t
+      })
+      }
+   }
       
-   handleQty = quantity => this.setState({qty: quantity })
-   handlePrice = wantedPrice => this.setState({wantedPrice: wantedPrice })
+   handleQty = (t, quantity) => {
+      this.check(t)
+      this.setState({[`${t}qty`]: quantity, qty: quantity })
+   }
+   handlePrice = (t, wantedPrice) => {
+      this.check(t)
+      this.setState({[`${t}wantedPrice`]: wantedPrice, wantedPrice: wantedPrice })
+   }
 
-   changeOrderType = (e, t, p) => this.setState({orderType: e.target.value, ticker: t, price: p})
+   changeOrderType = (e, t, p) => {
+      this.check(t)
+      this.setState({[`${t}orderType`]: e.target.value, ticker: t, price: p, orderType: e.target.value})
+   }
+
+   buy = (tick, price) => this.setState({buyClicked: !this.state.buyClicked, ticker: tick, price: price })
+   
+   add = () => {
+      const { ticker, price, qty } = this.state 
+      axios.post('/api/add', {
+         customer_order_id: this.props.user.customer_order_id,
+         ticker, 
+         qty, 
+         price, 
+         total: eval(price*qty)
+      }).then(res => {
+        toast.success(`${qty} of ${ticker} is added `);
+      }).catch(err=>{
+         toast.error('Something went wrong')
+         console.log(err)
+      })
+      this.setState({buyClicked: false, ticker: '', price: '', qty: ''})
+   }
 
     submit = () => {
+       console.log('stocks 81 ', this.state)
        const { orderType, ticker, price, qty, wantedPrice } = this.state
        if (!this.props.user.customer_order_id) return alert('Please sign in')
        else if ( !qty ) return alert(' Please enter QUANTITY ')
@@ -49,35 +90,56 @@ export class Stocks extends Component {
                      price, 
                      total: eval(price*qty)
                   }).then(res => {
-                     toast.success(` ${qty} of ${ticker} is added `);
+                     toast.success(`You added ${qty} of ${ticker} stocks`);
                   }).catch(err=>{
                      toast.error('Something went wrong')
                      console.log(err)
                      })
-                  this.setState({orderType: '', ticker: '', price: '', qty: '', wantedPrice: ''})
-            } else {
-                  axios.post('/api/addbuyorders', {
+                  this.setState({
+                     orderType: 'select', 
+                     ticker: '', 
+                     price: '', 
+                     qty: '', 
+                     wantedPrice: '', 
+                     [`${this.state.currTicker}qty`]: '', 
+                     [`${this.state.currTicker}wantedPrice`]: '',
+                     [`${this.state.currTicker}orderType`]: '',
+                     currTicker: ''
+                  })
+            } else if (orderType === 'limit' || orderType === 'stop limit') {
+                  let body = {
                      customer_id: this.props.user.customer_id,
                      orderType,
                      ticker, 
                      qty, 
                      wantedPrice,
+                  }
+                  axios.post('/api/addbuyorders', {
+                     ...body
                   }).then(res => {
-                     this.props.buyUpdate(true)
-                     toast.success(`  `);
+                     this.props.buyUpdate(this.state.v)
+                     toast.success('Added to buy orders');
                   }).catch(err=>{
                      toast.error('could not add to orders ')
                      console.log(err)
                      })
-                  
-                  this.setState({orderType: '', ticker: '', price: '', qty: '', wantedPrice: ''})
+                  this.setState({
+                     orderType: 'select', 
+                     ticker: '', 
+                     price: '', 
+                     qty: '', 
+                     wantedPrice: '', 
+                     [`${this.state.currTicker}qty`]: '', 
+                     [`${this.state.currTicker}wantedPrice`]: '',
+                     [`${this.state.currTicker}orderType`]: '',
+                     currTicker: ''
+                  })
             }
        }
     }
 
     render() {
-       console.log(this.state, this.props.user)
-       const { stocks } = this.state
+       const { stocks, buyClicked, ticker } = this.state
        let filteredStocks;
        if (this.props.searchInput.searchInput) {
           filteredStocks = stocks.filter(stock => stock.ticker.includes(this.props.searchInput.searchInput.toUpperCase()))
@@ -96,10 +158,11 @@ export class Stocks extends Component {
                rtl
                pauseOnVisibilityChange
                draggable
-               pauseOnHover />
+               pauseOnHover/>
 
+               <div className='desktop' >
                 <table className='stocks-table' >
-                  <thead ><tr><td colSpan='8'>Stocks</td> </tr></thead>
+                  <thead ><td colSpan='8'>Stocks</td></thead>
                     <tr>
                         <th>Ticker</th>
                         <th>Company Name</th>
@@ -116,20 +179,49 @@ export class Stocks extends Component {
                             <td> <Link to={`/invest/history/${stock.ticker}`} style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
                             <td> {stock.price} </td>
                             <td> {stock.exchange}</td>
-                           
                            <td> 
-                              <select onChange={e => this.changeOrderType(e, stock.ticker, stock.price )} >
-                                 <option >select </option>
+                              <select value={this.state[`${stock.ticker}orderType`]} onChange={e => this.changeOrderType(e, stock.ticker, stock.price )} >
+                                 <option defaultValue >select</option>
                                  <option value='market' >Market </option>
                                  <option value='limit' >Limit </option>
                                  <option value='stop limit'>Stop limit</option>
                               </select> 
                            </td> 
-                           <td> <input type='number' min='0' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleQty(e.target.value)} /></td> 
-                           <td> <input type='number' min='0' placeholder='Price' style={{width: '60px'}} onChange={e=>this.handlePrice(e.target.value)} /></td> 
+                           <td> <input value={this.state[`${stock.ticker}qty`]} type='number' min='0' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleQty(stock.ticker, e.target.value)} /></td> 
+                           <td> <input value={this.state[`${stock.ticker}wantedPrice`]} type='number' min='0' placeholder='Price' style={{width: '60px'}} onChange={e=>this.handlePrice(stock.ticker, e.target.value)} /></td> 
                            <td> <button disabled={ stock.ticker !== this.state.ticker } onClick={()=>this.submit()} > Submit </button> </td>  
                         </tr>)} 
                 </table>
+                </div>
+
+               <div className='mobile' >
+               
+                <table className='stocks-table' >
+                  <thead ><tr><td colSpan='8'>Stocks</td> </tr></thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Company Name</th>
+                        <th>Price</th>
+                        <th>Buy</th>
+                    </tr>
+                    {filteredStocks.length>=1 && filteredStocks.map(stock =>
+                        <tr key={stock.ticker} >
+                            <td> {stock.ticker} </td>
+                            <td> <Link to={`/invest/history/${stock.ticker}`} style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
+                            <td> {stock.price} </td>
+                             {buyClicked ? 
+                                 <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker, stock.price)} >Buy</button></td>
+                                 :
+                                 ticker===stock.ticker ? 
+                                 <td className='last-column'> {stock.exchange} 
+                                       <input type='number' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleChange(e.target.value)} /> 
+                                       <button onClick={()=>this.add()} >Add</button></td>
+                                 : 
+                                 <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker)} >Buy </button></td>
+                              } 
+                        </tr>)} 
+                </table>
+                </div>
             </div>
         )
     }
@@ -143,19 +235,3 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps, { buyUpdate })(Stocks)
-
-
-
-
-
-
-// {buyClicked ? 
-//    <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker, stock.price)} >Buy</button></td>
-//    :
-//    ticker===stock.ticker ? 
-//    <td className='last-column'> {stock.exchange} 
-//          <input type='number' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleChange(e.target.value)} /> 
-//          <button onClick={()=>this.add()} >Add</button></td>
-//    : 
-//    <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker)} >Buy </button></td>
-// } 

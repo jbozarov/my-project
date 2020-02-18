@@ -76,3 +76,5 @@ app.get('/api/investments/:customer_id', invstCtrl.getInvestments)
 //ORDERS 
 app.get('/api/getbuyorders', orderCtrl.getBuyOrders)
 app.post('/api/addbuyorders', orderCtrl.addBuyOrder)
+app.delete('/api/deletebuyorder/:buy_order_id', orderCtrl.deleteBuyOrder)
+app.put('/api/editbuyorder', orderCtrl.editBuyOrder)

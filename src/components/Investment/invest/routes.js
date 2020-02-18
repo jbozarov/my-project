@@ -6,6 +6,7 @@ import History from '../history/History'
 import Currencies from '../currencies/Currencies'
 import Crypto from '../crypto/Crypto'
 import MutualFuncs from '../muturalFunds/MutualFuncs'
+import Buyorder from '../orders/Buyorder'
 
 
 
@@ -18,5 +19,6 @@ export default (
         <Route path='/invest/currencies' component={Currencies} />
         <Route path='/invest/crypto' component={Crypto} />
         <Route path='/invest/mutualfunds' component={MutualFuncs} />
+        <Route path='/invest/buyorders' component={Buyorder} />
     </Switch>
 )

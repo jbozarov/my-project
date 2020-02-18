@@ -4,11 +4,11 @@ const initialState = {
 }
 
 const BUY_UPDATE = 'BUY_UPDATE'; 
-export const buyUpdate = (t) => {
-   console.log('hit buy update ', t)
+export const buyUpdate = bool => {
+   console.log('hit buy update ', bool)
    return {
       type: BUY_UPDATE,
-      payload: t
+      payload: bool
    }
 }
 

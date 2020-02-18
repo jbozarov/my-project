@@ -29,16 +29,18 @@
 
 
 .transactions{
-   width: 40%;
+   width: 30%;
    font-family: 'Times New Roman', Times, serif;
    border-collapse: collapse;
-   margin: auto;
+   margin: 0;
    background-color: white;
+   font-size: 5px;
 }
 
-.transactions td, .transactions th {
+.transactions td, .transactions th{
    border: 1px solid #ddd;
    padding: 8px;
+   font-size: 5px;
 }
 
 
@@ -50,24 +52,15 @@
  color: black;
 }
 
-/* .box{
-   display: flex;
-   flex-direction: column;
-   background-color: white;
-} */
-
 .transactions p{
    margin: 0px;
    width: 80%;
-   height: 6vh;
+   height: 4vh;
    display: flex;
    flex-direction: row;
    justify-content: space-between;
    align-items: center;
    padding: 0px 8% 0 5%;
-}
-
-.desc{
    color: black;
-   font-size: 16px;
+   font-size: 10px;
 }

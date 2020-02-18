@@ -16,6 +16,12 @@ const Accounts = props => {
               .then(res => setAccounts(res.data))
               .catch(err => console.log(err))
     }
+
+   //  const add = (a, b) =>  {
+   //     return a+b; 
+   //  }
+
+
         return (
             <div className='accounts' >
                 {accounts.map(account=>(

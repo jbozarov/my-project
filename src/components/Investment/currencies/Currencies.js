@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
-import styled from 'styled-components' 
 import { connect } from 'react-redux'
 import axios from 'axios'
 import './Currencies.css'
