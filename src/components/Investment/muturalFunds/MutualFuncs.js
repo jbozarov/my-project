@@ -55,7 +55,7 @@ class MutualFunds extends Component {
             <div className='currencies' >
             <ToastContainer
                position="top-right"
-               autoClose={1000}
+               autoClose={1200}
                hideProgressBar={false}
                newestOnTop={false}
                closeOnClick

@@ -18,7 +18,7 @@ export class Incomechart extends Component {
       if (prevProps !== this.props) {
             const expenses = this.props.alltransactions.filter(val => val.type === 'expense').reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.amount), 0)
             const gains = this.props.alltransactions.filter(val => val.type === 'gain').reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.amount), 0)
-            const newState = {...this.state, datasets: [{data: [expenses, gains], backgroundColor: ['red', 'green']}]}
+            const newState = {...this.state, datasets: [{data: [expenses.toFixed(2), gains.toFixed(2)], backgroundColor: ['red', 'green']}]}
             this.setState({...newState})
       }
    }

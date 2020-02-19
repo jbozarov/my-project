@@ -18,7 +18,6 @@ class Buyorders extends Component {
             isUpdated: this.props.isUpdated,
             buyOrderId: '', 
             type: 'limit',
-            qty: '', 
             price: '',
          }
     }
@@ -40,12 +39,12 @@ class Buyorders extends Component {
    handleChange = e => this.setState({[e.name]: e.value})
 
    submit = () => {
-      const {buyOrderId, type, qty, price} = this.state
-      console.log('front 44: ', buyOrderId, type, qty, price)
-      axios.put('/api/editbuyorder', {buyOrderId, type, qty, price})
+      const {buyOrderId, type, price} = this.state
+      console.log('front 44: ', buyOrderId, type, price)
+      axios.put('/api/editbuyorder', {buyOrderId, type, price})
       .then(res => {
          this.getBuyOrders()
-         this.setState({buyOrderId: '', type: 'limit', qty: '', price: ''})
+         this.setState({buyOrderId: '', type: 'limit', price: ''})
       })
       .catch(err => console.log(err))
    }
@@ -58,11 +57,11 @@ class Buyorders extends Component {
    }
 
     render() {
-       const { buyOrderId, qty, price } = this.state
+       const { buyOrderId, price } = this.state
         return (
             <div>
                 <table className='buyorders-table'>
-                <thead><tr><td colSpan='6'>Buy orders</td></tr></thead>
+                <thead><td colSpan='6'>Buy orders</td></thead>
                     <tr>
                         <th>Symbol</th>
                         <th>Type</th>
@@ -75,7 +74,7 @@ class Buyorders extends Component {
                         <tr key={order.buy_order_id} >
                            <td> {order.ticker}</td>
                            <td> {buyOrderId === order.buy_order_id ? <select onChange={e => this.handleSelect(e)} > <option value='limit' >Limit</option> <option value='stop limit' >Stop Limit</option> </select>: order.order_type }</td>  
-                           <td> {buyOrderId === order.buy_order_id ?  <input style={{width: '20px'}} name='qty' value={qty} onChange={e => this.handleChange(e.target)} /> : order.qty } </td>  
+                           <td> {order.qty} </td>  
                            <td> {buyOrderId === order.buy_order_id ? <input style={{width: '30px'}} name='price' value={price} onChange={e => this.handleChange(e.target)} /> : order.wanted_price} </td> 
                            <td> {buyOrderId === order.buy_order_id ? <button onClick={() => this.submit()} >Submit </button> : <MdModeEdit onClick={() => this.edit(order.buy_order_id)} ></MdModeEdit>} </td>
                            <td><MdDelete onClick={() => this.delete(order.buy_order_id)} ></MdDelete> </td> 
@@ -109,3 +108,7 @@ export default connect(mapStateToProps)(Buyorders)
 // pauseOnVisibilityChange
 // draggable
 // pauseOnHover />
+
+
+
+// <td> {buyOrderId === order.buy_order_id ?  <input style={{width: '20px'}} name='qty' value={qty} onChange={e => this.handleChange(e.target)} /> : order.qty } </td>  

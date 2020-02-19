@@ -21,7 +21,7 @@ module.exports = {
                 amount: amount,
                 currency:'usd',
                 source:id,
-                description:'Test Charge'
+                description:'Stocks purchase'
             },
             async (err, charge) => {
                 if(err) {

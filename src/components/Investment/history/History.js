@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { showbuyorder } from '../../../redux/reducers/showhideReducer'
 import {Line} from 'react-chartjs-2';
 import axios from 'axios'
+import styled from 'styled-components'
+import { MdArrowBack } from 'react-icons/md'
 
 
 export class History extends Component {
@@ -8,12 +12,13 @@ export class History extends Component {
       super(); 
 
       this.state = {
+         showbo: true,
          labels: [],
          datasets: [
             {
                label: 'Rainfall',
                fill: false,
-               lineTension: 0.5,
+               lineTension: 0.9,
                backgroundColor: 'rgba(75,192,192,1)',
                borderColor: 'rgba(0,0,0,1)',
                borderWidth: 2,
@@ -21,6 +26,16 @@ export class History extends Component {
             }
          ]
       }
+   }
+
+   gobackdesktop = () => {
+      const { showbo } = this.state 
+      this.props.showbuyorder(showbo)
+      this.props.history.push(`/invest/stocks`)
+      // this.props.history.push(`/invest/${this.props.user.customer_id}`)
+   }
+   gobackmobile = () => {
+      this.props.history.push(`/invest/stocks`)
    }
 
    componentDidMount(){
@@ -33,7 +48,7 @@ export class History extends Component {
             datasets: [{
                   label: `${this.props.match.params.ticker}`,
                   fill: false,
-                  lineTension: 0.9,
+                  lineTension: 0.2,
                   backgroundColor: 'rgba(75,192,192,1)',
                   background: 'linear-gradient(232deg, #16A085, #F4D03F)',
                   borderColor: 'rgba(0,0,0,1)',
@@ -46,17 +61,44 @@ export class History extends Component {
 
 
    render() {
-      console.log(this.props.match.params.ticker)
       return (
          <div>
-         <Line data={this.state} width={600} height={250}
-         options={{ title:{display:true, text:`History of ${this.props.match.params.ticker} for last 30 days`, fontSize:20},
-           legend: { display:true, position:'right' }
-         }}
-         />
+         <DesktopHistory className='desktop-history'>
+            <MdArrowBack size={20} style={{cursor: 'pointer'}} onClick={() => this.gobackdesktop()} ></MdArrowBack>
+            <Line data={this.state} width={900} height={300}
+            options={{ title:{display:true, text:`History of ${this.props.match.params.ticker} for last 30 days`, fontSize:20},
+            legend: { display:true, position:'right' }
+            }}/>
+         </DesktopHistory>
+         <MobileHistory className='mobile-history'>
+            <MdArrowBack size={20} style={{cursor: 'pointer'}} onClick={() => this.gobackmobile()} ></MdArrowBack>
+            <Line data={this.state} width={500} height={220}
+            options={{ title:{display:true, text:`History of ${this.props.match.params.ticker} for last 30 days`, fontSize:20},
+            legend: { display:true, position:'right' }
+            }}/>
+         </MobileHistory>
          </div>
       )
    }
 }
 
-export default History
+function mapStateToProps(state) {
+   return {
+      showHide: state.showhideReducer.showHide, 
+      user: state.userReducer.user
+   }
+}
+
+export default connect(mapStateToProps, { showbuyorder })(History)
+
+const DesktopHistory = styled.div`
+   @media(max-width: 480px) {
+      display: none
+   }
+`; 
+
+const MobileHistory = styled.div`
+   @media(min-width: 480px) {
+      display: none
+   }
+`; 

@@ -13,40 +13,56 @@ class Sellorders extends Component {
         super(props); 
 
         this.state = {
-            buyorders: [],
-            buyClicked: true,
-            ticker: '',
+            sellorders: [],
+            sellClicked: true,
+            isUpdated: this.props.isUpdated,
+            sellOrderId: '', 
+            type: 'limit',
             price: '',
-            qty: 0, 
-            isUpdated: this.props.isUpdated
-        }
+         }
     }
 
+    getSellOrders = () => axios.get('/api/getsellorders').then(res=>this.setState({sellorders: res.data}))
+   
     componentDidMount(){
-       this.getBuyOrders(); 
+       this.getSellOrders(); 
     }
     
    componentDidUpdate(prevProps){
       if (prevProps !== this.props) {
-         this.getBuyOrders(); 
+         this.getSellOrders(); 
       }
    }
 
-   delete = buy_order_id => {
-      axios.delete(`/api/deletebuyorder/${buy_order_id}`)
+   edit = sell_order_id => this.setState({sellOrderId: sell_order_id})
+   handleSelect = e => this.setState({type: e.target.value})
+   handleChange = e => this.setState({[e.name]: e.value})
+
+   submit = () => {
+      const {sellOrderId, type, price} = this.state
+      console.log('front 44: ', sellOrderId, type, price)
+      axios.put('/api/editsellorder', {sellOrderId, type, price})
       .then(res => {
-         this.getBuyOrders(); 
+         this.getSellOrders()
+         this.setState({sellOrderId: '', type: 'limit', price: ''})
       })
+      .catch(err => console.log(err))
    }
-   
-   getBuyOrders(){
-      axios.get('/api/getbuyorders').then(res=>this.setState({buyorders: res.data}))
+   delete = sell_order_id => {
+      axios.delete(`/api/deletesellorder/${sell_order_id}`)
+      .then(res => {
+         this.getSellOrders(); 
+      })
+      .catch(err => console.log(err))
    }
+
     render() {
+       const { sellorders, sellOrderId, price } = this.state
+       console.log(this.state)
         return (
             <div>
                 <table className='buyorders-table'>
-                <thead><tr><td colSpan='6'>Buy orders</td></tr></thead>
+                <thead><td colSpan='6'>Sell orders</td></thead>
                     <tr>
                         <th>Symbol</th>
                         <th>Type</th>
@@ -55,14 +71,14 @@ class Sellorders extends Component {
                         <th></th>
                         <th></th>
                     </tr>
-                    {this.state.buyorders.length>=1 && this.state.buyorders.map(order =>
-                        <tr key={order.buy_order_id} >
-                            <td> {order.ticker}</td>
-                            <td> {order.order_type} </td>
-                            <td> {order.qty} </td> 
-                            <td> {order.wanted_price} </td> 
-                            <td><MdModeEdit ></MdModeEdit></td>
-                            <td><MdDelete onClick={() => this.delete(order.buy_order_id)} ></MdDelete> </td>
+                    {sellorders.length>=1 && sellorders.map(order =>
+                        <tr key={order.sell_order_id} >
+                           <td> {order.ticker}</td>
+                           <td> {sellOrderId === order.sell_order_id ? <select onChange={e => this.handleSelect(e)} > <option value='limit' >Limit</option> <option value='stop limit' >Stop Limit</option> </select>: order.order_type }</td>  
+                           <td> {order.qty} </td>  
+                           <td> {sellOrderId === order.sell_order_id ? <input style={{width: '30px'}} name='price' value={price} onChange={e => this.handleChange(e.target)} /> : order.wanted_price} </td> 
+                           <td> {sellOrderId === order.sell_order_id ? <button onClick={() => this.submit()} >Submit </button> : <MdModeEdit onClick={() => this.edit(order.sell_order_id)} ></MdModeEdit>} </td>
+                           <td><MdDelete onClick={() => this.delete(order.sell_order_id)} ></MdDelete> </td> 
                         </tr>)}
                 </table>
             </div>

@@ -6,6 +6,7 @@ import sidebarReducer from './reducers/sidebarReducer'
 import accReducer from './reducers/accReducer'
 import searchReducer from './reducers/searchReducer'
 import ordersReducers from './reducers/ordersReducers'
+import showhideReducer from './reducers/showhideReducer'
 
 const rootReducer = combineReducers({
     userReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     account: accReducer,
     searchInput: searchReducer,
     ordersReducers,
+    showhideReducer,
 })
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware)); 

@@ -1,28 +1,38 @@
 
-.invest-table{
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-    margin: auto;
-    border-radius: 5px;
+.investments-table{
+   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+   border-collapse: collapse;
+   width: 100%;
+   margin-left: 0px;
 }
 
-.invest-table td, .invest-table th {
-    border: 1px solid #ddd;
-    padding: 8px;
+.investments-table td, .investments-table th {
+   border: 1px solid #ddd;
+   padding: 5px;
+   font-size: 10px;
 }
 
+.investments-table tr:nth-child(even){background-color: #f2f2f2;}
+.investments-table tr:hover {background-color: #ddd;}
 
-.invest-table th, .invest-table td {
-  padding-top: 12px;
-  padding-bottom: 12px;
+.investments-table th {
+ padding-top: 8px;
+ padding-bottom: 8px;
+ text-align: left;
+ background-color: #4CAF50;
+ color: white;
+}
+
+.investments-table thead {
+  padding-top: 15px;
+  padding-bottom: 15px;
   text-align: left;
-  background-color: white;
+  background-color: #4CAF50;
   color: black;
+  font-size: large;
 }
 
-.invest-table tr:nth-child(even){background-color: #f2f2f2;}
-.invest-table tr:hover {background-color: #ddd;}
+
 .transactions tr:nth-child(even){background-color: #f2f2f2;}
 .transactions tr:hover {background-color: #ddd;}
 

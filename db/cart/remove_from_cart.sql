@@ -1,2 +1,2 @@
 delete from cart 
-where ticker = $1; 
+where cart_id = $1; 

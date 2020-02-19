@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { buyUpdate } from '../../../redux/reducers/ordersReducers'
+import { hidebuyorder } from '../../../redux/reducers/showhideReducer'
 import axios from 'axios'
 import './Stocks.css'
 import { ToastContainer, toast } from 'react-toastify'
@@ -24,6 +25,7 @@ export class Stocks extends Component {
             qty: 0, 
             wantedPrice: 0,
             v: false,
+            showhidetoggle: false,
 
         }
     }
@@ -57,7 +59,14 @@ export class Stocks extends Component {
       this.setState({[`${t}orderType`]: e.target.value, ticker: t, price: p, orderType: e.target.value})
    }
 
+   handleChange = quantity => this.setState({qty: quantity })
    buy = (tick, price) => this.setState({buyClicked: !this.state.buyClicked, ticker: tick, price: price })
+
+   hidebuyorders = () => {
+      const { showhidetoggle } = this.state; 
+      this.props.hidebuyorder(showhidetoggle)
+      this.setState({showhidetoggle: !this.state.showhidetoggle})
+   }
    
    add = () => {
       const { ticker, price, qty } = this.state 
@@ -132,7 +141,8 @@ export class Stocks extends Component {
                      [`${this.state.currTicker}qty`]: '', 
                      [`${this.state.currTicker}wantedPrice`]: '',
                      [`${this.state.currTicker}orderType`]: '',
-                     currTicker: ''
+                     currTicker: '', 
+                     v: !this.state.v
                   })
             }
        }
@@ -151,7 +161,7 @@ export class Stocks extends Component {
             <div className='stocks' >
             <ToastContainer
                position="top-right"
-               autoClose={800}
+               autoClose={1200}
                hideProgressBar={false}
                newestOnTop={false}
                closeOnClick
@@ -176,7 +186,7 @@ export class Stocks extends Component {
                     {filteredStocks.length>=1 && filteredStocks.map(stock =>
                         <tr key={stock.ticker} >
                             <td> {stock.ticker} </td>
-                            <td> <Link to={`/invest/history/${stock.ticker}`} style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
+                            <td> <Link to={`/invest/history/${stock.ticker}`} onClick={()=>this.hidebuyorders()}  style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
                             <td> {stock.price} </td>
                             <td> {stock.exchange}</td>
                            <td> 
@@ -195,7 +205,6 @@ export class Stocks extends Component {
                 </div>
 
                <div className='mobile' >
-               
                 <table className='stocks-table' >
                   <thead ><tr><td colSpan='8'>Stocks</td> </tr></thead>
                     <tr>
@@ -234,4 +243,4 @@ function mapStateToProps (state) {
    }
 }
 
-export default connect(mapStateToProps, { buyUpdate })(Stocks)
+export default connect(mapStateToProps, { buyUpdate, hidebuyorder })(Stocks)

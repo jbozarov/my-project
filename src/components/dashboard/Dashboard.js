@@ -7,6 +7,8 @@ import styled from "styled-components";
 import axios from "axios";
 import "./Dashboard.css";
 import Incomechart from './IncomeChart'
+import Sellorders from "../Investment/orders/Sellorders";
+import DashInvestments from "./DashInvestments";
 
 class Dashboard extends Component {
    constructor() {
@@ -14,22 +16,16 @@ class Dashboard extends Component {
 
       this.state = {
          accounts: [], 
-         investments: [], 
          transactions: [],
          alltransactions: [], 
-         realStock: {},
          total: 0
       }
    }
 
    componentDidMount() {
        this.getAccounts();
-       this.getInvestments();
        this.getTransactions();
-      //  this.getTotal(); 
    }
-
-    
 
    getAccounts = async () => {
     await axios
@@ -38,35 +34,17 @@ class Dashboard extends Component {
       .catch(err => console.log(err));
   };
 
-   getInvestments = async () => {
-    await axios
-      .get(`/api/investments/${this.props.user.customer_id}`)
-      .then(res => this.setState({investments: res.data}))
-      .catch(err => console.log(err));
-  };
-
-//   getTotal = () => {
-//       let tot = this.state.investments.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.purchased_price))
-//       this.setState({total: tot})
-//   }
-
-
    getTransactions = () => {
     axios.get(`/api/transactionscustomerid/${this.props.user.customer_id}`)
    .then(res=>this.setState({transactions: res.data.reverse().slice(0, 5), alltransactions: res.data}))
 }
 
-    getMarketPrice = ticker => {
-      axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${ticker}`)
-      .then(res => {
-         this.setState({realStock: res.data})
-      })
-   }
+
 
    render(){
-      const { accounts, investments, transactions, alltransactions, realStock } = this.state
+      const { accounts, transactions, alltransactions } = this.state
       console.log(alltransactions)
-      let total = investments.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.purchased_price), 0)
+      
   return (
     <DashboardDiv>
       <DashNav>
@@ -128,40 +106,8 @@ class Dashboard extends Component {
       <h2>Your investments </h2>
   
       <LowerTables> 
-         <table className='stocks-table' >
-            <thead ><td colSpan='8'>Stocks</td></thead>
-               <tr>
-                  <th>Ticker</th>
-                  <th>Quantity</th>
-                  <th>Purchased price</th>
-                  <th>Real Price</th>
-                  <th>Orders</th>
-                  <th>Wanted price</th>
-                  <th>Submit</th>
-               </tr>
-               {investments.length>=1 && investments.map(item =>
-                  <tr key={item.ticker} >
-                        <td> {item.ticker} </td>
-                        <td> {item.qty} </td>
-                        <td> {item.purchased_price}</td>
-                        {realStock.symbol === item.ticker ? 
-                           <td style={{cursor: 'pointer', color: item.purchased_price > realStock.price ? 'red' : 'green', fontWeight: '800'}} onClick={() => this.getMarketPrice(item.ticker)} > {realStock.price} </td>
-                           : 
-                           <td style={{cursor: 'pointer'}} onClick={() => this.getMarketPrice(item.ticker)} > View market price </td>
-                        }
-                     <td> 
-                        <select value={this.state[`${item.ticker}orderType`]} onChange={e => this.changeOrderType(e, item.ticker, item.price )} >
-                           <option defaultValue >select</option>
-                           <option value='market' >Market </option>
-                           <option value='limit' >Limit </option>
-                           <option value='stop limit'>Stop limit</option>
-                        </select> 
-                     </td> 
-                     <td> <input value={this.state[`${item.ticker}wantedPrice`]} type='number' min='0' placeholder='Price' style={{width: '60px'}} onChange={e=>this.handlePrice(item.ticker, e.target.value)} /></td> 
-                     <td> <button disabled={ item.ticker !== this.state.ticker } onClick={()=>this.submit()} > Submit </button> </td>  
-                  </tr>)} 
-                  <tfoot><tr><td colSpan="7"> You invested ${total.toFixed(2)} </td></tr></tfoot>
-            </table>
+         <DashInvestments getTransactions={this.getTransactions} />
+         <Sellorders />
       </LowerTables>
     </DashboardDiv>
   );
@@ -184,6 +130,9 @@ const DashboardDiv = styled.div`
   box-sizing: border-box;
   background-color: rgba(245, 245, 245, 1);
 //   background: linear-gradient(90deg, rgba(156,156,156,1) 0%, rgba(255,255,255,1) 72%);
+  @media(max-width: 480px){
+      display: none; 
+   }
 `;
 
 const DashNav = styled.nav`
@@ -199,6 +148,7 @@ const DashNav = styled.nav`
   font-size: x-large;
   color: blue;
   font-weight: 500;
+  
 `;
 
 const NavIcons = styled.div`
@@ -286,11 +236,11 @@ const LinkBalance = styled.div`
 
 
 const LowerTables = styled.div`
-   width: 90%; 
-   // margin: auto; 
+   width: 95%; 
+   margin: auto; 
    display: flex; 
    flex-direction: row; 
-   justify-content: flex-start; 
+   justify-content: space-between; 
    align-items: flex-start; 
    flex-wrap: wrap; 
 `; 

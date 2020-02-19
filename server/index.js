@@ -53,15 +53,18 @@ app.post('/auth/logout', validCtrl.logout)
 app.post('/api/account', accCtrl.createAcc)
 app.get('/api/accounts/:customer_id', accCtrl.getAccounts)
 
+
+//TRANSACTIONS
 app.get('/api/transactions/:account_number', accCtrl.getTransactions)
 app.get('/api/transactionscustomerid/:customer_id', accCtrl.getTransByCusId)
+app.post('/api/addselltransaction', accCtrl.addSellTransaction)
 
 
 //STOCKS
 app.get('/api/stocks', stockCtrl.getStocks)
 app.post('/api/add', stockCtrl.addToCart)
 app.get('/api/cart/:customer_order_id', stockCtrl.getCart)
-app.delete('/api/removefromcart/:ticker', stockCtrl.remove)
+app.delete('/api/removefromcart/:cart_id', stockCtrl.remove)
 
 
 //APPOINTMENTS
@@ -72,9 +75,15 @@ app.post('/api/payment', stripeCtrl.pay)
 
 //INVESTMENTS 
 app.get('/api/investments/:customer_id', invstCtrl.getInvestments)
+app.delete('/api/deleteinvestment/:investment_id', invstCtrl.sellInvestment)
 
 //ORDERS 
 app.get('/api/getbuyorders', orderCtrl.getBuyOrders)
 app.post('/api/addbuyorders', orderCtrl.addBuyOrder)
 app.delete('/api/deletebuyorder/:buy_order_id', orderCtrl.deleteBuyOrder)
 app.put('/api/editbuyorder', orderCtrl.editBuyOrder)
+
+app.get('/api/getsellorders', orderCtrl.getSellOrders)
+app.post('/api/addsellorders', orderCtrl.addSellOrder)
+app.delete('/api/deletesellorder/:sell_order_id', orderCtrl.deleteSellOrder)
+app.put('/api/editsellorder', orderCtrl.editSellOrder)

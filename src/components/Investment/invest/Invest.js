@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { FiShoppingCart } from 'react-icons/fi'
 import './Invest.css'
 import routes from './routes'
@@ -14,7 +15,7 @@ export class Invest extends Component {
 
         this.state = {
             indexes: [], 
-            displayMenu: false
+            displayMenu: false,
         }
     }
 
@@ -44,6 +45,8 @@ export class Invest extends Component {
     }
 
     render() {
+       console.log(this.props)
+       const { indexes, displayMenu } = this.state
         return (
             <div className='invest' >
                <div className='desktop'>
@@ -52,13 +55,13 @@ export class Invest extends Component {
                     <Link to='/invest/mutualfunds' style={{textDecoration:'none', color:'black'}} > <p> Mutual Funds </p> </Link> 
                     <Link to='/invest/currencies' style={{textDecoration:'none', color:'black'}} > <p> Currencies </p> </Link> 
                     <Link to='/invest/crypto' style={{textDecoration:'none', color:'black'}} > <p> Cryptocurrencies </p> </Link> 
-                    <Link to='/' style={{textDecoration:'none', color:'black'}} > <p> Gainers </p> </Link> 
-                    <Link to='/' style={{textDecoration:'none', color:'black'}} > <p> Loosers </p> </Link> 
+                    <Link to='/gainers' style={{textDecoration:'none', color:'black'}} > <p> Gainers </p> </Link> 
+                    <Link to='/loosers' style={{textDecoration:'none', color:'black'}} > <p> Loosers </p> </Link> 
                     <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <p> <FiShoppingCart size={14} ></FiShoppingCart> </p> </Link> 
                 </nav>
                 
                <div className='major-indexes-box-1'>
-                  {this.state.indexes.map(ind=>
+                  {indexes.map(ind=>
                   <div key={ind.indexName} className='major-indexes-box-2' >
                       <p style={{fontWeight: '700'}} > {ind.indexName} </p>
                       <div>
@@ -67,7 +70,7 @@ export class Invest extends Component {
                   </div>)}
                   </div> 
                <LowerTables>
-                  <div className='' style={{ marginRight: '10%'}} > <Buyorders /> </div>
+                  {this.props.showHide ? <div className='' style={{ marginRight: '10%'}} > <Buyorders /> </div> : null }
                   {routes}
                </LowerTables>
                </div>
@@ -75,7 +78,7 @@ export class Invest extends Component {
          <div className='mobile' >
             <div  className="invest-mobile" style = {{background:"grey",width:"200px"}} >
             <div className="button" onClick={this.showDropdownMenu}> Menu </div>
-            { this.state.displayMenu ? 
+            {displayMenu ? 
             <ul>
             <Link to='/invest/buyorders' style={{textDecoration:'none', color:'black'}} > <li> Buy orders </li> </Link> 
             <Link to='/invest/stocks' style={{textDecoration:'none', color:'black'}} > <li> Stocks </li> </Link> 
@@ -88,7 +91,7 @@ export class Invest extends Component {
             </ul> : null }
             </div>           
             <div className='major-indexes-box-1'>
-            {this.state.indexes.map(ind=>
+            {indexes.map(ind=>
             <div key={ind.indexName} className='major-indexes-box-2' >
             <p style={{fontWeight: '700'}} > {ind.indexName} </p>
             <div>
@@ -105,16 +108,23 @@ export class Invest extends Component {
     }
 }
 
-export default Invest
+function mapStateToProps(state) {
+   return {
+      showHide: state.showhideReducer.showHide
+   }
+}
+
+export default connect(mapStateToProps)(Invest)
 
 
 const LowerTables = styled.div`
-   width: 100%; 
-   // margin: 0; 
-   margin: 20px 0px 10px 10px;
+   width: 90%; 
+   margin: 20px auto;
    display: flex;
    flex-direction: row;
-   justify-content: flex-start;
+   justify-content: space-between;
    align-items: flex-start;
-   // flex-wrap: wrap; 
+   @media(max-width: 900px){
+      flex-wrap: wrap; 
+   }
 `; 

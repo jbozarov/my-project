@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import './Transactions.css'
 
 export class Transactions extends Component {
     constructor(){
@@ -21,9 +22,11 @@ export class Transactions extends Component {
     }
 
     render() {
+       const { transactions } = this.state
         return (
-            <div>
-                <table>
+            <div className='transactions-class' >
+                <table className='transactions-table'>
+                <thead ><td colSpan='5'>Transactions</td></thead>
                     <tr>
                         <th> Transaction ID </th>
                         <th> Account Number </th>
@@ -31,8 +34,7 @@ export class Transactions extends Component {
                         <th> Description </th>
                         <th> Transaction date </th>
                     </tr>
-          
-                {this.state.transactions.map(transaction => (
+                {transactions.map(transaction => 
                     <tr key={transaction.transaction_id} >
                         <td> {transaction.transaction_id} </td>
                         <td> {transaction.account_number} </td>
@@ -40,7 +42,7 @@ export class Transactions extends Component {
                         <td> {transaction.description} </td>
                         <td> {transaction.transaction_date} </td>
                     </tr>
-                ))}      
+                )}      
                 </table>
             </div>
         )

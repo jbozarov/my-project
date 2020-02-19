@@ -30,5 +30,16 @@ module.exports =  {
 
         await db.transactions.get_trans_by_cusid(customer_id)
         .then(transactions => res.status(200).send(transactions))
+    },
+    addSellTransaction: (req, res) => {
+      const db = req.app.get('db') 
+      const { price, qty, total } = req.body; 
+      console.log('accCtrl add sell trans ', price, qty, total)
+      let today = new Date().toLocaleDateString()
+      let account_number = '4242424242424242'
+      let selling = 'Selling stocks'
+      db.transactions.create_transaction([account_number, total, selling, today, 'gain'])
+      .then(() => res.sendStatus(200))
+      .catch(err => res.status(500).send('Err in addSellTransactions ', err))
     }
 }

@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import './Cart.css'
 
 
 const Cart = props => {
@@ -19,23 +20,15 @@ function getCart() {
    .catch(err => console.log(err))
 }
 
-const remove = ticker => {
-   ticker = ticker.split('/').join('-')
-   console.log('cart ctrl', (ticker))
-   axios.delete(`/api/removefromcart/${ticker}`, )
+const remove = cart_id => {
+   // ticker = ticker.split('/').join('-')
+   axios.delete(`/api/removefromcart/${cart_id}`, )
    .then(() => getCart())
    .catch(err => console.log(err))
 }
 
 
-// const onOpened=()=>{
-//    console.log('this is opened')
-//  }
-
-// const onClosed=()=>{
-//    console.log('this is closed')
-//  }
-
+console.log(cartItems)
 const onToken = (token) => {
    console.log('line 38 is: ', token)
    axios.post('/api/payment', { token, amount: (yourTotal*100).toFixed(), customer_order_id: props.user.customer_order_id, customer_id: props.user.customer_id, email: props.user.email })
@@ -58,7 +51,7 @@ const onToken = (token) => {
          {cartItems.length < 1 ? 
             <h3> Your cart is empty </h3>
          :
-         <table className="invest-table">
+         <table className="cart-table">
             <tr>
                <th>Type</th>
                <th>Qty</th>
@@ -72,13 +65,12 @@ const onToken = (token) => {
              <td> {item.qty} </td>
              <td> {item.price} </td>
              <td> {item.total} </td>
-             <td><button onClick={() => remove(item.ticker)} >Remove</button>{" "}</td>
+             <td><button onClick={() => remove(item.cart_id)} >Remove</button>{" "}</td>
            </tr>
          ))}
          <tfoot>
            <tr>
-             <th>Total</th>
-             <td colSpan="4"> {yourTotal.toFixed(2)}</td>
+             <td colSpan="5"> <h3> Your total is: ${yourTotal.toFixed(2)} </h3> </td>
            </tr>
          </tfoot>
        </table>

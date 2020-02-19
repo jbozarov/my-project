@@ -5,6 +5,7 @@
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 60%;
+    margin-bottom: 40px;
 }
 
 .buyorders-table td, .buyorders-table th {
