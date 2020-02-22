@@ -1,13 +1,13 @@
 
 .sign-in {
-    height: 70vh;
-    width: 60%;
-    max-width: 390px;
+    height: 88vh;
+    width: 100%;
     margin: auto;
-    /* border: black 0.3px solid; */
+    margin-top: 0;
     box-sizing: border-box;
-    color: black;
-    background-color: whitesmoke;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: initial;
     border-radius: 5px;
     font-weight: 400;
     display: flex;
@@ -15,8 +15,6 @@
     justify-content: space-evenly;
     align-items: center;
     padding-bottom: 20px;
-    margin-top: 30px;
-    /* box-shadow: 0 0px 20px rgba(8, 112, 184, 0.7); */
 }
 
 .sign-in input{
@@ -36,5 +34,3 @@
     font-weight: 300;
     font-size: 14px;
 }
-
-

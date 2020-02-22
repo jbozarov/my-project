@@ -15,20 +15,25 @@ const SignIn = props => {
     const signIn = () => {
         axios.post('/auth/signin', {email, password})
         .then(res => {
-           props.userLogged(res.data)
-           props.history.push(`/dashboard`) 
+             props.userLogged(res.data)
+             props.history.push(`/dashboard/${props.user.customer_id}`) 
+            //  props.history.push(`/invest/${props.user.customer_id}`) 
          })
         .catch(err=>console.log(err))   
     }
 
       const goRegitsterPage = () => props.history.push('/form')
       return (
-         <div className='sign-in'  >
-               <h2>Please sign in </h2>
+         <div className='sign-in'
+         style={{backgroundImage: "url("+"https://static.vecteezy.com/system/resources/previews/000/683/043/large_2x/stock-market-or-forex-trading-graph.jpg"+")", 
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat'}}>
+               <h2>Please Sign in </h2>
                <input placeholder=' Enter your email' value={email} onChange={e=>setEmailInput(e.target.value)} />
-               <PasswordMask  className='password' useVendorStyles={false} placeholder=' Enter your password' value={password} onChange={e=>setPassInput(e.target.value)}/>
+               <PasswordMask useVendorStyles={false} placeholder=' Enter your password' value={password} onChange={e=>setPassInput(e.target.value)}/>
                <LoginBTN onClick={signIn} >Sign in </LoginBTN>
-               <p style={{color: '#3399ff', fontWeight: '600', fontStyle: 'italic'}} >Forgot password ?</p>
+               <ForgotPass style={{color: 'white', fontWeight: '700', fontStyle: 'italic'}} >Forgot password ?</ForgotPass>
                <RegBTN onClick={goRegitsterPage} className='register-btn' >Register </RegBTN>
          </div>
 
@@ -52,12 +57,15 @@ const LoginBTN = styled.button`
    min-width: 120px;
    max-width: 240px;
    border: none;
+   color: white; 
    border-radius: 2px;
    background-color: #3399ff;
    font-size: large;
    &:hover {
       background-color: #3399ff;
       transform: scale(1.02);
+      color: white; 
+      font-weight: 600; 
    }
 `; 
 
@@ -73,6 +81,14 @@ const RegBTN = styled.button`
    &:hover {
       background-color: #3399ff;
       transform: scale(1.02);
+      color: white; 
+      font-weight: 600; 
    }
 `;
 
+const ForgotPass = styled.p`
+   &:hover {
+      cursor: pointer; 
+      transform: scale(1.02);
+   }
+`; 

@@ -11,7 +11,7 @@ const mailOptions = {
 
 
 module.exports = {
-    pay: (req,res)=>{
+    pay: (req,res, ati)=>{
         const db = req.app.get('db')
         const transporter = req.app.get('transporter')
         const {token:{id}, amount, customer_order_id, customer_id, email } = req.body;
@@ -35,7 +35,6 @@ module.exports = {
                        description: charge.description, 
                        transaction_date: today
                     }
-
                     const cart = await db.cart.get_cart( customer_order_id ) 
                   //   const orderDetails: 
                     const {ticker, qty, price, total } = cart[0]
@@ -48,7 +47,7 @@ module.exports = {
                           console.log(data)
                        }
                     })
-                    db.investments.add_to_investments([customer_id, ticker, qty, price])
+                    ati([customer_id, ticker, qty, price])
                   //   const type = 'expense'
                     db.transactions.create_transaction([newTransaction.account_number, newTransaction.amount, newTransaction.description, newTransaction.transaction_date, 'expense'])
                     const balance = await db.accounts.get_balance(newTransaction.account_number)

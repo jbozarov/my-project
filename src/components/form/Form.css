@@ -1,21 +1,21 @@
 
 .form {
-   height: 70vh;
-   width: 60%;
-   max-width: 390px;
+   height: 88vh;
+   width: 100%;
    margin: auto;
-   border: black 0.3px solid;
-   border-radius: 5px;
-   background-color: whitesmoke;
+   margin-top: 0;
    box-sizing: border-box;
-   color: black;
+   color: white;
+   background-repeat: no-repeat;
+   background-size: initial;
+   
+   border-radius: 5px;
    font-weight: 400;
    display: flex;
    flex-direction: column;
    justify-content: space-evenly;
    align-items: center;
    padding-bottom: 20px;
-   margin-top: 30px;
    /* background: linear-gradient(232deg, #16A085, #F4D03F); */
    /* background: linear-gradient(90deg, rgba(156,156,156,1) 0%, rgba(235,235,235,1) 72%); */
    /* box-shadow: 0 0px 20px rgba(8, 112, 184, 0.7); */

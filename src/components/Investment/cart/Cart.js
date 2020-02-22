@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import logo from './stripelogo2.png'
 import './Cart.css'
 
 
@@ -28,7 +29,6 @@ const remove = cart_id => {
 }
 
 
-console.log(cartItems)
 const onToken = (token) => {
    console.log('line 38 is: ', token)
    axios.post('/api/payment', { token, amount: (yourTotal*100).toFixed(), customer_order_id: props.user.customer_order_id, customer_id: props.user.customer_id, email: props.user.email })
@@ -76,7 +76,7 @@ const onToken = (token) => {
        </table>
       }
 
-         <StripeCheckout
+         <StripeCheckout 
           name='bankname' //header
          //  image={imageUrl}
           description='making a payment' //subtitle - beneath header
@@ -84,7 +84,7 @@ const onToken = (token) => {
           token={onToken} //fires the call back
           amount={yourTotal*100} //this will be in cents
          //  currency="USD" 
-          image={imageUrl} // the pop-in header image (default none)
+          image={logo} // the pop-in header image (default none)
           // ComponentClass="div" //initial default button styling on block scope (defaults to span)
           panelLabel="Submit Payment" //text on the submit button
          //  locale="en" //locale or language (e.g. en=english, fr=french, zh=chinese)

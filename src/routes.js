@@ -15,6 +15,7 @@ import Schedule from './components/schedule/Schedule'
 
 export default (
     <Switch>
+        <Route exact path='/' component={SignIn} /> 
         <Route path='/dashboard' component={Dashboard} /> 
         <Route path='/accounts/:customer_id' component={Accounts} /> 
         <Route path='/transactions/:account_number' component={Transactions} /> 
@@ -22,7 +23,6 @@ export default (
         <Route path='/calculator' component={Calculator} /> 
         <Route path='/schedule' component={Schedule} />
         <Route path='/form' component={Form} /> 
-        <Route path='/signin' component={SignIn} /> 
         <Route path='/open/:customer_id' component={OpenAccount} /> 
         <Route path='/invest/:customer_id' component={Invest} />
         <Route path='/help' component={Help}/>

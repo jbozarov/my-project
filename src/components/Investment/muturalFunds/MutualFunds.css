@@ -2,7 +2,7 @@
 .mutual-table{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
 }
 
 .mutual-table td, .mutual-table th {

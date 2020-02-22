@@ -26,10 +26,9 @@ export class Transactions extends Component {
         return (
             <div className='transactions-class' >
                 <table className='transactions-table'>
-                <thead ><td colSpan='5'>Transactions</td></thead>
+                <thead ><td colSpan='5'>Transactions  </td></thead>
                     <tr>
                         <th> Transaction ID </th>
-                        <th> Account Number </th>
                         <th> Amount</th>
                         <th> Description </th>
                         <th> Transaction date </th>
@@ -37,7 +36,6 @@ export class Transactions extends Component {
                 {transactions.map(transaction => 
                     <tr key={transaction.transaction_id} >
                         <td> {transaction.transaction_id} </td>
-                        <td> {transaction.account_number} </td>
                         <td> {transaction.amount} </td>
                         <td> {transaction.description} </td>
                         <td> {transaction.transaction_date} </td>

@@ -29,13 +29,17 @@ const Form = props => {
     }
 
    return (
-      <div className='form' >
-            <h3> Register account </h3>
+      <div className='form'
+      style={{backgroundImage: "url("+"https://static.vecteezy.com/system/resources/previews/000/683/043/large_2x/stock-market-or-forex-trading-graph.jpg"+")",  
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat'}}>
+            <h2> Create your account </h2>
             <input placeholder=' Enter your email'  value={email} onChange={e=>setEmail(e.target.value)} />
             <input placeholder=' 8-20 character long'  value={password} onChange={e=>setPassword(e.target.value)}/> 
             <BTN onClick={validate} >Validate your email </BTN>
-            { validationResposce.length>1 ? <p style={{color: 'green', fontWeight: '700'}} > {validationResposce} </p>
-            : <p style={{color: 'red', fontWeight: '700'}} > {rejectResponse} </p> }
+            { validationResposce.length>1 ? <p style={{color: '#00ff00', fontWeight: '700', fontSize: '12px'}} > {validationResposce} </p>
+            : <p style={{color: '#ff3300', fontWeight: '700', fontSize: '12px'}} > {rejectResponse} </p> }
             <input placeholder=' Enter first name' value={first_name} onChange={e=>setFirstName(e.target.value)}/>
             <input placeholder=' Enter last name' value={last_name} onChange={e=>setLastName(e.target.value)} />
             <BTN className='click-btn' onClick={submit} > Click to submit</BTN>
@@ -55,8 +59,11 @@ const BTN = styled.button`
    border-radius: 2px;
    background-color: #3399ff;
    font-size: large;
+   color: white; 
    &:hover {
       background-color: #3399ff;
       transform: scale(1.02);
+      color: white; 
+      font-weight: 550; 
    }
 `;

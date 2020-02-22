@@ -172,7 +172,7 @@ export class Stocks extends Component {
 
                <div className='desktop' >
                 <table className='stocks-table' >
-                  <thead ><td colSpan='8'>Stocks</td></thead>
+                  <thead ><td colSpan='8' style={{paddingLeft: '10px'}} >Stocks</td></thead>
                     <tr>
                         <th>Ticker</th>
                         <th>Company Name</th>

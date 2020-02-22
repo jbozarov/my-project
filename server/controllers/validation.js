@@ -39,8 +39,7 @@ module.exports = {
        })
 
       let userCart = await db.cart.create_order(newCustomer[0].customer_id)
-      let sessionUser = {...newCustomer[0], ...userCart[0]}
-      session.user = sessionUser
+      session.user = {...newCustomer[0], ...userCart[0]}
       res.status(200).send(session.user); 
   },
     signIn: async (req, res) => {

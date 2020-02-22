@@ -65,7 +65,7 @@ export class History extends Component {
          <div>
          <DesktopHistory className='desktop-history'>
             <MdArrowBack size={20} style={{cursor: 'pointer'}} onClick={() => this.gobackdesktop()} ></MdArrowBack>
-            <Line data={this.state} width={900} height={300}
+            <Line data={this.state} width={800} height={250}
             options={{ title:{display:true, text:`History of ${this.props.match.params.ticker} for last 30 days`, fontSize:20},
             legend: { display:true, position:'right' }
             }}/>
@@ -92,6 +92,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { showbuyorder })(History)
 
 const DesktopHistory = styled.div`
+   margin: auto; 
    @media(max-width: 480px) {
       display: none
    }

@@ -50,14 +50,14 @@ export class Invest extends Component {
         return (
             <div className='invest' >
                <div className='desktop'>
-                <nav className='invest-nav' >
+                <nav className='invest-nav'>
                     <Link to='/invest/stocks' style={{textDecoration:'none', color:'black'}} > <p> Stocks </p> </Link> 
                     <Link to='/invest/mutualfunds' style={{textDecoration:'none', color:'black'}} > <p> Mutual Funds </p> </Link> 
                     <Link to='/invest/currencies' style={{textDecoration:'none', color:'black'}} > <p> Currencies </p> </Link> 
                     <Link to='/invest/crypto' style={{textDecoration:'none', color:'black'}} > <p> Cryptocurrencies </p> </Link> 
-                    <Link to='/gainers' style={{textDecoration:'none', color:'black'}} > <p> Gainers </p> </Link> 
-                    <Link to='/loosers' style={{textDecoration:'none', color:'black'}} > <p> Loosers </p> </Link> 
-                    <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <p> <FiShoppingCart size={14} ></FiShoppingCart> </p> </Link> 
+                    <Link to='/invest/gainers' style={{textDecoration:'none', color:'black'}} > <p> Gainers </p> </Link> 
+                    <Link to='/invest/losers' style={{textDecoration:'none', color:'black'}} > <p> Losers </p> </Link> 
+                    <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <FiShoppingCart size={14} ></FiShoppingCart></Link> 
                 </nav>
                 
                <div className='major-indexes-box-1'>
@@ -85,7 +85,7 @@ export class Invest extends Component {
             <Link to='/invest/mutualfunds' style={{textDecoration:'none', color:'black'}} > <li> Mutual Funds </li> </Link> 
             <Link to='/invest/currencies' style={{textDecoration:'none', color:'black'}} > <li> Currencies </li> </Link> 
             <Link to='/invest/crypto' style={{textDecoration:'none', color:'black'}} > <li> Cryptocurrencies </li> </Link> 
-            <Link to='/' style={{textDecoration:'none', color:'black'}} > <li> Gainers </li> </Link> 
+            <Link to='/invest/gainers' style={{textDecoration:'none', color:'black'}} > <li> Gainers </li> </Link> 
             <Link to='/' style={{textDecoration:'none', color:'black'}} > <li> Loosers </li> </Link> 
             <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <li> <FiShoppingCart size={15} ></FiShoppingCart> </li> </Link> 
             </ul> : null }
@@ -122,9 +122,11 @@ const LowerTables = styled.div`
    margin: 20px auto;
    display: flex;
    flex-direction: row;
-   justify-content: space-between;
+   justify-content: flex-start;
    align-items: flex-start;
    @media(max-width: 900px){
       flex-wrap: wrap; 
+      justify-content: center;
+      align-items: center;
    }
 `; 

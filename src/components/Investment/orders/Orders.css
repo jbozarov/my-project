@@ -21,15 +21,16 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
+  background-color: #1aa3ff;
   color: white;
 }
 .buyorders-table thead {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
-  color: black;
+  /* background-color: #4CAF50; */
+  background-color: #1aa3ff;
+  color: white;
   font-size: large;
 }
 

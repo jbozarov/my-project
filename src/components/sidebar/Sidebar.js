@@ -36,7 +36,7 @@ export class Sidebar extends Component {
                 <Link id='close-btn' ><Span onClick={() => this.props.closeSideBar(false)}> <AiOutlineClose size={15} ></AiOutlineClose></Span></Link>
                 <Link to='/dashboard' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdDashboard style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdDashboard>  Dashboard</P> </Link>
                 <Link to='/calculator' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><FaCalculator style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaCalculator> Calculator</P> </Link>
-                <Link to='/settings' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdSettings> Setting</P> </Link></div>
+                <Link to='/settings' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} disabled ></MdSettings> Setting</P> </Link></div>
                 : 
                 <div className={this.props.sidebarReducer.sidebarOpen ? 'show-side-bar' : 'hide-side-bar'} > 
                 <Link id='close-btn' ><Span onClick={() => this.props.closeSideBar(false)}> <AiOutlineClose size={15} ></AiOutlineClose></Span></Link>
@@ -78,7 +78,7 @@ const P = styled.p`
    border-right: #262626 solid 0.3px;
    &:hover {
       display: flex;
-      background-color: #262626;
+      background-color: #1F88F3;
       border-radius: 10px;
       color: white;
       font-weight: 700;

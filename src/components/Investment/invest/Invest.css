@@ -18,7 +18,11 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    max-width: 80vw;
+
+   }
+.invest-nav p{
+    color: blue;
+    font-weight: 600;
    }
    
 

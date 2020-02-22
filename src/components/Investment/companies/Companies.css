@@ -1,0 +1,33 @@
+.companies-table{
+   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+   border-collapse: collapse;
+   width: 70%;
+   margin-left: 0px;
+}
+
+.companies-table td, .companies-table th {
+   border: 1px solid #ddd;
+   padding: 5px;
+   font-size: 10px;
+}
+
+.companies-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.companies-table tr:hover {background-color: #ddd;}
+
+.companies-table th {
+ padding-top: 8px;
+ padding-bottom: 8px;
+ text-align: left;
+ background-color: #4CAF50;
+ color: white;
+}
+
+.companies-table thead {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: black;
+  font-size: large;
+}

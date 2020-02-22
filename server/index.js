@@ -71,7 +71,9 @@ app.delete('/api/removefromcart/:cart_id', stockCtrl.remove)
 app.post('/api/schedules', appointCtrl.getSchedules)
 app.put('/api/make', appointCtrl.makeApp)
 
-app.post('/api/payment', stripeCtrl.pay)
+app.post('/api/payment', (req, res) => {
+   stripeCtrl.pay(req, res, app.get('db').investments.add_to_investments)
+} )
 
 //INVESTMENTS 
 app.get('/api/investments/:customer_id', invstCtrl.getInvestments)

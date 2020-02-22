@@ -2,9 +2,11 @@
     margin-top: 15px;
     width: 150px;
     height: 90vh;
-    animation: open 1.3s;
-    overflow: hidden;
+    animation: open 1.5s;
     color: black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 
@@ -20,7 +22,7 @@
   .hide-side-bar {
     width: 0px;
     height: 100vh;
-    animation: close 0.3s;
+    animation: close 0s;
     overflow: auto;
   }
 
