@@ -192,11 +192,11 @@ const MappedCards = styled.div`
 
 const Card = styled.div`
   margin: 20px;
-  padding: 10px;
-  height: 27vh;
-  width: 49%;
-  min-width: 200px;
-  max-width: 200px;
+  padding: 15px;
+//   height: 27vh;
+//   width: 69%;
+//   min-width: 20%;
+//   max-width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

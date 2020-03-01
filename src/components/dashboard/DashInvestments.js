@@ -95,7 +95,6 @@ export class DashInvestments extends Component {
    }
 
     submit = () => {
-       console.log('submit 98  ', this.state)
        const { orderType, realStock, ticker, price, qty, wantedPrice, investment_id } = this.state
        if (!this.props.user.customer_order_id) return alert('Please sign in')
        else if ( !qty ) return alert(' Please enter QUANTITY ')
@@ -148,11 +147,10 @@ export class DashInvestments extends Component {
                   axios.post('/api/addsellorders', {
                      ...body
                   }).then(res => {
-                     console.log(this.state.v)
                      this.props.sellUpdate(this.state.s)
-                     toast.success('Added to buy orders');
+                     toast.success('Added to sell orders');
                   }).catch(err=>{
-                     toast.error('could not add to orders ')
+                     toast.error('could not add to sell orders ')
                      console.log(err)
                      })
                   this.setState({
@@ -174,7 +172,7 @@ export class DashInvestments extends Component {
     render() {
        const {investments, realStock } = this.state
        console.log(this.state)
-       let total = investments.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.purchased_price), 0)
+       let total = investments.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.purchased_price*cur.qty), 0)
        
         return (
             <div className='stocks' >

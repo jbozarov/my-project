@@ -28,7 +28,6 @@ export class Sidebar extends Component {
          this.props.history.push('/')
       }
       render() {
-        console.log(this.props.user.first_name)
         return (
             <div>
             {!this.props.user.first_name ? 

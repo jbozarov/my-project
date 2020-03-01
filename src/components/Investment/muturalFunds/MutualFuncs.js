@@ -65,6 +65,7 @@ class MutualFunds extends Component {
                pauseOnHover />
 
                 <table className='mutual-table' >
+                <thead ><td colSpan='8' style={{paddingLeft: '10px'}} >Mutual Funds</td></thead>
                     <tr>
                         <th>Symbol</th>
                         <th>Name</th>

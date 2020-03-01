@@ -18,7 +18,7 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
+  background-color: #1aa3ff;
   color: white;
 }
 
@@ -36,4 +36,9 @@
 .date-column{
    max-width: 50px;
    box-sizing: border-box;
+}
+
+.currencies-table thead{
+   background-color: #1aa3ff;
+   color: white;
 }

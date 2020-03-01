@@ -73,7 +73,7 @@ app.put('/api/make', appointCtrl.makeApp)
 
 app.post('/api/payment', (req, res) => {
    stripeCtrl.pay(req, res, app.get('db').investments.add_to_investments)
-} )
+})
 
 //INVESTMENTS 
 app.get('/api/investments/:customer_id', invstCtrl.getInvestments)

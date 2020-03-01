@@ -23,7 +23,7 @@ CREATE TABLE accounts (
 --transactions table 
 CREATE TABLE transactions (
     transaction_id serial primary key, 
-    account_number varchar(20) references accounts(account_number),
+    account_number varchar(20),
     amount varchar(20), 
     description varchar(200),
     transaction_date varchar(20), 
@@ -130,38 +130,38 @@ insert into appointments (appointment_id, customer_id, date, time, available) va
 
 
 
-insert into stocks (ticker, name, price, exchange) values ('AAPL', 'Apple Inc.',  325.21, 'NASDAQ');
-insert into stocks (ticker, name, price, exchange) values ('GOOG', 'Alphabet Inc.', 1476.23, 'NASDAQ');
-insert into stocks (ticker, name, price, exchange) values ('MSFT', 'Microsoft Corporation', 183.63, 'NASDAQ');
-insert into stocks (ticker, name, price, exchange) values ('AMZN', 'Amazon', 2050.23, 'NASDAQ');
-insert into stocks (ticker, name, price, exchange) values ('FB', 'Facebook', 210.85, 'NASDAQ');
-insert into stocks (ticker, name, price, exchange) values ('BRK.A', 'Berkshire Hathaway', 1466.00, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('BABA', 'Alibaba Group', 220.90, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('JNJ', 'Johnson & Johnson', 153.53, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('JPM', 'JPMorgan Chase & Co', 137.61, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('AAPL', 'Apple Inc.',  288.08, 'NASDAQ');
+insert into stocks (ticker, name, price, exchange) values ('GOOG', 'Alphabet Inc.', 1386.32, 'NASDAQ');
+insert into stocks (ticker, name, price, exchange) values ('MSFT', 'Microsoft Corporation', 168.07, 'NASDAQ');
+insert into stocks (ticker, name, price, exchange) values ('AMZN', 'Amazon', 1972.74, 'NASDAQ');
+insert into stocks (ticker, name, price, exchange) values ('FB', 'Facebook', 196.77, 'NASDAQ');
+insert into stocks (ticker, name, price, exchange) values ('BRK.B', 'Berkshire Hathaway', 218.05, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('BABA', 'Alibaba Group', 205.61, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('JNJ', 'Johnson & Johnson', 144.65, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('JPM', 'JPMorgan Chase & Co', 126.26, 'NYSE');
 insert into stocks (ticker, name, price, exchange) values ('XOM', 'ExxonMobil', 61.88, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('BAC', 'Bank of America', 34.67, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('WMT', 'Wal-Mart Stores Inc.', 116.31, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('WFC', 'Wells Fargo & Co.', 47.98, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('RDS.A', 'Royal Dutch Shell plc', 52.14, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('V', 'Visa Inc.', 203.04, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('PG', 'Procter & Gamble Co.', 127.14, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('BUD', 'Anheuser-Busch Inbev ', 76.57, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('T', 'AT&T', 38.44, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('CVX', 'Chevron Corporation', 109.49, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('UNH', 'UnitedHealth Group Inc.', 292.46, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('PFE', 'Pfizer Inc.', 38.26, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('RHHBY', 'Roche Holding Ltd.', 43.43, 'OTC');
-insert into stocks (ticker, name, price, exchange) values ('CHL', 'China Mobile', 43.10, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('HD', 'Home Depot', 238.84, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('INTC', 'Intel', 67.09, 'NASDAQ');
-insert into stocks (ticker, name, price, exchange) values ('TSM', 'Taiwan Semiconductor', 58.02, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('VZ', 'Verizon Communications', 59.44, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('MMM', '3M Company', 162.89, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('ABBV', 'AbbVie Inc', 0.02, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('ORCL', 'Oracle Corporation', 54.71, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('C', 'Citigroup Inc.', 78.97, 'NYSE');
-insert into stocks (ticker, name, price, exchange) values ('NVS', 'Novartis', 96.96, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('BAC', 'Bank of America', 54.20, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('WMT', 'Wal-Mart Stores Inc.', 114.39, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('WFC', 'Wells Fargo & Co.', 45.12, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('RDS.A', 'Royal Dutch Shell plc', 45.90, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('V', 'Visa Inc.', 188.40, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('PG', 'Procter & Gamble Co.', 121.43, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('BUD', 'Anheuser-Busch Inbev ', 66.92, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('T', 'AT&T', 37.35, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('CVX', 'Chevron Corporation', 100.71, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('UNH', 'UnitedHealth Group Inc.', 263.39, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('PFE', 'Pfizer Inc.', 33.93, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('RHHBY', 'Roche Holding Ltd.', 41.75, 'OTC');
+insert into stocks (ticker, name, price, exchange) values ('CHL', 'China Mobile', 41.01, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('HD', 'Home Depot', 237.38, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('INTC', 'Intel', 59.73, 'NASDAQ');
+insert into stocks (ticker, name, price, exchange) values ('TSM', 'Taiwan Semiconductor', 53.86, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('VZ', 'Verizon Communications', 57.12, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('MMM', '3M Company', 146.85, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('ABBV', 'AbbVie Inc', 89.18, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('ORCL', 'Oracle Corporation', 50.96, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('C', 'Citigroup Inc.', 69.43, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('NVS', 'Novartis', 87.95, 'NYSE');
 
 insert into stocks (ticker, name, price, exchange) values (null, null, null, null);
 insert into stocks (ticker, name, price, exchange) values (null, null, null, null);

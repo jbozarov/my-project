@@ -66,6 +66,7 @@ class crpto extends Component {
                pauseOnHover />
 
                 <table className='stocks-table' >
+                <thead ><td colSpan='8' style={{paddingLeft: '10px'}} >Cryptocurrencies</td></thead>
                     <tr>
                         <th>Ticker</th>
                         <th>Name</th>
@@ -80,14 +81,16 @@ class crpto extends Component {
                             <td> {crpt.price} </td>
                             <td className='date-column' style={{fontWeight: '900', color: crpt.changes>0 ? 'green' : 'red'}} > {crpt.changes} </td>
                             {buyClicked ? 
-                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.price)} >Buy</button></td>
+                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.price)} style
+                              ={{borderRadius: '5px', backgroundColor: 'white'}} >Buy</button></td>
                               :
                               ticker===crpt.ticker ? 
                               <td className='last-cur-column' > {crpt.marketCapitalization} 
                                     <input type='number' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleChange(e.target.value)} /> 
                                     <button onClick={()=>this.add()} >Add</button></td>
                               : 
-                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.price)} >Buy</button></td>
+                              <td className='last-cur-column' > {crpt.marketCapitalization} <button onClick={()=>this.buy(crpt.ticker, crpt.price)} style
+                              ={{borderRadius: '51px'}} >Buy</button></td>
                            }     
                         </tr>)}
                 </table>

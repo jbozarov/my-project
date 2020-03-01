@@ -40,6 +40,7 @@ module.exports = {
 
       let userCart = await db.cart.create_order(newCustomer[0].customer_id)
       session.user = {...newCustomer[0], ...userCart[0]}
+      delete session.user.hash
       res.status(200).send(session.user); 
   },
     signIn: async (req, res) => {
@@ -48,11 +49,10 @@ module.exports = {
         const { session } = req
         let user = await db.customers.check_login(email)
 
-
         if(!user[0]) {
             return res.status(400).send('Incorrect email')
         }
-        console.log(user)
+
         let validated = bcrypt.compareSync(password, user[0].hash)
         if(!validated) return res.status(401).send('Incorrect password')
         delete user[0].hash

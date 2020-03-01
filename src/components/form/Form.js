@@ -25,7 +25,7 @@ const Form = props => {
         axios.post('/auth/register', { first_name, last_name, email, password })
         .then(res=>props.userLogged(res.data))
         .catch(err=>console.log(err))
-        props.history.push('/') 
+        props.history.push(`/invest/${props.user.customer_id}`) 
     }
 
    return (
@@ -47,7 +47,12 @@ const Form = props => {
    )
 }
 
-export default connect(null, { userLogged })(Form);
+function mapStateToProps(state) {
+   return {
+     user: state.userReducer.user
+   }
+}
+export default connect(mapStateToProps, { userLogged })(Form);
 
 
 const BTN = styled.button`

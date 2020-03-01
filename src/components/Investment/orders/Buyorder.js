@@ -40,7 +40,6 @@ class Buyorders extends Component {
 
    submit = () => {
       const {buyOrderId, type, price} = this.state
-      console.log('front 44: ', buyOrderId, type, price)
       axios.put('/api/editbuyorder', {buyOrderId, type, price})
       .then(res => {
          this.getBuyOrders()
@@ -86,7 +85,6 @@ class Buyorders extends Component {
 }
 
 function mapStateToProps (state) {
-   console.log(state)
    return {
       user: state.userReducer.user, 
       searchInput: state.searchInput, 
@@ -96,19 +94,3 @@ function mapStateToProps (state) {
 
 export default connect(mapStateToProps)(Buyorders)
 
-
-
-// <ToastContainer
-// position="top-right"
-// autoClose={1000}
-// hideProgressBar={false}
-// newestOnTop={false}
-// closeOnClick
-// rtl
-// pauseOnVisibilityChange
-// draggable
-// pauseOnHover />
-
-
-
-// <td> {buyOrderId === order.buy_order_id ?  <input style={{width: '20px'}} name='qty' value={qty} onChange={e => this.handleChange(e.target)} /> : order.qty } </td>  

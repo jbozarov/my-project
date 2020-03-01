@@ -16,8 +16,7 @@ const SignIn = props => {
         axios.post('/auth/signin', {email, password})
         .then(res => {
              props.userLogged(res.data)
-             props.history.push(`/dashboard/${props.user.customer_id}`) 
-            //  props.history.push(`/invest/${props.user.customer_id}`) 
+             props.history.push(`/invest/${props.user.customer_id}`) 
          })
         .catch(err=>console.log(err))   
     }
@@ -29,7 +28,7 @@ const SignIn = props => {
                   backgroundPosition: 'center',
                   backgroundSize: 'cover',
                   backgroundRepeat: 'no-repeat'}}>
-               <h2>Please Sign in </h2>
+               <h2>Please Sign in</h2>
                <input placeholder=' Enter your email' value={email} onChange={e=>setEmailInput(e.target.value)} />
                <PasswordMask useVendorStyles={false} placeholder=' Enter your password' value={password} onChange={e=>setPassInput(e.target.value)}/>
                <LoginBTN onClick={signIn} >Sign in </LoginBTN>

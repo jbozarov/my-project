@@ -5,4 +5,4 @@ INSERT INTO customers (
     hash
 )
 VALUES($1, $2, $3, $4)
-returning customer_id, first_name; 
+returning *; 

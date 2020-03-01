@@ -1,4 +1,12 @@
+const stripe = require('stripe')(process.env.STRIPE_SECRET)
+const EMAIL = process.env
 
+const mailOptions = {
+   from: EMAIL, 
+   to: '', 
+   subject: 'You sold your stocks', 
+   text: 'Selling confirmation '
+}
 
 
 module.exports = {
@@ -11,8 +19,18 @@ module.exports = {
    },
    sellInvestment: (req, res) => {
       const db = req.app.get('db')
+      const transporter = req.app.get('transporter')
       const { investment_id } = req.params
       db.investments.delete_investment(investment_id)
+      const customMailOptions = {...mailOptions}
+      transporter.sendMail(customMailOptions, (err, data) => {
+         if(err) {
+            console.log(err)
+         } else {
+            console.log('email confirmation sent')
+            console.log(data)
+         }
+      })
 
    }
 }

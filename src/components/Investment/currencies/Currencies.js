@@ -70,6 +70,7 @@ class Currencies extends Component {
                draggable
                pauseOnHover />
                 <table className='currencies-table' >
+                <thead ><td colSpan='8' style={{paddingLeft: '10px'}} >Currencies</td></thead>
                     <tr>
                         <th>Pair</th>
                         <th>Price</th>

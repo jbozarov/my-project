@@ -1,12 +1,13 @@
+import actionTypes from '../actionTypes'
+const { CREATE_ACC } = actionTypes
 
 
 const initialState = {
     newAccount: {}
 }
 
-const CREATE_ACC = 'CREATE_ACC'; 
+
 export const createNewAcc = newAccount => {
-    console.log('account reducer 9 line: ', newAccount); 
     return {
         type: CREATE_ACC, 
         payload: newAccount

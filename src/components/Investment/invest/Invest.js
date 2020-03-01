@@ -45,7 +45,6 @@ export class Invest extends Component {
     }
 
     render() {
-       console.log(this.props)
        const { indexes, displayMenu } = this.state
         return (
             <div className='invest' >
@@ -70,7 +69,7 @@ export class Invest extends Component {
                   </div>)}
                   </div> 
                <LowerTables>
-                  {this.props.showHide ? <div className='' style={{ marginRight: '10%'}} > <Buyorders /> </div> : null }
+                  {this.props.showHide ? <div style={{ marginRight: '2%'}} > <Buyorders /> </div> : null }
                   {routes}
                </LowerTables>
                </div>
@@ -118,11 +117,11 @@ export default connect(mapStateToProps)(Invest)
 
 
 const LowerTables = styled.div`
-   width: 90%; 
+   width: 95%; 
    margin: 20px auto;
    display: flex;
    flex-direction: row;
-   justify-content: flex-start;
+   justify-content: space-between;
    align-items: flex-start;
    @media(max-width: 900px){
       flex-wrap: wrap; 

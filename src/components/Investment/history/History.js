@@ -31,8 +31,8 @@ export class History extends Component {
    gobackdesktop = () => {
       const { showbo } = this.state 
       this.props.showbuyorder(showbo)
+      // window.history.back(); // same as this.props.history.push(`/invest/stocks`)
       this.props.history.push(`/invest/stocks`)
-      // this.props.history.push(`/invest/${this.props.user.customer_id}`)
    }
    gobackmobile = () => {
       this.props.history.push(`/invest/stocks`)
