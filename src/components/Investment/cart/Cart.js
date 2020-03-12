@@ -76,7 +76,7 @@ const onToken = (token) => {
        </table>
       }
 
-         <StripeCheckout 
+         <StripeCheckout style={{position: 'fixed', bottom: '10px'}}
           name='bankname' //header
          //  image={imageUrl}
           description='making a payment' //subtitle - beneath header

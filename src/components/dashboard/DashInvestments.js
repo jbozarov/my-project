@@ -219,7 +219,7 @@ export class DashInvestments extends Component {
                         <td> <input value={this.state[`${item.ticker}wantedPrice`]} type='number' min='0' placeholder='Price' style={{width: '60px'}} onChange={e=>this.handlePrice(item.ticker, e.target.value)} /></td> 
                         <td> <button disabled={ item.ticker !== this.state.ticker } onClick={()=>this.submit()} > Submit </button> </td>  
                      </tr>)} 
-                     <tfoot><tr><td colSpan="7"> You invested ${total.toFixed(2)} </td></tr></tfoot>
+                     <tfoot ><tr><td colSpan="7">You invested ${total.toFixed(2)} </td></tr></tfoot>
                </table>
             </div>
         )

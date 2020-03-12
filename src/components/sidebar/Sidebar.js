@@ -10,19 +10,40 @@ import { AiOutlineLogout, AiOutlineClose, AiOutlineTransaction } from 'react-ico
 import { GiBank, GiBanknote } from 'react-icons/gi'
 import { MdDashboard, MdSettings, MdHelpOutline } from 'react-icons/md'
 import axios from 'axios';
+import Modal from 'react-modal';
 
 
+const customStyles = {
+   content : {
+     width: '150px', 
+     height: '150px', 
+     margin: 'auto',
+     display: 'flex', 
+     flexDirection: 'column',
+     justifyContent: 'space-around'
+   }
+ };
 
 export class Sidebar extends Component {
     constructor(props) {
         super(props);
         this.state = {
             authenticated: false,
-            showsidebar: true
+            showsidebar: true, 
+            modalIsOpen: false
         };
       }
 
+      openModal = () => {
+         this.setState({modalIsOpen: true});
+       }
+      
+       closeModal = () => {
+          this.setState({modalIsOpen: false})
+       }
+
       logout = () => {
+         this.closeModal(); 
          axios.post('/auth/logout').then(() => this.props.userLogOut({}))
          this.props.closeSideBar(false)
          this.props.history.push('/')
@@ -30,6 +51,18 @@ export class Sidebar extends Component {
       render() {
         return (
             <div>
+               <Modal
+               isOpen={this.state.modalIsOpen}
+               onRequestClose={this.closeModal}
+               style={customStyles}
+               contentLabel="Example Modal"
+               >
+               <div style={{display: 'flex', justifyContent: 'center'}} >Are you logging out? </div>
+               <div style={{display: 'flex', justifyContent: 'space-between'}} >
+                  <button onClick={this.closeModal}>Cancel</button>
+                  <button onClick={this.logout}>Logout</button>
+               </div>
+               </Modal>
             {!this.props.user.first_name ? 
                 <div className={this.props.sidebarReducer.sidebarOpen ? 'show-side-bar' : 'hide-side-bar'} >
                 <Link id='close-btn' ><Span onClick={() => this.props.closeSideBar(false)}> <AiOutlineClose size={15} ></AiOutlineClose></Span></Link>
@@ -47,7 +80,7 @@ export class Sidebar extends Component {
                 <Link to={`/open/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><P> <GiBanknote style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></GiBanknote> Open new account </P> </Link>
                 <Link to='/settings' style={{textDecoration:'none', color:'grey'}} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></MdSettings> Setting</P> </Link>
                 <Link to='/help' style={{textDecoration:'none', color:'grey'}} ><P> <MdHelpOutline style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></MdHelpOutline> Help</P> </Link>
-                <Link style={{textDecoration:'none', color:'grey'}}><P onClick={this.logout} ><AiOutlineLogout style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></AiOutlineLogout> LOGOUT</P></Link>
+                <Link style={{textDecoration:'none', color:'grey'}}><P onClick={this.openModal} ><AiOutlineLogout style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></AiOutlineLogout> LOGOUT</P></Link>
                 </div>}
            </div>
         )

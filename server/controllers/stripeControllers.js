@@ -14,6 +14,7 @@ module.exports = {
     pay: (req,res, ati)=>{
         const db = req.app.get('db')
         const transporter = req.app.get('transporter')
+        console.log('line 17 ', req.body)
         const {token:{id}, amount, customer_order_id, customer_id, email } = req.body;
         console.log('stripe line 7: ', amount, customer_order_id, customer_id, email)
         stripe.charges.create(

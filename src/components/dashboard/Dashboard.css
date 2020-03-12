@@ -32,14 +32,8 @@
   font-size: large;
 }
 
-
-.transactions tr:nth-child(even){background-color: #f2f2f2;}
-.transactions tr:hover {background-color: #ddd;}
-
-
-
 .transactions{
-   width: 30%;
+   width: 29%;
    font-family: 'Times New Roman', Times, serif;
    border-collapse: collapse;
    margin: 0;
@@ -74,3 +68,6 @@
    color: black;
    font-size: 10px;
 }
+
+.transactions tbody:nth-child(even){background-color: #f2f2f2;}
+.transactions tr:hover {background-color: #ddd;}

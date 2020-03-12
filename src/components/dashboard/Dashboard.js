@@ -40,6 +40,9 @@ class Dashboard extends Component {
    .then(res=>this.setState({transactions: res.data.reverse().slice(0, 5), alltransactions: res.data}))
 }
 
+   viewTransactions = () => {
+      this.props.history.push(`/transactions/4242424242424242`)
+   }
 
 
    render(){
@@ -100,11 +103,12 @@ class Dashboard extends Component {
                <span style={{fontWeight: '600', color: transaction.type === 'expense' ? 'red' : 'green'}} > {transaction.amount} </span>
             </p>
             </tr>
-         </tbody> ))}
+            </tbody> ))}
+            <tfoot><tr><td colSpan='1' style={{fontSize: '12px', cursor: 'pointer'}} onClick={this.viewTransactions} > View All </td> </tr></tfoot>
       </table>
       </UpperTables>
 
-      <h2>Your investments </h2>
+      <h2 style={{marginLeft: '40px'}} >Your investments </h2>
   
       <LowerTables> 
          <DashInvestments getTransactions={this.getTransactions} />
@@ -157,7 +161,7 @@ const NavIcons = styled.div`
 `;
 
 const UpperTables = styled.div`
-   width: 100%; 
+   width: 92%; 
    margin: auto; 
    display: flex;
    flex-direction: row;
@@ -193,10 +197,10 @@ const MappedCards = styled.div`
 const Card = styled.div`
   margin: 20px;
   padding: 15px;
-//   height: 27vh;
-//   width: 69%;
-//   min-width: 20%;
-//   max-width: 200px;
+  height: 27vh;
+  width: 69%;
+  min-width: 20%;
+  max-width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -242,7 +246,7 @@ const LinkBalance = styled.div`
 
 
 const LowerTables = styled.div`
-   width: 95%; 
+   width: 90%; 
    margin: auto; 
    display: flex; 
    flex-direction: row; 

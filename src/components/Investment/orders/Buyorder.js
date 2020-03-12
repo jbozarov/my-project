@@ -5,8 +5,20 @@ import axios from 'axios'
 import './Orders.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { MdDelete, MdModeEdit } from 'react-icons/md'
+import Modal from 'react-modal';
 // toast.configure(); 
 
+
+const customStyles = {
+   content : {
+     width: '150px', 
+     height: '150px', 
+     margin: 'auto',
+     display: 'flex', 
+     flexDirection: 'column',
+     justifyContent: 'space-around'
+   }
+ };
 
 class Buyorders extends Component {
     constructor(props){
@@ -19,6 +31,8 @@ class Buyorders extends Component {
             buyOrderId: '', 
             type: 'limit',
             price: '',
+            modalIsOpen: false, 
+            buy_order_id: ''
          }
     }
 
@@ -34,6 +48,15 @@ class Buyorders extends Component {
       }
    }
 
+
+   openModal = buy_order_id => {
+      this.setState({modalIsOpen: true, buy_order_id: buy_order_id});
+    }
+   
+    closeModal = () => {
+       this.setState({modalIsOpen: false})
+    }
+
    edit = buy_order_id => this.setState({buyOrderId: buy_order_id})
    handleSelect = e => this.setState({type: e.target.value})
    handleChange = e => this.setState({[e.name]: e.value})
@@ -47,18 +70,33 @@ class Buyorders extends Component {
       })
       .catch(err => console.log(err))
    }
-   delete = buy_order_id => {
-      axios.delete(`/api/deletebuyorder/${buy_order_id}`)
+   delete = () => {
+      this.closeModal()
+      axios.delete(`/api/deletebuyorder/${this.state.buy_order_id}`)
       .then(res => {
          this.getBuyOrders(); 
+         this.setState({buy_order_id: ''})
       })
       .catch(err => console.log(err))
    }
 
     render() {
        const { buyOrderId, price } = this.state
+       console.log(this.state.buyorders)
         return (
             <div>
+               <Modal
+               isOpen={this.state.modalIsOpen}
+               onRequestClose={this.closeModal}
+               style={customStyles}
+               contentLabel="Example Modal"
+               >
+               <div style={{display: 'flex', justifyContent: 'center'}} >Do want you to delete? </div>
+               <div style={{display: 'flex', justifyContent: 'space-between'}} >
+                  <button onClick={this.closeModal}>Cencel</button>
+                  <button onClick={this.delete}>Submit</button>
+               </div>
+               </Modal>
                 <table className='buyorders-table'>
                 <thead><td colSpan='6'>Buy orders</td></thead>
                     <tr>
@@ -76,7 +114,7 @@ class Buyorders extends Component {
                            <td> {order.qty} </td>  
                            <td> {buyOrderId === order.buy_order_id ? <input style={{width: '30px'}} name='price' value={price} onChange={e => this.handleChange(e.target)} /> : order.wanted_price} </td> 
                            <td> {buyOrderId === order.buy_order_id ? <button onClick={() => this.submit()} >Submit </button> : <MdModeEdit onClick={() => this.edit(order.buy_order_id)} ></MdModeEdit>} </td>
-                           <td><MdDelete onClick={() => this.delete(order.buy_order_id)} ></MdDelete> </td> 
+                           <td><MdDelete onClick={() => this.openModal(order.buy_order_id)} ></MdDelete> </td> 
                         </tr>)}
                 </table>
             </div>

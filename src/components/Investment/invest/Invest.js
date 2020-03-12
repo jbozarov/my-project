@@ -69,7 +69,7 @@ export class Invest extends Component {
                   </div>)}
                   </div> 
                <LowerTables>
-                  {this.props.showHide ? <div style={{ marginRight: '2%'}} > <Buyorders /> </div> : null }
+                  {this.props.showHide ? <div style={{ marginRight: '6%'}} > <Buyorders /> </div> : null }
                   {routes}
                </LowerTables>
                </div>
@@ -121,7 +121,7 @@ const LowerTables = styled.div`
    margin: 20px auto;
    display: flex;
    flex-direction: row;
-   justify-content: space-between;
+   justify-content: flex-start;
    align-items: flex-start;
    @media(max-width: 900px){
       flex-wrap: wrap; 

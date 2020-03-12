@@ -11,11 +11,11 @@ const Accounts = props => {
        getAccounts()
     }, [])
 
-    const getAccounts = async() => {
-        await axios.get(`/api/accounts/${props.match.params.customer_id}`)
-              .then(res => setAccounts(res.data))
-              .catch(err => console.log(err))
-    }
+   const getAccounts = async() => {
+      await axios.get(`/api/accounts/${props.match.params.customer_id}`)
+            .then(res => setAccounts(res.data))
+            .catch(err => console.log(err))
+   }
 
         return (
             <div className='accounts' >

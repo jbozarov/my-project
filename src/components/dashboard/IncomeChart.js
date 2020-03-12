@@ -26,7 +26,7 @@ export class Incomechart extends Component {
    render() {
       return (
          <div>
-             <Pie data={{labels: this.state.labels, datasets: this.state.datasets}} height='170%' />
+             <Pie data={{labels: this.state.labels, datasets: this.state.datasets}} height='130%' />
          </div>
       )
    }

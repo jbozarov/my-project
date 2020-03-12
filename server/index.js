@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
+const path = require('path')
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, EMAIL, PASSWORD } = process.env
 const validCtrl = require('./controllers/validation')
 const accCtrl = require('./controllers/accCountroller')
@@ -71,6 +72,9 @@ app.delete('/api/removefromcart/:cart_id', stockCtrl.remove)
 app.post('/api/schedules', appointCtrl.getSchedules)
 app.put('/api/make', appointCtrl.makeApp)
 
+
+
+
 app.post('/api/payment', (req, res) => {
    stripeCtrl.pay(req, res, app.get('db').investments.add_to_investments)
 })
@@ -89,3 +93,10 @@ app.get('/api/getsellorders', orderCtrl.getSellOrders)
 app.post('/api/addsellorders', orderCtrl.addSellOrder)
 app.delete('/api/deletesellorder/:sell_order_id', orderCtrl.deleteSellOrder)
 app.put('/api/editsellorder', orderCtrl.editSellOrder)
+
+
+app.use(express.static(__dirname + '/../build'))
+
+app.get('*', (req, res) => {
+   res.sendFile(path.join(__dirname, '../build/index.html'))
+})
