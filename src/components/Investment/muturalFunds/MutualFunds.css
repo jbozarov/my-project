@@ -2,7 +2,7 @@
 .mutual-table{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 130%;
 }
 
 .mutual-table td, .mutual-table th {
@@ -26,3 +26,16 @@
    background-color: #1aa3ff;
    color: white;
 }
+
+@media (max-width: 1000px) {
+   .mutual-table{
+      width: 90%;
+      max-width: 400px;
+  }
+ }
+
+/* @media (max-width: 500px){
+   .mutual-table{
+      max-width: 300px;
+  }
+} */

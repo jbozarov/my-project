@@ -121,7 +121,13 @@ li:hover {
    display: none;
 }
 
-@media (max-width: 480px){
+@media (max-width: 500px){
+   .invest{
+      width: 100%;
+      background-color: #e6e6e6;
+      display: flex;
+      flex-direction: column;
+  }
    .mobile{
       display: inline-block;
    }

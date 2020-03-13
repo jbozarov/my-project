@@ -2,7 +2,7 @@
 .stocks-table{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 70%;
+    width: 100%;
     margin-left: 0px;
 }
 
@@ -40,9 +40,15 @@
    display: none;
 }
 
-@media (max-width: 480px){
+@media (max-width: 600px){
+   .stocks-table{
+      width: 400px;
+   }
    .mobile{
-      display: inline-block;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
    }
    .desktop{
       display: none;

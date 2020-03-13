@@ -21,9 +21,9 @@ const Header = props => {
             <div  >
                 {!props.user.first_name ? 
                <DeskHeader>
-                  <Link><p onClick={() => props.openSideBar(true)}> <GiHamburgerMenu size={17} style={{color: 'white'}} ></GiHamburgerMenu></p></Link>
-                  <img src={logo} alt='' width={45} /> 
-                  <input placeholder="  Search" style={{width: '60vw', height: '20px', borderRadius: '10px', border: 'none'}} onChange={e => handleSearch(e.target.value)} />
+                  <Link><p onClick={() => props.openSideBar(true)}> <GiHamburgerMenu size={22} style={{color: 'white'}} ></GiHamburgerMenu></p></Link>
+                  <img src={logo} alt='' width={55} /> 
+                  <input placeholder="  Search" style={{width: '60%', height: '25px', borderRadius: '10px', border: 'none'}} onChange={e => handleSearch(e.target.value)} />
                   <LoginRegister>
                         <Link to='/' style={{textDecoration:'none', color:'white'}}><p> <FaUserAlt> </FaUserAlt> Login</p></Link>
                         <Link to='/form' style={{textDecoration:'none', color:'white'}} ><p> <FiUserCheck></FiUserCheck> Register</p></Link>
@@ -76,6 +76,7 @@ const DeskHeader = styled.div`
    padding-right: 5%; 
    box-sizing: border-box; 
    align-items: center;
+   font-size: 15px;
    font-family: 'Poiret One';
    @media(max-width: 480px){
       display: none;

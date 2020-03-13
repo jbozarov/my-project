@@ -79,13 +79,13 @@ export class Invest extends Component {
             <div className="button" onClick={this.showDropdownMenu}> Menu </div>
             {displayMenu ? 
             <ul>
-            <Link to='/invest/buyorders' style={{textDecoration:'none', color:'black'}} > <li> Buy orders </li> </Link> 
+            {/*<Link to='/invest/buyorders' style={{textDecoration:'none', color:'black'}} > <li> Buy orders </li> </Link> */}
             <Link to='/invest/stocks' style={{textDecoration:'none', color:'black'}} > <li> Stocks </li> </Link> 
             <Link to='/invest/mutualfunds' style={{textDecoration:'none', color:'black'}} > <li> Mutual Funds </li> </Link> 
             <Link to='/invest/currencies' style={{textDecoration:'none', color:'black'}} > <li> Currencies </li> </Link> 
             <Link to='/invest/crypto' style={{textDecoration:'none', color:'black'}} > <li> Cryptocurrencies </li> </Link> 
             <Link to='/invest/gainers' style={{textDecoration:'none', color:'black'}} > <li> Gainers </li> </Link> 
-            <Link to='/' style={{textDecoration:'none', color:'black'}} > <li> Loosers </li> </Link> 
+            <Link to='/invest/losers' style={{textDecoration:'none', color:'black'}} > <li> Loosers </li> </Link> 
             <Link to='/invest/cart' style={{textDecoration:'none', color:'black'}} > <li> <FiShoppingCart size={15} ></FiShoppingCart> </li> </Link> 
             </ul> : null }
             </div>           
@@ -99,7 +99,8 @@ export class Invest extends Component {
             </div>)}
             </div> 
             <LowerTables>
-            {routes}
+               {this.props.showHide ? <div style={{ marginRight: '6%'}} > <Buyorders /> </div> : null }
+               {routes}
             </LowerTables>
          </div>
             </div>
@@ -124,8 +125,8 @@ const LowerTables = styled.div`
    justify-content: flex-start;
    align-items: flex-start;
    @media(max-width: 900px){
+      display: flex; 
       flex-wrap: wrap; 
       justify-content: center;
-      align-items: center;
    }
 `; 
