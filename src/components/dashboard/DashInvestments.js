@@ -175,7 +175,7 @@ export class DashInvestments extends Component {
        let total = investments.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.purchased_price*cur.qty), 0)
        
         return (
-            <div className='stocks' >
+            <div className='dash' >
             <ToastContainer
                position="top-right"
                autoClose={1200}

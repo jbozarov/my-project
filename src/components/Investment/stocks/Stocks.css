@@ -42,7 +42,7 @@
 
 @media (max-width: 600px){
    .stocks-table{
-      width: 400px;
+      width: 370px;
    }
    .mobile{
       display: flex;

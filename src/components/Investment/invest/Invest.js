@@ -69,7 +69,7 @@ export class Invest extends Component {
                   </div>)}
                   </div> 
                <LowerTables>
-                  {this.props.showHide ? <div style={{ marginRight: '6%'}} > <Buyorders /> </div> : null }
+                  {this.props.showHide ? <Buyorders />  : null }
                   {routes}
                </LowerTables>
                </div>
@@ -99,7 +99,7 @@ export class Invest extends Component {
             </div>)}
             </div> 
             <LowerTables>
-               {this.props.showHide ? <div style={{ marginRight: '6%'}} > <Buyorders /> </div> : null }
+               {this.props.showHide ? <Buyorders />  : null }
                {routes}
             </LowerTables>
          </div>

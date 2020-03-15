@@ -65,14 +65,14 @@ export class History extends Component {
          <div>
          <DesktopHistory className='desktop-history'>
             <MdArrowBack size={20} style={{cursor: 'pointer'}} onClick={() => this.gobackdesktop()} ></MdArrowBack>
-            <Line data={this.state} width={800} height={250}
+            <Line data={this.state} width={700} height={450}
             options={{ title:{display:true, text:`History of ${this.props.match.params.ticker} for last 30 days`, fontSize:20},
             legend: { display:true, position:'right' }
             }}/>
          </DesktopHistory>
          <MobileHistory className='mobile-history'>
-            <MdArrowBack size={20} style={{cursor: 'pointer'}} onClick={() => this.gobackmobile()} ></MdArrowBack>
-            <Line data={this.state} width={500} height={220}
+            <MdArrowBack size={30} style={{cursor: 'pointer'}} onClick={() => this.gobackmobile()} ></MdArrowBack>
+            <Line data={this.state} width={400} height={220}
             options={{ title:{display:true, text:`History of ${this.props.match.params.ticker} for last 30 days`, fontSize:20},
             legend: { display:true, position:'right' }
             }}/>

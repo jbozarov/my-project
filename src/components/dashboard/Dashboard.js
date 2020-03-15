@@ -65,31 +65,42 @@ class Dashboard extends Component {
         </NavIcons>
       </DashNav>
       <UpperTables>
-      <MappedCards>
-        {accounts.map(account => (
-          <Card key={account.account_number}>
-            <img src={logo} alt='GO TRADE' width={180} /> 
-            <p> {account.first_name} </p>
-            <NameAcc>
-              <h3> 4242 4242 4242 4242 </h3>
-              <p> {account.account_type} </p>
-            </NameAcc>
-            <LinkBalance>
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                to={`/transactions/${account.account_number}`}
-              >
-                <p> View Activity </p>
-              </Link>
-              <p>
-                Balance: {"$"}
-                {Number(account.balance).toFixed(2)}{" "}
-              </p>
-            </LinkBalance>
-          </Card>
-        ))}
-      </MappedCards>
-      <Incomechart alltransactions={alltransactions} />
+      <div class="news" >
+         <div className='news-nav' >
+            <a className='news-btn' href='https://finance.yahoo.com/' >Financial News</a>
+            <span className='news-btn' >Services</span>
+            <span className='news-btn' >Contact us</span>
+            <span className='news-btn' >start</span>
+         </div>
+         <p >Successfull investing is about managing risk, not avoiding it</p>
+      </div>
+      <div>
+         <Incomechart alltransactions={alltransactions} />
+         <MappedCards>
+         {accounts.map(account => (
+            <Card key={account.account_number}>
+               <img src={logo} alt='GO TRADE' width={180} /> 
+               <p> {account.first_name} </p>
+               <NameAcc>
+               <h3> 4242 4242 4242 4242 </h3>
+               <p> {account.account_type} </p>
+               </NameAcc>
+               <LinkBalance>
+               <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={`/transactions/${account.account_number}`}
+               >
+                  <p> View Activity </p>
+               </Link>
+               <p>
+                  Balance: {"$"}
+                  {Number(account.balance).toFixed(2)}{" "}
+               </p>
+               </LinkBalance>
+            </Card>
+         ))}
+         </MappedCards>
+      </div>
       <table className="transactions" >
          <thead><tr><td colSpan='1' style={{fontSize: '12px'}} >Recent transactions</td> </tr></thead>
          {transactions.map(transaction => (
@@ -139,9 +150,9 @@ const DashboardDiv = styled.div`
 
 const DashNav = styled.nav`
   height: 7vh;
-  width: 90%;
+  width: 100%;
   margin: auto; 
-  padding: 3px 10px;
+  padding: 3px 3%;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -150,7 +161,6 @@ const DashNav = styled.nav`
   font-size: x-large;
   color: blue;
   font-weight: 500;
-  
 `;
 
 const NavIcons = styled.div`
@@ -161,13 +171,14 @@ const NavIcons = styled.div`
 `;
 
 const UpperTables = styled.div`
-   width: 92%; 
+   width: 95%; 
    margin: auto; 
    display: flex;
    flex-direction: row;
-   justify-content: space-around;
+   justify-content: space-between;
    align-items: flex-start;
-   @media(max-width: 700px){
+   @media(max-width: 800px){
+      width: 100%; 
       display: flex; 
       flex-direction: column; 
       justify-content: space-between; 
@@ -180,25 +191,24 @@ const UpperTables = styled.div`
 
 const MappedCards = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   color: white;
   font-weight: 900px;
   box-sizing: border-box; 
-  @media (max-width: 480px) {
+  @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 400px;
   }
 `;
 
 const Card = styled.div`
   margin: 20px;
   padding: 15px;
-  height: 27vh;
-  width: 69%;
+//   height: 27vh;
   min-width: 20%;
   max-width: 200px;
   display: flex;
@@ -251,9 +261,11 @@ const LowerTables = styled.div`
    display: flex; 
    flex-direction: row; 
    justify-content: space-between; 
+   justify-content: flex-start; 
    align-items: flex-start; 
    flex-wrap: wrap; 
-   @media(max-width: 700px){
+   @media(max-width: 850px){
+      width: 100%; 
       display: flex; 
       flex-direction: column; 
       justify-content: space-between; 

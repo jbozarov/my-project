@@ -16,7 +16,8 @@ const SignIn = props => {
         axios.post('/auth/signin', {email, password})
         .then(res => {
              props.userLogged(res.data)
-             props.history.push(`/invest/${props.user.customer_id}`) 
+            //  props.history.push(`/invest/${props.user.customer_id}`) 
+             props.history.push(`/dashboard/${props.user.customer_id}`) 
          })
         .catch(err=>console.log(err))   
     }

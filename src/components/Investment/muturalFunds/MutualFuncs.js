@@ -52,7 +52,7 @@ class MutualFunds extends Component {
         const { mutualfunds, buyClicked, ticker } = this.state
         console.log(this.state)
         return (
-            <div className='currencies' >
+            <div >
             <ToastContainer
                position="top-right"
                autoClose={1200}

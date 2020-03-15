@@ -4,7 +4,7 @@
 .buyorders-table{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 60%;
+    width: 100%;
     margin-bottom: 40px;
 }
 
@@ -49,8 +49,8 @@
 .sellorders-table{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 85%;
-    margin-bottom: 40px;
+    width: 125%;
+    margin-left: 40px;
 }
 
 .sellorders-table td, .sellorders-table th {
@@ -88,4 +88,14 @@
 
 .first{
     width: 30px;
+}
+
+@media(min-width: 600px){
+   .buyorders-box{
+      width: 40%;
+   }
+   .sellorders-table{
+      margin: 0;
+      width: 400px;
+   }
 }
