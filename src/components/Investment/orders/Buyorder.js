@@ -36,10 +36,12 @@ class Buyorders extends Component {
          }
     }
 
-    getBuyOrders = () => axios.get('/api/getbuyorders').then(res=>this.setState({buyorders: res.data}))
+    getBuyOrders = () => axios.get(`/api/getbuyorders/${this.props.user.customer_id}`).then(res=>this.setState({buyorders: res.data}))
    
     componentDidMount(){
-       this.getBuyOrders(); 
+       if (this.props.user.customer_id){
+          this.getBuyOrders(); 
+       }
     }
     
    componentDidUpdate(prevProps){
@@ -82,7 +84,7 @@ class Buyorders extends Component {
 
     render() {
        const { buyOrderId, price } = this.state
-       console.log(this.state.buyorders)
+       console.log(this.props.user)
         return (
             <div className='buyorders-box' style={{marginRight: '40px'}} >
                <Modal

@@ -2,11 +2,13 @@
 
 
 module.exports = {
-   getBuyOrders: (req, res) => {
+   getBuyOrders: async (req, res) => {
       const db = req.app.get('db')
-      db.orders.get_buy_orders()
+      const { customer_id } = req.params
+      console.log(customer_id)
+      await db.orders.get_buy_orders(customer_id)
       .then(buyorders => res.status(200).send(buyorders))
-      .catch(err => res.status(500).send('getBuyOrders error: ', err))
+      .catch(err => res.status(500).send(err))
    }, 
    addBuyOrder: (req, res) => {
       const db = req.app.get('db')
@@ -39,11 +41,12 @@ module.exports = {
       .then(response => res.status(200).send('Edited'))
       .catch(err => res.status(500).send('cannot edit : ', err))
    },
-   getSellOrders: (req, res) => {
+   getSellOrders: async (req, res) => {
       const db = req.app.get('db')
-      db.orders.get_sell_orders()
+      const { customer_id } = req.params; 
+      await db.orders.get_sell_orders(customer_id)
       .then(sellorders => res.status(200).send(sellorders))
-      .catch(err => res.status(500).send('getBuyOrders error: ', err))
+      .catch(err => res.status(500).send(err))
    },
    addSellOrder: (req, res) => {
       const db = req.app.get('db')

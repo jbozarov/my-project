@@ -1,2 +1,3 @@
 SELECT * FROM sellorders
-ORDER BY sell_order_id ASC; 
+where customer_id = $1 
+ORDER BY sell_order_id ASC;

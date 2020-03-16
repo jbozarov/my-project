@@ -46,56 +46,10 @@
 }
 
 
-.sellorders-table{
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 125%;
-    margin-left: 40px;
-}
 
-.sellorders-table td, .sellorders-table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-.sellorders-table tr:nth-child(even){background-color: #f2f2f2;}
-
-.sellorders-table tr:hover {background-color: #ddd;}
-
-.sellorders-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #1aa3ff;
-  color: white;
-}
-.sellorders-table thead {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  /* background-color: #4CAF50; */
-  background-color: #1aa3ff;
-  color: white;
-  font-size: large;
-}
-
-.last-column{
-    min-width: 60%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.first{
-    width: 30px;
-}
-
-@media(min-width: 600px){
+@media(max-width: 600px){
    .buyorders-box{
       width: 40%;
    }
-   .sellorders-table{
-      margin: 0;
-      width: 400px;
-   }
 }
+

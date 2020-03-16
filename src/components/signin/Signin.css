@@ -27,7 +27,31 @@
     color: black;
     font-weight: 400;
     font-size: 13px;
+    padding-left: 5px;
+    box-sizing: border-box;
 }
+
+.input-div{
+   position: relative;
+}
+
+.font {
+   position: absolute;
+   right: 6px;
+   top: 6px;
+   color: black;
+   cursor: pointer;
+}
+@media (max-width: 700px){
+   .sign-in input{
+      width: 90vw;
+   }
+   .sign-in button{
+      width: 90vw;
+   }
+}
+
+
 
 .sign-in ::-webkit-input-placeholder{
     color: black;

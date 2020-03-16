@@ -39,7 +39,7 @@ const Header = props => {
                {!props.user.first_name ? 
                <MobileHeader>
                      <Link><p onClick={() => props.openSideBar(true)}> <GiHamburgerMenu size={17} style={{color: 'white'}} ></GiHamburgerMenu></p></Link>
-                     <input placeholder="  Search - mobile" style={{width: '45vw', height: '20px', borderRadius: '10px', border: 'none'}} />
+                     <input placeholder="  Search - mobile" style={{width: '45vw', height: '20px', borderRadius: '10px', border: 'none'}} onChange={e => handleSearch(e.target.value)} />
                      <LoginRegister>
                         <Link  to='/' style={{textDecoration:'none', color:'white'}}><IoMdLogIn> </IoMdLogIn></Link>
                         <Link to='/form' style={{textDecoration:'none', color:'white'}} > <FiUserCheck></FiUserCheck> </Link>
@@ -48,7 +48,7 @@ const Header = props => {
               : 
               <MobileHeader>
                   <Link><p onClick={() => props.openSideBar(true)}> <GiHamburgerMenu size={17} style={{color: 'white'}} ></GiHamburgerMenu></p></Link>
-                  <input placeholder="  Search - mobile" style={{width: '45vw', height: '15px', borderRadius: '10px', border: 'none'}} />
+                  <input placeholder="  Search - mobile" style={{width: '45vw', height: '15px', borderRadius: '10px', border: 'none'}} onChange={e => handleSearch(e.target.value)} />
                   <p style={{fontWeight: '700'}} >Welcome, {props.user.first_name} </p>
               </MobileHeader>}          
             </div>

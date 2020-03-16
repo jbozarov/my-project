@@ -84,12 +84,12 @@ app.get('/api/investments/:customer_id', invstCtrl.getInvestments)
 app.delete('/api/deleteinvestment/:investment_id', invstCtrl.sellInvestment)
 
 //ORDERS 
-app.get('/api/getbuyorders', orderCtrl.getBuyOrders)
+app.get('/api/getbuyorders/:customer_id', orderCtrl.getBuyOrders)
 app.post('/api/addbuyorders', orderCtrl.addBuyOrder)
 app.delete('/api/deletebuyorder/:buy_order_id', orderCtrl.deleteBuyOrder)
 app.put('/api/editbuyorder', orderCtrl.editBuyOrder)
 
-app.get('/api/getsellorders', orderCtrl.getSellOrders)
+app.get('/api/getsellorders/:customer_id', orderCtrl.getSellOrders)
 app.post('/api/addsellorders', orderCtrl.addSellOrder)
 app.delete('/api/deletesellorder/:sell_order_id', orderCtrl.deleteSellOrder)
 app.put('/api/editsellorder', orderCtrl.editSellOrder)

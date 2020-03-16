@@ -15,7 +15,7 @@ module.exports = {
       const { customer_id } = req.params
       db.investments.get_investments(customer_id)
       .then(response => res.status(200).send(response))
-      .catch(err => res.status(500).send('error in invest ctrl'))
+      .catch(err => res.status(500).send(err))
    },
    sellInvestment: (req, res) => {
       const db = req.app.get('db')

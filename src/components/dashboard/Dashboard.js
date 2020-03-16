@@ -118,9 +118,7 @@ class Dashboard extends Component {
             <tfoot><tr><td colSpan='1' style={{fontSize: '12px', cursor: 'pointer'}} onClick={this.viewTransactions} > View All </td> </tr></tfoot>
       </table>
       </UpperTables>
-
       <h2 style={{marginLeft: '40px'}} >Your investments </h2>
-  
       <LowerTables> 
          <DashInvestments getTransactions={this.getTransactions} />
          <Sellorders />
@@ -267,11 +265,12 @@ const LowerTables = styled.div`
    @media(max-width: 850px){
       width: 100%; 
       display: flex; 
-      flex-direction: column; 
+      flex-direction: column;
       justify-content: space-between; 
       align-items: center; 
+      flex-wrap: wrap; 
       margin: auto; 
-      height: 40vh; 
+      margin-top: 40px; 
    }
 `; 
 

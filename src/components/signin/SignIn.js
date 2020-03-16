@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { userLogged } from '../../redux/reducers/userReducer'
-import PasswordMask from 'react-password-mask';
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import './Signin.css'
+import { FaEye } from 'react-icons/fa'
 
 
 const SignIn = props => {
    const [email, setEmailInput] = useState('')
    const [password, setPassInput] = useState('')
+   const [isPassword, setIsPassword] = useState(true)
 
 
     const signIn = () => {
@@ -31,7 +32,12 @@ const SignIn = props => {
                   backgroundRepeat: 'no-repeat'}}>
                <h2>Please Sign in</h2>
                <input placeholder=' Enter your email' value={email} onChange={e=>setEmailInput(e.target.value)} />
-               <PasswordMask useVendorStyles={false} placeholder=' Enter your password' value={password} onChange={e=>setPassInput(e.target.value)}/>
+               <div className='input-div' > <input type={isPassword ? 'password' : 'text'} 
+                    className='input'
+                    placeholder=' Enter your password' name='password' 
+                    value={password} 
+                    onChange={e=>setPassInput(e.target.value)}/>
+               <FaEye className='font' size={17} onClick={() => setIsPassword(!isPassword)} ></FaEye> </div>
                <LoginBTN onClick={signIn} >Sign in </LoginBTN>
                <ForgotPass style={{color: 'white', fontWeight: '700', fontStyle: 'italic'}} >Forgot password ?</ForgotPass>
                <RegBTN onClick={goRegitsterPage} className='register-btn' >Register </RegBTN>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import { ToastContainer, toast } from 'react-toastify'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import './Orders.css'
+import './Sellorders.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { MdDelete, MdModeEdit } from 'react-icons/md'
 import Modal from 'react-modal';
@@ -35,10 +35,13 @@ class Sellorders extends Component {
          }
     }
 
-    getSellOrders = () => axios.get('/api/getsellorders').then(res=>this.setState({sellorders: res.data}))
+    getSellOrders = () => axios.get(`/api/getsellorders/${this.props.user.customer_id}`).then(res=>this.setState({sellorders: res.data}))
    
     componentDidMount(){
-       this.getSellOrders(); 
+       if (this.props.user.customer_id){
+           this.getSellOrders(); 
+       }
+      
     }
     
    componentDidUpdate(prevProps){
