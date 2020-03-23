@@ -162,6 +162,7 @@ insert into stocks (ticker, name, price, exchange) values ('ABBV', 'AbbVie Inc',
 insert into stocks (ticker, name, price, exchange) values ('ORCL', 'Oracle Corporation', 50.96, 'NYSE');
 insert into stocks (ticker, name, price, exchange) values ('C', 'Citigroup Inc.', 69.43, 'NYSE');
 insert into stocks (ticker, name, price, exchange) values ('NVS', 'Novartis', 87.95, 'NYSE');
+insert into stocks (ticker, name, price, exchange) values ('NVS', 'Novartis', 87.95, 'NYSE');
 
 insert into stocks (ticker, name, price, exchange) values (null, null, null, null);
 insert into stocks (ticker, name, price, exchange) values (null, null, null, null);

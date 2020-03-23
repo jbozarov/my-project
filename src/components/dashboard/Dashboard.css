@@ -1,21 +1,21 @@
 
-.investments-table{
+.investments-table1{
    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
    border-collapse: collapse;
-   width: 100%;
+   width: 140%;
    margin-left: 0px;
 }
 
-.investments-table td, .investments-table th {
+.investments-table1 td, .investments-table1 th {
    border: 1px solid #ddd;
-   padding: 5px;
-   font-size: 10px;
+   padding: 10px;
+   font-size: 15px;
 }
 
-.investments-table tr:nth-child(even){background-color: #f2f2f2;}
-.investments-table tr:hover {background-color: #ddd;}
+.investments-table1 tr:nth-child(even){background-color: #f2f2f2;}
+.investments-table1 tr:hover {background-color: #ddd;}
 
-.investments-table th {
+.investments-table1 th {
  padding-top: 8px;
  padding-bottom: 8px;
  text-align: left;
@@ -23,7 +23,7 @@
  color: white;
 }
 
-.investments-table thead {
+.investments-table1 thead {
   padding-top: 15px;
   padding-bottom: 15px;
   text-align: left;
@@ -108,7 +108,34 @@
     justify-content: space-between;
  }
 
-@media(max-width: 798px){
+ @media(min-width: 1600px){
+   .investments-table1{
+      width: 135%;
+      margin-left: 0;
+   }
+}
+
+@media(max-width: 1600px) and (min-width: 1200px) {
+   .investments-table1{
+      width: 95%;
+      margin-left: 0;
+      margin-right: 0;
+   }
+}
+@media(max-width: 1200px) and (min-width: 800px) {
+   .investments-table1{
+      width: 75%;
+      margin-left: 0;
+      margin-right: 0;
+   }
+   .investments-table1 td, .investments-table1 th {
+      border: 1px solid #ddd;
+      padding: 5px;
+      font-size: 10px;
+   }
+}
+
+@media(max-width: 800px){
    .transactions{
       width: 70%;
       margin-bottom: 150px;
@@ -117,5 +144,14 @@
       width: 94%;
       height: 300px;
       font-size: 15px;
+   }
+   .investments-table1{
+      width: 90%;
+      margin: auto;
+   }
+   .investments-table1 td, .investments-table1 th {
+      border: 1px solid #ddd;
+      padding: 5px;
+      font-size: 10px;
    }
 }

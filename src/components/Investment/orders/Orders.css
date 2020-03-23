@@ -44,7 +44,17 @@
 .first{
     width: 30px;
 }
+@media (max-width: 1430px) and (min-width: 1200px){
+   .buyorders-box{
+      width: 20%;
+   } 
+}
 
+@media (max-width: 1200px) and (min-width: 1050px){
+   .buyorders-box{
+      width: 20%;
+   }
+}
 
 
 @media(max-width: 600px){

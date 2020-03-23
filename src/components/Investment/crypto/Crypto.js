@@ -65,7 +65,7 @@ class crpto extends Component {
                draggable
                pauseOnHover />
 
-                <table className='stocks-table' >
+                <table className='stocks-table3' >
                 <thead ><td colSpan='8' style={{paddingLeft: '10px'}} >Cryptocurrencies</td></thead>
                     <tr>
                         <th>Ticker</th>

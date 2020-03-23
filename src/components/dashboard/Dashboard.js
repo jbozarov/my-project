@@ -262,13 +262,13 @@ const LowerTables = styled.div`
    justify-content: flex-start; 
    align-items: flex-start; 
    flex-wrap: wrap; 
-   @media(max-width: 850px){
+   @media(max-width: 650px){
       width: 100%; 
       display: flex; 
       flex-direction: column;
       justify-content: space-between; 
       align-items: center; 
-      flex-wrap: wrap; 
+      flex-wrap: nowrap; 
       margin: auto; 
       margin-top: 40px; 
    }

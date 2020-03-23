@@ -87,7 +87,7 @@ class Sellorders extends Component {
        const { sellorders, sellOrderId, price } = this.state
        console.log(this.state)
         return (
-            <div>
+            <div className='sellorders-comp-2' >
                <Modal
                isOpen={this.state.modalIsOpen}
                onRequestClose={this.closeModal}
@@ -100,7 +100,7 @@ class Sellorders extends Component {
                   <button onClick={this.delete}>Submit</button>
                </div>
                </Modal>
-                <table className='sellorders-table'>
+                <table className='sellorders-table1'>
                 <thead><td colSpan='6'>Sell orders</td></thead>
                     <tr>
                         <th>Symbol</th>

@@ -187,7 +187,7 @@ export class DashInvestments extends Component {
                draggable
                pauseOnHover/>
 
-               <table className='investments-table' >
+               <table className='investments-table1' >
                <thead ><td colSpan='8'>Investments</td></thead>
                   <tr>
                      <th>Ticker</th>

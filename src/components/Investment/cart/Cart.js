@@ -61,7 +61,7 @@ const onToken = (token) => {
             </tr>
          {cartItems.map(item => (
            <tr key={item.cart_id}>
-             <td> {item.ticker} </td>
+             <td> {item.ticker}</td>
              <td> {item.qty} </td>
              <td> {item.price} </td>
              <td> {item.total} </td>

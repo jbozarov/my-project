@@ -21,18 +21,20 @@ export class Stocks extends Component {
             searchInput: props.searchInput, 
             orderType: 'select', 
             ticker: '',
+            symbol: '',
             price: '',
             qty: 0, 
             wantedPrice: 0,
             v: false,
             showhidetoggle: false,
-
+            euronextStocks: [],
         }
     }
 
     
    componentDidMount(){
       axios.get('/api/stocks').then(res=>this.setState({stocks: res.data}))
+      axios.get('https://financialmodelingprep.com/api/v3/quotes/euronext').then(res=>this.setState({euronextStocks: res.data.slice(0, 50)}))
    }
 
    check = (t) => {
@@ -57,6 +59,10 @@ export class Stocks extends Component {
    changeOrderType = (e, t, p) => {
       this.check(t)
       this.setState({[`${t}orderType`]: e.target.value, ticker: t, price: p, orderType: e.target.value})
+   }
+   changeOrderTypeEuro = (e, t, p) => {
+      this.check(t)
+      this.setState({[`${t}orderType`]: e.target.value, symbol: t, price: p, orderType: e.target.value})
    }
 
    handleChange = quantity => this.setState({qty: quantity })
@@ -149,7 +155,7 @@ export class Stocks extends Component {
     }
 
     render() {
-       const { stocks, buyClicked, ticker } = this.state
+       const { stocks, buyClicked, ticker, euronextStocks } = this.state
        let filteredStocks;
        if (this.props.searchInput.searchInput) {
           filteredStocks = stocks.filter(stock => stock.ticker.includes(this.props.searchInput.searchInput.toUpperCase()))
@@ -171,7 +177,11 @@ export class Stocks extends Component {
                pauseOnHover/>
 
                <div className='desktop' >
-                <table className='stocks-table' >
+
+
+
+               <div className="two-tables" >
+                <table className='stocks-table3' >
                   <thead ><td colSpan='8' style={{paddingLeft: '10px'}} >Stocks</td></thead>
                     <tr>
                         <th>Ticker</th>
@@ -202,10 +212,42 @@ export class Stocks extends Component {
                            <td> <button disabled={ stock.ticker !== this.state.ticker } onClick={()=>this.submit()} > Submit </button> </td>  
                         </tr>)} 
                 </table>
+                <table className='stocks-table3' >
+                  <thead ><td colSpan='8' style={{paddingLeft: '10px'}} >EURONEXT Stocks</td></thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Company Name</th>
+                        <th>Price</th>
+                        <th>Market</th>
+                        <th>Orders</th>
+                        <th>Quantity</th>
+                        <th>Wanted price</th>
+                        <th>Submit</th>
+                    </tr>
+                    {euronextStocks.length>=1 && euronextStocks.map(stock =>
+                        <tr key={stock.symbol} >
+                            <td> {stock.symbol} </td>
+                            <td> <Link to={`/invest/history/${stock.ticker}`} onClick={()=>this.hidebuyorders()}  style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
+                            <td> {stock.price} </td>
+                            <td> {stock.exhange}</td>
+                           <td> 
+                              <select value={this.state[`${stock.symbol}orderType`]} onChange={e => this.changeOrderTypeEuro(e, stock.symbol, stock.price )} >
+                                 <option defaultValue >select</option>
+                                 <option value='market' >Market </option>
+                                 <option value='limit' >Limit </option>
+                                 <option value='stop limit'>Stop limit</option>
+                              </select> 
+                           </td> 
+                           <td> <input value={this.state[`${stock.symbol}qty`]} type='number' min='0' placeholder='Quantity' style={{width: '60px'}} onChange={e=>this.handleQty(stock.symbol, e.target.value)} /></td> 
+                           <td> <input value={this.state[`${stock.symbol}wantedPrice`]} type='number' min='0' placeholder='Price' style={{width: '60px'}} onChange={e=>this.handlePrice(stock.symbol, e.target.value)} /></td> 
+                           <td> <button disabled={ stock.symbol !== this.state.symbol } onClick={()=>this.submit()} > Submit </button> </td>  
+                        </tr>)} 
+                </table>
+                </div>
                 </div>
 
                <div className='mobile' >
-                <table className='stocks-table' >
+                <table className='stocks-table3' >
                   <thead ><tr><td colSpan='8'>Stocks</td> </tr></thead>
                     <tr>
                         <th>Ticker</th>
