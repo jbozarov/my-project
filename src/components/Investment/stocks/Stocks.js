@@ -256,7 +256,7 @@ export class Stocks extends Component {
                         <th>Price</th>
                         <th>Buy</th>
                     </tr>
-                    {euronextStocks.length>=1 && euronextStocks.map(stock =>
+                    {filteredStocks.length>=1 && filteredStocks.map(stock =>
                         <tr key={stock.ticker} >
                             <td> {stock.ticker} </td>
                             <td> <Link to={`/invest/history/${stock.ticker}`} style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
@@ -271,6 +271,20 @@ export class Stocks extends Component {
                                  : 
                                  <td className='last-column'> {stock.exchange} <button onClick={()=>this.buy(stock.ticker)} >Buy </button></td>
                               } 
+                        </tr>)} 
+                </table>
+                <table className='stocks-table3' >
+                  <thead ><tr><td colSpan='3'>Stocks</td> </tr></thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Company Name</th>
+                        <th>Price</th>
+                    </tr>
+                    {euronextStocks.length>=1 && euronextStocks.map(stock =>
+                        <tr key={stock.symbol} >
+                            <td> {stock.symbol} </td>
+                            <td> <Link to={`/invest/history/${stock.ticker}`} style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>
+                            <td> {stock.price} </td>
                         </tr>)} 
                 </table>
                 </div>

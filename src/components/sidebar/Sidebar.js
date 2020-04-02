@@ -15,10 +15,11 @@ import Modal from 'react-modal';
 
 const customStyles = {
    content : {
-     width: '150px', 
-     height: '150px', 
+     width: '200px', 
+     height: '200px', 
      margin: 'auto',
      display: 'flex', 
+     borderRadius: '10px',
      flexDirection: 'column',
      justifyContent: 'space-around'
    }
@@ -57,10 +58,10 @@ export class Sidebar extends Component {
                style={customStyles}
                contentLabel="Example Modal"
                >
-               <div style={{display: 'flex', justifyContent: 'center'}} >Are you logging out? </div>
+               <div style={{display: 'flex', justifyContent: 'center', fontSize: '20px'}} >Are you logging out? </div>
                <div style={{display: 'flex', justifyContent: 'space-between'}} >
-                  <button onClick={this.closeModal}>Cancel</button>
-                  <button onClick={this.logout}>Logout</button>
+                  <button className='logout-are-you-sure-buttons' onClick={this.closeModal}>Cancel</button>
+                  <button className='logout-are-you-sure-buttons' onClick={this.logout}>Logout</button>
                </div>
                </Modal>
             {!this.props.user.first_name ? 
@@ -80,7 +81,7 @@ export class Sidebar extends Component {
                   {/* <Link to={`/open/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><P> <GiBanknote style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></GiBanknote> Open new account </P> </Link> */}
                   <Link to='/settings' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdSettings> Setting</P> </Link>
                   <Link to='/help' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdHelpOutline style={{paddingRight: '10px', paddingLeft: '15px'}}></MdHelpOutline> Help</P> </Link>
-                  <Link style={{textDecoration:'none', color:'grey'}}><P onClick={this.openModal} ><AiOutlineLogout style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></AiOutlineLogout> LOGOUT</P></Link>
+                  <Link style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P onClick={this.openModal} ><AiOutlineLogout style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></AiOutlineLogout> LOGOUT</P></Link>
                 </div>}
            </div>
         )

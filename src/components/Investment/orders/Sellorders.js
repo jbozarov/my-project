@@ -10,13 +10,14 @@ import Modal from 'react-modal';
 
 const customStyles = {
    content : {
-     width: '150px', 
-     height: '150px', 
-     margin: 'auto',
-     display: 'flex', 
-     flexDirection: 'column',
-     justifyContent: 'space-around'
-   }
+      width: '250px', 
+      height: '200px', 
+      margin: 'auto',
+      display: 'flex', 
+      borderRadius: '10px',
+      flexDirection: 'column',
+      justifyContent: 'space-around'
+    }
  };
 
 class Sellorders extends Component {
@@ -94,10 +95,10 @@ class Sellorders extends Component {
                style={customStyles}
                contentLabel="Example Modal"
                >
-               <div style={{display: 'flex', justifyContent: 'center'}} >Do you want to delete? </div>
+               <div style={{display: 'flex', justifyContent: 'center', fontSize: '20px'}} >Do you want to delete? </div>
                <div style={{display: 'flex', justifyContent: 'space-between'}} >
-                  <button onClick={this.closeModal}>Cencel</button>
-                  <button onClick={this.delete}>Submit</button>
+                  <button className='logout-are-you-sure-buttons' onClick={this.closeModal}>Cencel</button>
+                  <button className='logout-are-you-sure-buttons' onClick={this.delete}>Submit</button>
                </div>
                </Modal>
                 <table className='sellorders-table1'>
