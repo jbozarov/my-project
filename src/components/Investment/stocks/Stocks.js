@@ -156,9 +156,10 @@ export class Stocks extends Component {
 
     render() {
        const { stocks, buyClicked, ticker, euronextStocks } = this.state
-       let filteredStocks;
-       if (this.props.searchInput.searchInput) {
-          filteredStocks = stocks.filter(stock => stock.ticker.includes(this.props.searchInput.searchInput.toUpperCase()))
+       const { searchInput } = this.props.searchInput
+       let filteredStocks = [];
+       if (searchInput) {
+          filteredStocks = stocks.filter(stock => stock.ticker.includes(searchInput.toUpperCase()))
        } else {
           filteredStocks=stocks
        }
@@ -255,7 +256,7 @@ export class Stocks extends Component {
                         <th>Price</th>
                         <th>Buy</th>
                     </tr>
-                    {filteredStocks.length>=1 && filteredStocks.map(stock =>
+                    {euronextStocks.length>=1 && euronextStocks.map(stock =>
                         <tr key={stock.ticker} >
                             <td> {stock.ticker} </td>
                             <td> <Link to={`/invest/history/${stock.ticker}`} style={{textDecoration:'none', color:'blue'}}>{stock.name}</Link> </td>

@@ -86,7 +86,7 @@ class Buyorders extends Component {
        const { buyOrderId, price } = this.state
        console.log(this.props.user)
         return (
-            <div className='buyorders-box' style={{marginRight: '40px'}} >
+            <div className='buyorders-box' >
                <Modal
                isOpen={this.state.modalIsOpen}
                onRequestClose={this.closeModal}

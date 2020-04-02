@@ -44,21 +44,29 @@
 .first{
     width: 30px;
 }
+
+.buyorders-box{
+   margin-right: 40px;
+}
+
 @media (max-width: 1430px) and (min-width: 1200px){
    .buyorders-box{
       width: 20%;
+      margin-right: 40px;
    } 
 }
 
 @media (max-width: 1200px) and (min-width: 1050px){
    .buyorders-box{
       width: 20%;
+      margin-right: 40px;
    }
 }
 
 
 @media(max-width: 600px){
    .buyorders-box{
+      margin-right: 0;
    }
 }
 
