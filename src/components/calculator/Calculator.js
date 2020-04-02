@@ -39,7 +39,7 @@ class Calculator extends Component {
     const {results} = this.state
     return (
       <div className="calculator">
-      <h5 className='calc-header'> Calculator </h5>
+      <p className='calc-header'> Calculator </p>
       <input className='screen' value={results}/>
       <Buttons buttonPressed={this.buttonPressed} /> 
       </div>

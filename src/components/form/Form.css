@@ -24,15 +24,17 @@
 
 
 .form input{
-   height: 25px;
-   width: 29vw;
+   height: 45px;
+   width: 59vw;
    min-width: 120px;
-   max-width: 240px;
+   max-width: 440px;
    border: #333333 0.5px solid;
    border-radius: 2px;
    color: black;
    font-weight: 400;
    font-size: 13px;
+   padding-left: 18px;
+   box-sizing: border-box;
 }
 
 @media (max-width: 700px){
@@ -47,4 +49,10 @@
    color: black;
    font-weight: 300;
    font-size: 14px;
+}
+
+.create-account{
+   font-size: 20px;
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: 700;
 }

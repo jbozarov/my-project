@@ -182,7 +182,7 @@ export class Stocks extends Component {
 
                <div className="two-tables" >
                 <table className='stocks-table3' >
-                  <thead ><td colSpan='8' style={{paddingLeft: '10px'}} >Stocks</td></thead>
+                  <thead ><td colSpan='9' style={{paddingLeft: '10px'}} >Stocks</td></thead>
                     <tr>
                         <th>Ticker</th>
                         <th>Company Name</th>
@@ -248,7 +248,7 @@ export class Stocks extends Component {
 
                <div className='mobile' >
                 <table className='stocks-table3' >
-                  <thead ><tr><td colSpan='8'>Stocks</td> </tr></thead>
+                  <thead ><tr><td colSpan='9'>Stocks</td> </tr></thead>
                     <tr>
                         <th>Ticker</th>
                         <th>Company Name</th>

@@ -65,22 +65,22 @@ export class Sidebar extends Component {
                </Modal>
             {!this.props.user.first_name ? 
                 <div className={this.props.sidebarReducer.sidebarOpen ? 'show-side-bar' : 'hide-side-bar'} >
-                <Link id='close-btn' ><Span onClick={() => this.props.closeSideBar(false)}> <AiOutlineClose size={15} ></AiOutlineClose></Span></Link>
-                <Link to='/dashboard' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdDashboard style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdDashboard>  Dashboard</P> </Link>
-                <Link to='/calculator' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><FaCalculator style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaCalculator> Calculator</P> </Link>
-                <Link to='/settings' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} disabled ></MdSettings> Setting</P> </Link></div>
-                : 
+                  <Link id='close-btn' ><Span onClick={() => this.props.closeSideBar(false)}> <AiOutlineClose size={15} ></AiOutlineClose></Span></Link>
+                  <Link to='/dashboard' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdDashboard style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdDashboard>  Dashboard</P> </Link>
+                  <Link to='/calculator' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><FaCalculator style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaCalculator> Calculator</P> </Link>
+                  {/*<Link to='/settings' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} disabled ></MdSettings> Setting</P> </Link>*/}
+                </div> : 
                 <div className={this.props.sidebarReducer.sidebarOpen ? 'show-side-bar' : 'hide-side-bar'} > 
-                <Link id='close-btn' ><Span onClick={() => this.props.closeSideBar(false)}> <AiOutlineClose size={15} ></AiOutlineClose></Span></Link>
-                <Link to={`/dashboard/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdDashboard style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdDashboard>Dashboard</P> </Link>
-                <Link to={`/accounts/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><GiBank style={{paddingRight: '10px', paddingLeft: '15px'}} ></GiBank> Accounts</P> </Link>
-                <Link to={`/transactions/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><AiOutlineTransaction style={{paddingRight: '10px', paddingLeft: '15px'}} ></AiOutlineTransaction> Transactions</P> </Link>
-                <Link to={`/invest/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <FaAddressCard style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaAddressCard> Investment</P> </Link>
-                <Link to='/calculator' style={{textDecoration:'none', color:'grey'}} ><P><FaCalculator style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></FaCalculator> Calculator</P> </Link>
-                <Link to={`/open/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><P> <GiBanknote style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></GiBanknote> Open new account </P> </Link>
-                <Link to='/settings' style={{textDecoration:'none', color:'grey'}} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></MdSettings> Setting</P> </Link>
-                <Link to='/help' style={{textDecoration:'none', color:'grey'}} ><P> <MdHelpOutline style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></MdHelpOutline> Help</P> </Link>
-                <Link style={{textDecoration:'none', color:'grey'}}><P onClick={this.openModal} ><AiOutlineLogout style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></AiOutlineLogout> LOGOUT</P></Link>
+                  <Link id='close-btn' ><Span onClick={() => this.props.closeSideBar(false)}> <AiOutlineClose size={15} ></AiOutlineClose></Span></Link>
+                  <Link to={`/dashboard/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdDashboard style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdDashboard>Dashboard</P> </Link>
+                  {/* <Link to={`/accounts/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><GiBank style={{paddingRight: '10px', paddingLeft: '15px'}} ></GiBank> Accounts</P> </Link> */}
+                  <Link to={`/transactions/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><AiOutlineTransaction style={{paddingRight: '10px', paddingLeft: '15px'}} ></AiOutlineTransaction> Transactions</P> </Link>
+                  <Link to={`/invest/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <FaAddressCard style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaAddressCard> Investment</P> </Link>
+                  <Link to='/calculator' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P><FaCalculator style={{paddingRight: '10px', paddingLeft: '15px'}} ></FaCalculator> Calculator</P> </Link>
+                  {/* <Link to={`/open/${this.props.user.customer_id}`} style={{textDecoration:'none', color:'grey'}} ><P> <GiBanknote style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></GiBanknote> Open new account </P> </Link> */}
+                  <Link to='/settings' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdSettings style={{paddingRight: '10px', paddingLeft: '15px'}} ></MdSettings> Setting</P> </Link>
+                  <Link to='/help' style={{textDecoration:'none', color:'grey'}} onClick={() => this.props.closeSideBar(false)} ><P> <MdHelpOutline style={{paddingRight: '10px', paddingLeft: '15px'}}></MdHelpOutline> Help</P> </Link>
+                  <Link style={{textDecoration:'none', color:'grey'}}><P onClick={this.openModal} ><AiOutlineLogout style={{paddingRight: '10px', paddingLeft: '15px'}} onClick={() => this.props.closeSideBar(false)} ></AiOutlineLogout> LOGOUT</P></Link>
                 </div>}
            </div>
         )

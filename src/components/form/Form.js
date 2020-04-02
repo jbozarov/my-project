@@ -34,7 +34,7 @@ const Form = props => {
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'}}>
-            <h2> Create your account </h2>
+            <p className='create-account' > CREATE ACCOUNT </p>
             <input placeholder=' Enter your email'  value={email} onChange={e=>setEmail(e.target.value)} />
             <input placeholder=' 8-20 character long'  value={password} onChange={e=>setPassword(e.target.value)}/> 
             <BTN onClick={validate} >Validate your email </BTN>
@@ -56,14 +56,15 @@ export default connect(mapStateToProps, { userLogged })(Form);
 
 
 const BTN = styled.button`
-   height: 25px;
-   width: 29vw;
+   height: 45px;
+   width: 59vw;
    min-width: 120px;
-   max-width: 240px;
+   max-width: 440px;
    border: none;
    border-radius: 2px;
    background-color: #3399ff;
    font-size: large;
+   cursor: pointer;
    color: white; 
    &:hover {
       background-color: #3399ff;

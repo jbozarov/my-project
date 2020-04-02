@@ -1,5 +1,4 @@
 .calculator {
-    height: 70vh;
     margin: auto;
     margin-top: 20px;
     display: flex;
@@ -31,4 +30,8 @@
     margin: 5px;
     font-size: 20px;
     font-weight: 500;
+}
+
+.calc-header{
+   font-size: 30px;
 }
